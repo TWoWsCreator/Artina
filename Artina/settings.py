@@ -1,14 +1,21 @@
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-nugv&73@c32kc)(^3q-jdsn-p7-)*z5)9$=r1#1i!v#mo*x(p9'
+load_dotenv()
+
+SECRET_KEY = os.environ.get('SECRET_KEY', 'so-secret')
+debug = os.environ.get('debug', 'True') == 'True'
 
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -16,6 +23,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'homepage.apps.HomepageConfig',
+    'users.apps.UsersConfig',
+    'artists.apps.ArtistsConfig',
+    'galleries.apps.GalleriesConfig',
+    'feedback.apps.FeedbackConfig',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +81,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -85,3 +96,10 @@ STATICFILES_DIRS = [
     BASE_DIR / 'staticfiles'
 ]
 STATIC_ROOT = BASE_DIR / 'static'
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
+LOGIN_REDIRECT_URL = 'homepage:home'
+LOGOUT_REDIRECT_URL = 'homepage:home'
+
+# LOGIN_URL = 'users/login'

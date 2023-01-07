@@ -1,0 +1,34 @@
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="justify-content-center">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="col-sm-5 mx-auto">
+                    {{ field.label_tag }}
+                    {{ field|add_class:"form-control" }}
+                    {% if field.help_text %}
+                        {{ fielf.help_text }}
+                    {% endif %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger">
+                        {{ field.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {% with request.resolver_match.view_name as view_name %}
+                {% if view_name == 'login' %}
+                    <div>
+                        <button class="btn btn-primary mt-2 mb-3">Войти</button>
+                    </div>
+                {% elif view_name == 'sign_up' %}
+                    <div>
+                        <button class="btn btn-primary mt-2 mb-3">Зарегистрироваться</button>
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </form>
+    </div>
+{% endblock content %}
