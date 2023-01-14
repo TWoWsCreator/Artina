@@ -2,30 +2,30 @@
 
 {% load static %}
 
+{% block add_css_link %}
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+{% endblock add_css_link %}
+
 {% block content %}
-    <h1 class="text-center">Artina</h1>
-    <img
-      src="{% static 'img/main.jpg' %}"
-      height="200"
-      alt="Avatar of our store"
-      class="d-block mx-auto mb-3 rounded-circle"
-    >
-    <p class="col-6 text-center mx-auto">
-        Сайт Artina является интернет-выставкой работ известных
-        художников России. Здесь вы сможете увидеть работы Левитана,
-        Репина, Сурикова и других известных деятелей искусства.
-        Узнать больше об истории работ, их задумке и мест, где они
-        находятся. Для нашаего развития вы можете оставить отзыв о
-        сайте, который поможет нам развиваться в лучшую сторону.
-    </p>
-    <blockquote class="blockquote text-center">
-        <p class="mb-4">
-            Только искусство позволяет нам сказать даже то, чего мы не знаем
+    <div class="all-text">
+        <h1>Artina</h1>
+        <p class="col-6 mx-auto">
+            Сайт Artina является интернет-выставкой работ известных
+            художников России. Здесь вы сможете увидеть работы Левитана,
+            Репина, Сурикова и других известных деятелей искусства.
+            Узнать больше об истории работ, их задумке и мест, где они
+            находятся. Для нашаего развития вы можете оставить отзыв о
+            сайте, который поможет нам развиваться в лучшую сторону.
         </p>
-        <footer class="blockquote-footer">
-            <cite title="Source Title">
-                Габриэль Лауб
-            </cite>
-        </footer>
-    </blockquote>
+        <blockquote class="blockquote">
+            <p class="mb-4">
+                Только искусство позволяет нам сказать даже то, чего мы не знаем
+            </p>
+            <footer class="blockquote-footer">
+                <cite title="Source Title">
+                    Габриэль Лауб
+                </cite>
+            </footer>
+        </blockquote>
+    </div>
 {% endblock content %}

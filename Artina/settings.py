@@ -15,6 +15,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    'django_cleanup.apps.CleanupConfig',
     'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -27,6 +28,8 @@ INSTALLED_APPS = [
     'artists.apps.ArtistsConfig',
     'galleries.apps.GalleriesConfig',
     'feedback.apps.FeedbackConfig',
+    'paintings.apps.PaintingsConfig',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -102,4 +105,8 @@ AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_REDIRECT_URL = 'homepage:home'
 LOGOUT_REDIRECT_URL = 'homepage:home'
 
-# LOGIN_URL = 'users/login'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / 'feedback_mails'

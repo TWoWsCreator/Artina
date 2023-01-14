@@ -1,1 +1,37 @@
-{% include 'base.html' %}
+{% extends 'base.html' %}
+
+{% block title %}
+    Художники
+{% endblock %}
+
+{% block content %}
+    <h1>Художники</h1>
+    {% for artist in artists %}
+        {% if forloop.counter0|divisibleby:3 %}
+            <div class="row">
+        {% endif %}
+        <div class="col-4">
+            <h5>{{ artist.artist }}</h5>
+            <p>Годы жизни: {{ artist.years_of_life }}</p>
+            {% load thumbnail %}
+            {% thumbnail artist.artist_photo '300x300' crop='center' as photo %}
+                <img src="{{ photo.url }}"
+                     width="{{ photo.width }}"
+                     height="{{ photo.height }}"
+                     class="rounded-circle z-depth-0"
+                     alt="изображение художника">
+            {% endthumbnail %}
+            <div>
+                <a href="{% url 'artists:artist' artist.artist_slug %}"
+                   role="button" class="btn btn-primary mt-3 mb-3 bi me-2">
+                    Биография художника
+                </a>
+                <a href="{% url 'artists:artist_painting' artist_slug=artist.artist_slug %}"
+                   role="button" class="btn btn-primary mt-3 mb-3">
+                    Картины художника
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
