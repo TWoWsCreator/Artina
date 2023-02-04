@@ -27,13 +27,13 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('username', 'email', 'first_name', 'last_name', 'image')
 
 
-# class PasswordResetEmail(models.Model):
-#     user_email = models.EmailField(
-#         'Ваша почта',
-#     )
-#
-#     def __str__(self):
-#         return self.user_email
+class PasswordResetEmail(models.Model):
+    user_email = models.EmailField(
+        'Ваша почта',
+    )
+
+    def __str__(self):
+        return self.user_email
 
 
 class PasswordResetEmailForm(ModelForm):
@@ -43,8 +43,7 @@ class PasswordResetEmailForm(ModelForm):
             field.field.widget.attrs['class'] = 'form-control'
 
     class Meta:
-        pass
-        # model = PasswordResetEmail
-        # fields = (
-        #     PasswordResetEmail.user_email.field.name,
-        # )
+        model = PasswordResetEmail
+        fields = (
+            PasswordResetEmail.user_email.field.name,
+        )
