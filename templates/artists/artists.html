@@ -10,6 +10,9 @@
         {% if forloop.counter0|divisibleby:3 %}
             <div class="row">
         {% endif %}
+        {% if forloop.counter0 >= 3 and forloop.counter0|divisibleby:3 %}
+            </div>
+        {% endif %}
         <div class="col-4">
             <h5>{{ artist.artist }}</h5>
             <p>Годы жизни: {{ artist.years_of_life }}</p>
@@ -33,5 +36,4 @@
             </div>
         </div>
     {% endfor %}
-    </div>
 {% endblock %}

@@ -11,4 +11,5 @@
         <h1>Вход</h1>
         {% include 'users/includes/base_users_template.html' %}
     {% endif %}
+    <a role="button" class="mt-2 mb-3" href="{% url 'users:password_reset' %}">Забыли пароль?</a>
 {% endblock %}

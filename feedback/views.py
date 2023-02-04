@@ -4,6 +4,7 @@ from smtplib import SMTP, SMTPException
 
 from dotenv import load_dotenv
 
+from django.contrib import messages
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import FormView
@@ -18,7 +19,7 @@ class FeedbackView(FormView):
     template_name = 'feedback/feedback.html'
     form_class = FeedbackForm
     model = Feedback
-    success_url = reverse_lazy('homepage:home')
+    success_url = reverse_lazy('feedback:feedback')
 
     @classmethod
     def send_mail_user(cls, msg, from_mail, to_mail):
@@ -40,7 +41,7 @@ class FeedbackView(FormView):
         name = form.cleaned_data['name']
         mail = form.cleaned_data['mail']
         feedback_text = form.cleaned_data['feedback_text']
-        message = f'Здравствуйте, {name}.\nСпасибо что оставили свой отзыв.\n ' \
+        message = f'Здравствуйте, {name}.\nСпасибо что оставили свой feedback.\n ' \
                   f'Ваша отзывчивость помогает нам развиваться\n' \
                   f'Ваш отзыв: {feedback_text}\n' \
                   f'Спасибо от команды Artina.'
@@ -52,8 +53,8 @@ class FeedbackView(FormView):
             recipient_list=[mail],
             fail_silently=False
         )
-        print(form.cleaned_data)
         self.model.objects.create(
             **form.cleaned_data
         )
+        messages.success(self.request, 'Ваше сообщение отправлено')
         return super().form_valid(form)

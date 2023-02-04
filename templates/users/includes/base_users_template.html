@@ -27,11 +27,15 @@
                 <div>
                     <button class="btn btn-primary mt-2 mb-3">Войти</button>
                 </div>
+            {% elif view_name == 'users:password_reset' %}
+                <div>
+                    <button class="btn btn-primary mt-2 mb-3">Сбросить</button>
+                </div>
             {% elif view_name == 'users:sign_up' %}
                 <div>
                     <button class="btn btn-primary mt-2 mb-3">Зарегистрироваться</button>
                 </div>
-            {% elif view_name == 'users:password_change' %}
+            {% elif view_name == 'users:password_change' or view_name == 'users:password_reset_confirm' %}
                 <div>
                     <button class="btn btn-primary mt-2 mb-3">Сменить</button>
                 </div>

@@ -5,9 +5,8 @@ from django.contrib.auth.views import (LoginView,
                                        PasswordResetConfirmView,
                                        PasswordResetCompleteView,
                                        PasswordResetDoneView,
-                                       PasswordResetView
                                        )
-from .views import SignUpView, ProfileView
+from .views import SignUpView, ProfileView, PasswordReset
 
 app_name = 'users'
 urlpatterns = [
@@ -34,9 +33,9 @@ urlpatterns = [
          ),
          name='password_change'),
     path('password_reset/',
-         PasswordResetView.as_view(
-             template_name='users/password_reset.html',
-             success_url=reverse_lazy('users:password_reset_done')
+         PasswordReset.as_view(
+             # template_name='users/password_reset.html',
+             # success_url=reverse_lazy('users:password_reset_done')
          ),
          name='password_reset'),
     path('password_reset/done/',
@@ -52,7 +51,7 @@ urlpatterns = [
             ),
             name='password_reset_confirm'),
     path('password_reset/complete/',
-         PasswordChangeView.as_view(
+         PasswordResetCompleteView.as_view(
              template_name='users/password_reset_complete.html',
          ),
          name='password_reset_complete'),

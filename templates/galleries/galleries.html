@@ -11,6 +11,9 @@
         {% if forloop.counter0|divisibleby:3 %}
             <div class="row">
         {% endif %}
+        {% if forloop.counter0 >= 3 and forloop.counter0|divisibleby:3 %}
+            </div>
+        {% endif %}
         <div class="col-4">
             <h4>{{ gallery.gallery_name }}</h4>
             <p>Расположение: {{ gallery.gallery_location }}</p>
@@ -33,5 +36,4 @@
             </div>
         </div>
     {% endfor %}
-</div>
 {% endblock %}

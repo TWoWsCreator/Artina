@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+# from django.conf import global_settings
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -59,6 +61,10 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+)
 
 WSGI_APPLICATION = 'Artina.wsgi.application'
 

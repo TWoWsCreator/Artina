@@ -64,6 +64,7 @@ class GalleryPhotos(models.Model):
     )
     photo = models.ImageField(
         'путь до фотографии галереи',
+        upload_to='galleries/',
         help_text='Выберите путь до фотографии галереи'
     )
 

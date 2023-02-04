@@ -1,8 +1,5 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils.safestring import mark_safe
-
-from sorl.thumbnail import get_thumbnail
 
 
 class CustomUser(AbstractUser):
@@ -12,6 +9,9 @@ class CustomUser(AbstractUser):
         unique=True,
         help_text='максимальная длина 30 символов'
     )
+    email = models.EmailField(
+        'Ваша почта',
+    )
     image = models.ImageField(
         'добавьте картинку профиля',
         upload_to='avatar/%Y/%m/%d',
@@ -20,3 +20,12 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+class PasswordResetEmail(models.Model):
+    user_email = models.EmailField(
+        'Ваша почта',
+    )
+
+    def __str__(self):
+        return self.user_email
