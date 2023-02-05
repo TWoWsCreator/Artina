@@ -66,7 +66,9 @@ class ArtistPaintingsView(ListView):
 
     def get_queryset(self, **kwargs):
         artist = Artists.objects.filter(artist_slug=self.kwargs['artist_slug'])[0].artist
+        print(artist)
         paintings = Painting.objects.filter(painting_artist__artist=artist)
         result_search = self.request.GET.get('search')
         filter_paintings = searching_paintings(paintings, result_search)
+        print(filter_paintings)
         return filter_paintings
