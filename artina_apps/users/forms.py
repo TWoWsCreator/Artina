@@ -34,6 +34,4 @@ class PasswordResetEmailForm(ModelForm):
 
     class Meta:
         model = PasswordResetEmail
-        fields = (
-            PasswordResetEmail.user_email.field.name,
-        )
+        fields = (PasswordResetEmail.user_email.field.name,)
