@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Галерея
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <h1>{{ name }}</h1>
+    <h5>Местоположение: {{ location }}</h5>
+    {% load thumbnail %}
+    <div class="d-block">
+        {% thumbnail photo '550x350' as ph %}
+            <img src="{{ ph.url }}"
+                 width="{{ ph.width }}"
+                 height="{{ ph.height }}"
+                 alt="картина">
+        {% endthumbnail %}
+    </div>
+    {% if photos %}
+        <h4 class="mt-2 mb-3">Ещё фотографии</h4>
+        {% for ph in photos %}
+            <div class="d-inline-block">
+                {% load thumbnail %}
+                {% thumbnail ph.photo '250x150' crop='center' as ph %}
+                    <img src="{{ ph.url }}"
+                         width="{{ ph.width }}"
+                         height="{{ ph.height }}"
+                         alt="картина">
+                {% endthumbnail %}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <h4 class="mt-2">История</h4>
+    <p class="col-6 mx-auto">{{ description }}</p>
+    <div>
+        <a href="{% url 'galleries:galleries' %}"
+           class="btn btn-primary bi me-2 mb-2" role="button">
+            К галереям
+        </a>
+        <a href="{% url 'galleries:gallery_paintings' gallery_slug=slug %}"
+           class="btn btn-primary mb-2" role="button">
+            Картины галереи
+        </a>
+    </div>
+{% endblock %}

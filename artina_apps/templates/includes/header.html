@@ -1,0 +1,62 @@
+{% load static %}
+
+<header class="p-2 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <img src={% static 'img/artina.png' %} width="60" height="44" alt="Иконка сайта" class="bi me-2">
+
+            {% with request.resolver_match.view_name as view_name %}
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href='{% url 'homepage:home' %}' class="nav-link px-2
+                            {% if view_name == 'homepage:home' %}
+                            text-secondary
+                            {% else %}
+                            text-white
+                            {% endif %}">О нас</a>
+                    </li>
+                    <li><a href='{% url 'artists:artists' %}' class="nav-link px-2
+                            {% if view_name == 'artists:artists' %}
+                            text-secondary
+                            {% else %}
+                            text-white
+                            {% endif %}">Художники</a>
+                    </li>
+                    <li><a href='{% url 'galleries:galleries' %}' class="nav-link px-2
+                            {% if view_name == 'galleries:galleries' %}
+                            text-secondary
+                            {% else %}
+                            text-white
+                            {% endif %}">Галереи</a>
+                    </li>
+                    <li><a href='{% url 'feedback:feedback' %}' class="nav-link px-2
+                            {% if view_name == 'feedback:feedback' %}
+                            text-secondary
+                            {% else %}
+                            text-white
+                            {% endif %}">Обратная связь</a>
+                    </li>
+                </ul>
+            {% endwith %}
+
+            {% with request.resolver_match.view_name as view_name %}
+                {% if view_name == 'artists:artists' or view_name == 'artists:artist_painting' or view_name == 'galleries:galleries' or view_name == 'galleries:gallery_paintings' %}
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="get">
+                        {% csrf_token %}
+                        <input name="search" type="search" class="form-control form-control-dark"
+                               placeholder="Поиск по странице..." aria-label="search">
+                    </form>
+                {% endif %}
+            {% endwith %}
+
+            <div class="text-end">
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'users:profile' %}" role="button" class="btn btn-primary bi me-2">Профиль</a>
+                    <a href="{% url 'logout' %}" role="button" class="btn btn-primary">Выйти</a>
+                {% else %}
+                    <a href="{% url 'users:login' %}" role="button" class="btn btn-primary bi me-2">Войти</a>
+                    <a href="{% url 'users:sign_up' %}" role="button" class="btn btn-primary">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
