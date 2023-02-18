@@ -9,7 +9,7 @@
 ### Запуск кода программы
 #### 1) Клонируйте репозиторий
 ```commandline
-git clone https://github.com/TWoWsCreator/Artina.
+git clone https://github.com/TWoWsCreator/Artina.git
 ```
 #### 2) Создайте виртуальную среду
 For Windows:
@@ -32,7 +32,7 @@ python manage.py migrate
 ```
 #### 5) Загрузите фикстуры
 ```commandline
-
+python manage.py loaddata fixtures/data.json
 ```
 #### 6) Запустите сайт
 ```commandline

@@ -35,4 +35,3 @@ jobs:
       uses: py-actions/flake8@v2
       with:
         plugins: 'flake8-quotes pep8-naming flake8-import-order'
-
