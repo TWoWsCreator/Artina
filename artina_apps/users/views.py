@@ -21,7 +21,7 @@ from .forms import (
     CustomUserCreationForm,
     PasswordResetEmailForm,
 )
-from .models import CustomUser
+from .models import CustomUser, PasswordResetEmail
 
 load_dotenv()
 
@@ -70,7 +70,7 @@ class ProfileView(LoginRequiredMixin, FormView):
 
 class PasswordReset(FormView):
     template_name = 'users/password_reset.html'
-    # model = PasswordResetEmail
+    model = PasswordResetEmail
     form_class = PasswordResetEmailForm
 
     @staticmethod

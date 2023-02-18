@@ -18,3 +18,12 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+class PasswordResetEmail(models.Model):
+    user_email = models.EmailField(
+        'Ваша почта',
+    )
+
+    def __str__(self):
+        return self.user_email
