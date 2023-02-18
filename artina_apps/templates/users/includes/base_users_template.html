@@ -1,0 +1,52 @@
+{% load widget_tweaks %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            {% with request.resolver_match.view_name as view_name %}
+                {% if view_name == 'users:profile' and forloop.last %}
+                {% else %}
+                    <div class="col-sm-5 mx-auto">
+                        {{ field.label_tag }}
+                        {{ field|add_class:"form-control" }}
+                        {% if field.help_text %}
+                            {{ fielf.help_text }}
+                        {% endif %}
+                        {% if field.errors %}
+                            <div class="alert alert-danger">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        {% endfor %}
+        {% with request.resolver_match.view_name as view_name %}
+            {% if view_name == 'users:login' %}
+                <div>
+                    <button class="btn btn-primary mt-2 mb-3">Войти</button>
+                </div>
+            {% elif view_name == 'users:password_reset' %}
+                <div>
+                    <button class="btn btn-primary mt-2 mb-3">Сбросить</button>
+                </div>
+            {% elif view_name == 'users:sign_up' %}
+                <div>
+                    <button class="btn btn-primary mt-2 mb-3">Зарегистрироваться</button>
+                </div>
+            {% elif view_name == 'users:password_change' or view_name == 'users:password_reset_confirm' %}
+                <div>
+                    <button class="btn btn-primary mt-2 mb-3">Сменить</button>
+                </div>
+            {% elif view_name == 'users:profile' %}
+                <div>
+                    <button class="btn btn-primary mt-2 mb-3">Обновить</button>
+                </div>
+                <div>
+                    <a href="{% url 'users:password_change' %}">Сменить пароль</a>
+                </div>
+            {% endif %}
+        {% endwith %}
+    </form>
+{% endblock content %}

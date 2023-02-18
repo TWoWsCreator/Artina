@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block add_css_link %}
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+{% endblock add_css_link %}
+
+{% block content %}
+    <div class="all-text">
+        <h1>Artina</h1>
+        <p class="col-6 mx-auto">
+            Сайт Artina является интернет-выставкой работ известных
+            художников сообщества передвижных выставок. Здесь вы
+            сможете увидеть работы Левитана, Репина, Сурикова и
+            других известных деятелей искусства. Узнать больше об
+            истории работ, их задумке и мест, где они находятся.
+            Для нашего развития вы можете оставить отзыв о
+            сайте, который поможет нам развиваться в лучшую сторону.
+        </p>
+        <blockquote class="blockquote">
+            <p class="mb-4">
+                Только искусство позволяет нам сказать даже то, чего мы не знаем
+            </p>
+            <footer class="blockquote-footer">
+                <cite title="Source Title">
+                    Габриэль Лауб
+                </cite>
+            </footer>
+        </blockquote>
+    </div>
+{% endblock content %}

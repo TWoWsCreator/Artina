@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Вход
+{% endblock title %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h1 class="mt-2">Вы уже вошли в аккаунт</h1>
+    {% else %}
+        <h1>Вход</h1>
+        {% include 'users/includes/base_users_template.html' %}
+    {% endif %}
+    <a role="button" class="mt-2 mb-3" href="{% url 'users:password_reset' %}">Забыли пароль?</a>
+{% endblock %}
