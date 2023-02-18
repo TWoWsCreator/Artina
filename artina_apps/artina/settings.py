@@ -17,6 +17,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# DEBUG = os.environ.get('debug', 'false') in ('y', 'yes', '1', 't', 'true')
+
+# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(' ')
+
 INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'widget_tweaks',
