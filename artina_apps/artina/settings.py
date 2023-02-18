@@ -11,15 +11,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'so-secret')
-debug = os.environ.get('debug', 'True') == 'True'
 
-DEBUG = True
+DEBUG = os.environ.get('debug', 'false') in ('y', 'yes', '1', 't', 'true')
 
-ALLOWED_HOSTS = []
-
-# DEBUG = os.environ.get('debug', 'false') in ('y', 'yes', '1', 't', 'true')
-
-# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(' ')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(' ')
 
 INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
