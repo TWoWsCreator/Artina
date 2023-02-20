@@ -30,11 +30,12 @@ class StaticURLTests(TestCase):
             ('MQ', 'bjy5fc-4f38e570b1612bd', 200),
             ('HH', 'uqwbucqbruvb137108ncuqn', 200),
             ('HH', 'uqwbuc//qbruvb13//710/8ncuqn', 404),
-            ('2131232//', 'bjy5fc-4f38e570b1612bd', 404)
+            ('2131232//', 'bjy5fc-4f38e570b1612bd', 404),
         ]
     )
-    def test_users_password_reset_complete_endpoint(self, uuid, token,
-                                                    status_code):
+    def test_users_password_reset_complete_endpoint(
+        self, uuid, token, status_code
+    ):
         # response = Client().get(
         #     reverse('users:password_reset_confirm',
         #             kwargs={
@@ -43,7 +44,8 @@ class StaticURLTests(TestCase):
         #             })
         # )
         response = Client().get(
-            f'/users/password_reset/confirm/{uuid}/{token}/')
+            f'/users/password_reset/confirm/{uuid}/{token}/'
+        )
         self.assertEqual(response.status_code, status_code)
 
     # требуется вход в систему

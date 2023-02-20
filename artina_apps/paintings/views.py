@@ -17,7 +17,7 @@ class PaintingsView(ListView):
         painting = Painting.objects.filter(
             painting_slug=self.kwargs['painting_slug']
         ).first()
-        
+
         return {
             'name': painting.painting_name,
             'size': painting.painting_size,
