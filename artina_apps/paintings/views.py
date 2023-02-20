@@ -16,7 +16,8 @@ class PaintingsView(ListView):
     def get_context_data(self, **kwargs):
         painting = Painting.objects.filter(
             painting_slug=self.kwargs['painting_slug']
-        )[0]
+        ).first()
+        
         return {
             'name': painting.painting_name,
             'size': painting.painting_size,

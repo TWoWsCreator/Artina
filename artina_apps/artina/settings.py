@@ -3,8 +3,6 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-# from django.conf import global_settings
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -17,20 +15,20 @@ DEBUG = os.environ.get('debug', 'false') in ('y', 'yes', '1', 't', 'true')
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(' ')
 
 INSTALLED_APPS = [
-    'django_cleanup.apps.CleanupConfig',
-    'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'homepage.apps.HomepageConfig',
-    'users.apps.UsersConfig',
+    'django_cleanup.apps.CleanupConfig',
     'artists.apps.ArtistsConfig',
-    'galleries.apps.GalleriesConfig',
     'feedback.apps.FeedbackConfig',
+    'galleries.apps.GalleriesConfig',
+    'homepage.apps.HomepageConfig',
     'paintings.apps.PaintingsConfig',
+    'users.apps.UsersConfig',
+    'widget_tweaks',
     'sorl.thumbnail',
 ]
 
@@ -116,3 +114,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = BASE_DIR / 'feedback_mails'
+
+if DEBUG:
+    print('1')
+    INSTALLED_APPS.append('debug_toolbar')
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+    INTERNAL_IPS = ['127.0.0.1']
