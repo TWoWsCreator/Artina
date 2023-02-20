@@ -10,9 +10,7 @@ load_dotenv()
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'so-secret')
 
-available_debug_variants = ('y', 'yes', '1', 't', 'true')
-
-DEBUG = os.environ.get('debug', 'true').lower() in available_debug_variants
+DEBUG = os.environ.get('debug', 'false') in ('y', 'yes', '1', 't', 'true')
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(' ')
 
