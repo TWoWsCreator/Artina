@@ -73,9 +73,11 @@ class GalleryPaintingsView(ListView):
 
     def get_queryset(self):
         result_search = self.request.GET.get('search')
-        gallery = Galleries.objects.filter(
-            gallery_slug=self.kwargs['gallery_slug']
-        ).first().gallery_name
+        gallery = (
+            Galleries.objects.filter(gallery_slug=self.kwargs['gallery_slug'])
+            .first()
+            .gallery_name
+        )
         paintings = Painting.objects.filter(
             painting_gallery__gallery_name=gallery
         )
