@@ -16,8 +16,5 @@ class FeedbackForm(django.forms.ModelForm):
             feedback.models.Feedback.mail.field.name,
             feedback.models.Feedback.feedback_text.field.name,
         )
-        widgets = {
-            feedback.models.Feedback.feedback_text.field.name: django.forms.Textarea(
-                attrs={'rows': 5}
-            )
-        }
+        textarea = django.forms.Textarea(attrs={'rows': 5})
+        widgets = {feedback.models.Feedback.feedback_text.field.name: textarea}
