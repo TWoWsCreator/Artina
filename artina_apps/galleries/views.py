@@ -1,3 +1,4 @@
+import django.shortcuts
 from django.db.models import Q
 from django.views.generic import ListView, TemplateView
 
@@ -41,9 +42,10 @@ class GalleryView(TemplateView):
     template_name = 'galleries/gallery.html'
 
     def get_context_data(self, **kwargs):
-        gallery = Galleries.objects.filter(
+        gallery = django.shortcuts.get_object_or_404(
+            Galleries,
             gallery_slug=self.kwargs['gallery_slug']
-        )[0]
+        )
         photos = GalleryPhotos.objects.filter(gallery_photos=gallery).order_by(
             'gallery_photos_id'
         )
@@ -73,11 +75,10 @@ class GalleryPaintingsView(ListView):
 
     def get_queryset(self):
         result_search = self.request.GET.get('search')
-        gallery = (
-            Galleries.objects.filter(gallery_slug=self.kwargs['gallery_slug'])
-            .first()
-            .gallery_name
-        )
+        gallery = django.shortcuts.get_object_or_404(
+            Galleries,
+            gallery_slug=self.kwargs['gallery_slug']
+        ).gallery_name
         paintings = Painting.objects.filter(
             painting_gallery__gallery_name=gallery
         )

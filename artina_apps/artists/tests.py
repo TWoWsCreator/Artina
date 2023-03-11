@@ -14,7 +14,8 @@ class StaticURLTests(TestCase):
 
     def test_artists_endpoint(self):
         response = Client().get(reverse('artists:artists'))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200,
+                         'Страница художников не прогружается')
 
     @parameterized.expand(
         [
@@ -26,7 +27,8 @@ class StaticURLTests(TestCase):
     def test_positive_artist_page_endpoint(self, artist_slug):
         response = Client().get(reverse('artists:artist',
                                         kwargs={'artist_slug': artist_slug}))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200,
+                         'Страница биографии художников не загружается')
 
     @parameterized.expand(
         [
@@ -38,31 +40,36 @@ class StaticURLTests(TestCase):
     def test_negative_artist_page_endpoint(self, artist_slug):
         response = Client().get(reverse('artists:artist',
                                         kwargs={'artist_slug': artist_slug}))
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 404,
+                         'Загружается страница биографии художников, '
+                         'которых не в базе данных')
 
     @parameterized.expand(
         [
-            ('serov',),
-            ('perov',),
-            ('shishkin',),
+            ('ge',),
+            ('repin',),
+            ('savrasov',),
         ]
     )
     def test_positive_artist_paintings_endpoint(self, artist_slug):
         response = Client().get(reverse('artists:artist_painting',
                                         kwargs={'artist_slug': artist_slug}))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200,
+                         'Страница картин художников не загружается')
 
     @parameterized.expand(
         [
-            ('vasnetsov',),
-            ('pushkin',),
-            ('mendeleev',),
+            ('serov_1',),
+            ('ladno',),
+            ('nestor',),
         ]
     )
     def test_negative_artist_paintings_endpoint(self, artist_slug):
         response = Client().get(reverse('artists:artist_painting',
                                         kwargs={'artist_slug': artist_slug}))
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 404,
+                         'Загружается страница картин художников, '
+                         'которых не в базе данных')
 
 
 class ModelsTests(StaticURLTests):
@@ -95,7 +102,8 @@ class ModelsTests(StaticURLTests):
         self.fake_artist.full_clean()
         self.fake_artist.save()
         self.assertEqual(artists.models.Artists.objects.count(),
-                         artists_amount + 1)
+                         artists_amount + 1,
+                         'Художник с валидным именем не создается')
 
     @parameterized.expand(
         [
@@ -111,7 +119,8 @@ class ModelsTests(StaticURLTests):
             self.create_artist(name=artist_name)
             self.fake_artist.full_clean()
         self.assertEqual(artists.models.Artists.objects.count(),
-                         artists_amount)
+                         artists_amount,
+                         'Художник с невалидным именем создается')
 
     @parameterized.expand(
         [
@@ -126,7 +135,8 @@ class ModelsTests(StaticURLTests):
         self.fake_artist.full_clean()
         self.fake_artist.save()
         self.assertEqual(artists.models.Artists.objects.count(),
-                         artists_amount + 1)
+                         artists_amount + 1,
+                         'Художник с валидными годами жизни не создается')
 
     @parameterized.expand(
         [
@@ -145,4 +155,5 @@ class ModelsTests(StaticURLTests):
             self.create_artist(years_of_life=artist_years_of_life)
             self.fake_artist.full_clean()
         self.assertEqual(artists.models.Artists.objects.count(),
-                         artists_amount)
+                         artists_amount,
+                         'Художник с невалидными годами жизни создается')
