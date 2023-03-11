@@ -24,10 +24,10 @@ class ArtistYearsValidator:
         if '-' not in artist_years:
             raise ValidationError('Введите годы через тире')
         years = artist_years.split('-')
-        if len(years) > 2:
+        if len(years) != 2:
             raise ValidationError('Введите 2 года через тире')
         for year in years:
-            if len(year) > 4:
+            if len(year) > 4 or year == '':
                 raise ValidationError('Введите реальный год')
         return artist_years
 

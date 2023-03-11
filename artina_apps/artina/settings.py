@@ -8,11 +8,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'so-secret')
+SECRET_KEY = os.getenv('SECRET_KEY', 'so-secret')
 
-DEBUG = os.environ.get('debug', 'false') in ('y', 'yes', '1', 't', 'true')
+DEBUG = os.getenv('debug', 't').lower() in ('y', 'yes', '1', 't', 'true')
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(' ')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -116,7 +116,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = BASE_DIR / 'feedback_mails'
 
 if DEBUG:
-    print('1')
     INSTALLED_APPS.append('debug_toolbar')
     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
     INTERNAL_IPS = ['127.0.0.1']

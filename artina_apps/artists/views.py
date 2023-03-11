@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, TemplateView
 
 from core.views import searching_paintings
@@ -40,9 +41,10 @@ class ArtistView(TemplateView):
     template_name = 'artists/artist.html'
 
     def get_context_data(self, **kwargs):
-        artist = Artists.objects.filter(
+        artist = get_object_or_404(
+            Artists,
             artist_slug=self.kwargs['artist_slug']
-        )[0]
+        )
         return {
             'artist': artist.artist,
             'years_of_life': artist.years_of_life,
@@ -67,9 +69,10 @@ class ArtistPaintingsView(ListView):
             return 'paintings/paintings.html'
 
     def get_queryset(self, **kwargs):
-        artist = Artists.objects.filter(
+        artist = get_object_or_404(
+            Artists,
             artist_slug=self.kwargs['artist_slug']
-        )[0].artist
+        ).artist
         paintings = Painting.objects.filter(painting_artist__artist=artist)
         result_search = self.request.GET.get('search')
         filter_paintings = searching_paintings(paintings, result_search)
