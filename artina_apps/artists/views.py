@@ -3,9 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, TemplateView
 
 from core.views import searching_paintings
-
 from paintings.models import Painting
-
 from .models import Artists
 
 

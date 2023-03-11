@@ -1,15 +1,15 @@
-from django.contrib import admin
+import django.contrib
 
-from .models import Galleries, GalleryPhotos
+import galleries.models
 
 
-class GalleryPhotosAdmin(admin.TabularInline):
+class GalleryPhotosAdmin(django.contrib.admin.TabularInline):
     fk_name = 'gallery_photos'
-    model = GalleryPhotos
+    model = galleries.models.GalleryPhotos
 
 
-@admin.register(Galleries)
-class GalleriesAdmin(admin.ModelAdmin):
+@django.contrib.admin.register(galleries.models.Galleries)
+class GalleriesAdmin(django.contrib.admin.ModelAdmin):
     list_display = (
         'gallery_name',
         'gallery_location',

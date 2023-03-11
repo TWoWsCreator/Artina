@@ -1,69 +1,67 @@
-from django.contrib.auth.views import (
-    LoginView,
-    PasswordChangeDoneView,
-    PasswordChangeView,
-    PasswordResetCompleteView,
-    PasswordResetConfirmView,
-    PasswordResetDoneView,
-)
-from django.urls import path, re_path, reverse_lazy
+import django.contrib.auth.views
+import django.urls
 
-from .views import PasswordReset, ProfileView, SignUpView
+import users.views
 
 app_name = 'users'
 urlpatterns = [
-    path(
+    django.urls.path(
         'login/',
-        LoginView.as_view(
+        django.contrib.auth.views.LoginView.as_view(
             template_name='users/login.html',
         ),
         name='login',
     ),
-    path('sign_up/', SignUpView.as_view(), name='sign_up'),
-    path(
+    django.urls.path(
+        'sign_up/', users.views.SignUpView.as_view(), name='sign_up'
+    ),
+    django.urls.path(
         'password_change/done/',
-        PasswordChangeDoneView.as_view(
+        django.contrib.auth.views.PasswordChangeDoneView.as_view(
             template_name='users/password_change_done.html'
         ),
         name='password_change_done',
     ),
-    path(
+    django.urls.path(
         'password_change/',
-        PasswordChangeView.as_view(
+        django.contrib.auth.views.PasswordChangeView.as_view(
             template_name='users/password_change.html',
-            success_url=reverse_lazy('users:password_change_done'),
+            success_url=django.urls.path.reverse_lazy(
+                'users:password_change_done'
+            ),
         ),
         name='password_change',
     ),
-    path(
+    django.urls.path(
         'password_reset/',
-        PasswordReset.as_view(
-            # template_name='users/password_reset.html',
-            # success_url=reverse_lazy('users:password_reset_done')
-        ),
+        users.views.PasswordReset.as_view(),
         name='password_reset',
     ),
-    path(
+    django.urls.path(
         'password_reset/done/',
-        PasswordResetDoneView.as_view(
+        django.contrib.auth.views.PasswordResetDoneView.as_view(
             template_name='users/password_reset_done.html'
         ),
         name='password_reset_done',
     ),
-    re_path(
+    django.urls.re_path(
         r'password_reset/confirm/(?P<uidb64>[-\w]+)/(?P<token>[-\w]+)/$',
-        PasswordResetConfirmView.as_view(
+        django.contrib.auth.views.PasswordResetConfirmView.as_view(
             template_name='users/password_reset_confirm.html',
-            success_url=reverse_lazy('users:password_reset_complete'),
+            success_url=django.urls.path.reverse_lazy(
+                'users:password_reset_complete'
+            ),
         ),
         name='password_reset_confirm',
     ),
-    path(
+    django.urls.path(
         'password_reset/complete/',
-        PasswordResetCompleteView.as_view(
+        django.contrib.auth.views.PasswordResetCompleteView.as_view(
             template_name='users/password_reset_complete.html',
         ),
         name='password_reset_complete',
     ),
-    path('profile/', ProfileView.as_view(), name='profile'),
+    django.urls.path(
+        'profile/', users.views.ProfileView.as_view(), name='profile'
+    ),
 ]

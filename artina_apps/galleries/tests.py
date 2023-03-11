@@ -1,21 +1,22 @@
-from django.test import Client, TestCase
-from django.urls import reverse
-
-from parameterized import parameterized
+import django.test
+import django.urls
+import parameterized.parameterized
 
 import galleries.models
 
 
-class StaticURLTests(TestCase):
+class StaticURLTests(django.test.TestCase):
     fixtures = ['fixtures/data.json']
 
     def test_galleries_endpoint(self):
-        response = Client().get(reverse('galleries:galleries'))
+        response = django.test.Client().get(
+            django.urls.reverse('galleries:galleries')
+        )
         self.assertEqual(
             response.status_code, 200, 'Страница галерей не прогружается'
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('tretyakovskaya',),
             ('state_russian_museum',),
@@ -23,8 +24,8 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_positive_galleries_painting_endpoint(self, gallery_slug):
-        response = Client().get(
-            reverse(
+        response = django.test.Client().get(
+            django.urls.reverse(
                 'galleries:gallery_paintings',
                 kwargs={'gallery_slug': gallery_slug},
             )
@@ -35,7 +36,7 @@ class StaticURLTests(TestCase):
             'Страница картин галереи не прогружается',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('tretyakovskaya_1',),
             ('state_arabic_museum',),
@@ -43,8 +44,8 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_negative_galleries_painting_endpoint(self, gallery_slug):
-        response = Client().get(
-            reverse(
+        response = django.test.Client().get(
+            django.urls.reverse(
                 'galleries:gallery_paintings',
                 kwargs={'gallery_slug': gallery_slug},
             )
@@ -56,7 +57,7 @@ class StaticURLTests(TestCase):
             'которой нет в базе данных',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('private_collections',),
             ('tulskiy_art_museum',),
@@ -64,8 +65,10 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_positive_galleries_page_endpoint(self, gallery_slug):
-        response = Client().get(
-            reverse('galleries:gallery', kwargs={'gallery_slug': gallery_slug})
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'galleries:gallery', kwargs={'gallery_slug': gallery_slug}
+            )
         )
         self.assertEqual(
             response.status_code,
@@ -73,7 +76,7 @@ class StaticURLTests(TestCase):
             'Страница истории галереи не прогружается',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('russian_museum',),
             ('new_museum',),
@@ -81,8 +84,10 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_negative_galleries_page_endpoint(self, gallery_slug):
-        response = Client().get(
-            reverse('galleries:gallery', kwargs={'gallery_slug': gallery_slug})
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'galleries:gallery', kwargs={'gallery_slug': gallery_slug}
+            )
         )
         self.assertEqual(
             response.status_code,
@@ -92,8 +97,8 @@ class StaticURLTests(TestCase):
         )
 
 
-class ModelsTests(StaticURLTests):
-    @parameterized.expand(
+class ModelsTests(django.test.TestCase):
+    @parameterized.parameterized.expand(
         [
             ('Третьяковка', 'Москва', 'tretyakovka', 'описание', '../'),
             ('Национальный музей', 'Петербург', 'russian_museum', 'ок', '/.'),

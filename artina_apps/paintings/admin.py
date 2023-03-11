@@ -1,10 +1,10 @@
-from django.contrib import admin
+import django.contrib
 
-from .models import Painting
+import paintings.models
 
 
-@admin.register(Painting)
-class PaintingsAdmin(admin.ModelAdmin):
+@django.contrib.admin.register(paintings.models.Painting)
+class PaintingsAdmin(django.contrib.admin.ModelAdmin):
     list_display = (
         'painting_name',
         'painting_slug',

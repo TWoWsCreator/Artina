@@ -1,47 +1,43 @@
+import email.mime.text
 import os
-from email.mime.text import MIMEText
-from smtplib import SMTP, SMTPException
+import smtplib
 
-from django.contrib import messages
-from django.contrib.auth import login
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.tokens import default_token_generator
-from django.shortcuts import redirect
-from django.urls import reverse_lazy
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
-from django.views.generic import CreateView, FormView
+import django.contrib
+import django.contrib.auth
+import django.contrib.auth.mixins
+import django.contrib.auth.tokens
+import django.shortcuts
+import django.urls
+import django.utils.encoding
+import django.utils.http
+import django.views.generic
+import dotenv
 
-from dotenv import load_dotenv
+import users.forms
+import users.models
 
-import users
-
-from .forms import (
-    CustomUserChangeForm,
-    CustomUserCreationForm,
-    PasswordResetEmailForm,
-)
-from .models import CustomUser, PasswordResetEmail
-
-load_dotenv()
+dotenv.load_dotenv()
 
 
-class SignUpView(CreateView):
-    form_class = CustomUserCreationForm
-    success_url = reverse_lazy('users:login')
+class SignUpView(django.views.generic.CreateView):
+    form_class = users.forms.CustomUserCreationForm
+    success_url = django.urls.reverse_lazy('users:login')
     template_name = 'users/sign_up.html'
 
     def form_valid(self, form):
         user = form.save()
-        login(self.request, user)
+        django.contrib.auth.login(self.request, user)
         return super().form_valid(form)
 
 
-class ProfileView(LoginRequiredMixin, FormView):
+class ProfileView(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.FormView,
+):
     template_name = 'users/profile.html'
-    model = CustomUser
-    form_class = CustomUserChangeForm
-    success_url = reverse_lazy('users:profile')
+    model = users.models.CustomUser
+    form_class = users.forms.CustomUserChangeForm
+    success_url = django.urls.reverse_lazy('users:profile')
 
     def get_form(self):
         return self.form_class(
@@ -51,7 +47,9 @@ class ProfileView(LoginRequiredMixin, FormView):
         )
 
     def form_valid(self, form):
-        old_image = CustomUser.objects.get(id=self.request.user.id).image
+        old_image = users.models.CustomUser.objects.get(
+            id=self.request.user.id
+        ).image
         if old_image:
             image_path = old_image.path
             if os.path.exists(image_path):
@@ -68,41 +66,48 @@ class ProfileView(LoginRequiredMixin, FormView):
         return context
 
 
-class PasswordReset(FormView):
+class PasswordReset(django.views.generic.FormView):
     template_name = 'users/password_reset.html'
-    model = PasswordResetEmail
-    form_class = PasswordResetEmailForm
+    model = users.models.PasswordResetEmail
+    form_class = users.forms.PasswordResetEmailForm
 
     @staticmethod
     def send_mail_for_reset_password(msg, from_mail, to_mail):
         password = os.environ.get('gmail_password', 'gmail_data')
-        server = SMTP('smtp.gmail.com', port=587)
+        server = smtplib.SMTP('smtp.gmail.com', port=587)
         server.starttls()
 
         try:
             server.login(from_mail, password)
-            msg = MIMEText(msg)
+            msg = email.mime.text.MIMEText(msg)
             msg['Subject'] = 'Сброс пароля'
             server.sendmail(from_mail, to_mail, msg.as_string())
 
-        except SMTPException:
+        except smtplib.SMTPException:
             pass
 
     def form_valid(self, form):
         user_email = form.cleaned_data['user_email']
         try:
-            user = CustomUser.objects.get(email=user_email)
+            user = users.models.CustomUser.objects.get(email=user_email)
         except users.models.CustomUser.DoesNotExist:
-            messages.error(
+            django.contrib.messages.error(
                 self.request,
                 'Введите почту, которую вводили при регистрации на сайте.',
             )
-            return redirect(reverse_lazy('users:password_reset'))
+            return django.shortcuts.redirect(
+                django.urls.reverse_lazy('users:password_reset')
+            )
+        token = django.contrib.auth.tokens.default_token_generator.make_token(
+            user
+        )
         msg_data = {
             'protocol': 'http',
             'domain': '127.0.0.1:8000',
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-            'token': default_token_generator.make_token(user),
+            'uid': django.utils.http.urlsafe_base64_encode(
+                django.utils.encoding.force_bytes(user.pk)
+            ),
+            'token': token,
         }
 
         message = (
@@ -115,4 +120,6 @@ class PasswordReset(FormView):
         )
         from_mail = 'artina.djangoproject@gmail.com'
         self.send_mail_for_reset_password(message, from_mail, user.email)
-        return redirect(reverse_lazy('users:password_reset_done'))
+        return django.shortcuts.redirect(
+            django.urls.reverse_lazy('users:password_reset_done')
+        )

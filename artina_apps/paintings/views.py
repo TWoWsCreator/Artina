@@ -1,21 +1,21 @@
-from django.db.models import Prefetch
-from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse_lazy
-from django.views.generic import FormView, ListView
+import django.db.models
+import django.shortcuts
+import django.urls
+import django.views.generic
 
-from users.models import CustomUser
+import paintings.models
+import users.models
 
-from .models import Painting
 
-
-class PaintingsView(ListView):
-    model = Painting
+class PaintingsView(django.views.generic.ListView):
+    model = paintings.models.Painting
     template_name = 'paintings/painting.html'
     context_object_name = 'painting'
 
     def get_context_data(self, **kwargs):
-        painting = get_object_or_404(
-            Painting, painting_slug=self.kwargs['painting_slug']
+        painting = django.shortcuts.get_object_or_404(
+            paintings.models.Painting,
+            painting_slug=self.kwargs['painting_slug'],
         )
 
         return {
@@ -32,27 +32,27 @@ class PaintingsView(ListView):
         }
 
 
-class LikePaintingView(FormView):
-    model = Painting
+class LikePaintingView(django.views.generic.FormView):
+    model = paintings.models.Painting
 
     @staticmethod
     def get_queryset():
-        return Painting.objects.select_related(
+        return paintings.models.Painting.objects.select_related(
             'painting_artist', 'painting_gallery'
         ).prefetch_related(
-            Prefetch(
+            django.db.models.Prefetch(
                 'likes',
-                queryset=CustomUser.objects.all(),
+                queryset=users.models.CustomUser.objects.all(),
                 to_attr='painting_likes',
             ),
         )
 
     def post(self, request, **kwargs):
         painting_slug = kwargs['painting_slug']
-        success_url = reverse_lazy(
+        success_url = django.urls.reverse_lazy(
             'paintings:painting', kwargs={'painting_slug': painting_slug}
         )
-        response = get_object_or_404(
+        response = django.shortcuts.get_object_or_404(
             self.get_queryset().filter(painting_slug=painting_slug)
         )
         if request.user.is_authenticated:
@@ -61,6 +61,8 @@ class LikePaintingView(FormView):
             else:
                 response.likes.add(request.user)
         else:
-            return redirect(reverse_lazy('users:login'))
+            return django.shortcuts.redirect(
+                django.urls.reverse_lazy('users:login')
+            )
         response.save()
-        return redirect(success_url)
+        return django.shortcuts.redirect(success_url)

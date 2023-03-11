@@ -1,21 +1,24 @@
-from django.forms import ModelForm, Textarea
+import django.forms
 
-from .models import Feedback
+import feedback.models
 
 
-class FeedbackForm(ModelForm):
+class FeedbackForm(django.forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
             field.field.widget.attrs['class'] = 'form-control'
 
     class Meta:
-        model = Feedback
+        model = feedback.models.Feedback
         fields = (
-            Feedback.name.field.name,
-            Feedback.mail.field.name,
-            Feedback.feedback_text.field.name,
+            feedback.models.Feedback.name.field.name,
+            feedback.models.Feedback.mail.field.name,
+            feedback.models.Feedback.feedback_text.field.name,
         )
         widgets = {
-            Feedback.feedback_text.field.name: Textarea(attrs={'rows': 5})
+            feedback.models.Feedback.feedback_text.field.name:
+                django.forms.Textarea(
+                    attrs={'rows': 5}
+                )
         }

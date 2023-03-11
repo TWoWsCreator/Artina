@@ -1,23 +1,30 @@
-from django.conf import settings
-from django.conf.urls.static import static
-from django.contrib import admin
-from django.urls import include, path
+import django.conf
+import django.conf.urls.static
+import django.contrib
+import django.urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('homepage.urls', namespace='homepage')),
-    path('users/', include('users.urls')),
-    path('users/', include('django.contrib.auth.urls')),
-    path('galleries/', include('galleries.urls')),
-    path('artists/', include('artists.urls')),
-    path('feedback/', include('feedback.urls')),
-    path('paintings/', include('paintings.urls')),
+    django.urls.path('admin/', django.contrib.admin.site.urls),
+    django.urls.path('', django.urls.include('homepage.urls')),
+    django.urls.path('users/', django.urls.include('users.urls')),
+    django.urls.path(
+        'users/', django.urls.include('django.contrib.auth.urls')
+    ),
+    django.urls.path('galleries/', django.urls.include('galleries.urls')),
+    django.urls.path('artists/', django.urls.include('artists.urls')),
+    django.urls.path('feedback/', django.urls.include('feedback.urls')),
+    django.urls.path('paintings/', django.urls.include('paintings.urls')),
 ]
 
-if settings.DEBUG:
+if django.conf.settings.DEBUG:
     import debug_toolbar
 
-    urlpatterns += (path('__debug__/', include(debug_toolbar.urls)),)
-    urlpatterns += static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    urlpatterns += (
+        django.urls.path(
+            '__debug__/', django.urls.include(debug_toolbar.urls)
+        ),
+    )
+    urlpatterns += django.conf.urls.static.static(
+        django.conf.settings.MEDIA_URL,
+        document_root=django.conf.settings.MEDIA_ROOT,
     )

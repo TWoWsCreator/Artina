@@ -1,10 +1,10 @@
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from django.forms import ModelForm
+import django.contrib.auth.forms
+import django.forms
 
 from .models import CustomUser, PasswordResetEmail
 
 
-class CustomUserCreationForm(UserCreationForm):
+class CustomUserCreationForm(django.contrib.auth.forms.UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
@@ -15,7 +15,7 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ('username', 'email')
 
 
-class CustomUserChangeForm(UserChangeForm):
+class CustomUserChangeForm(django.contrib.auth.formsUserChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
@@ -26,7 +26,7 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('username', 'email', 'first_name', 'last_name', 'image')
 
 
-class PasswordResetEmailForm(ModelForm):
+class PasswordResetEmailForm(django.forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():

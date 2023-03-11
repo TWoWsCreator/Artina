@@ -1,10 +1,10 @@
-from django.contrib import admin
+import django.contrib
 
-from .models import Artists
+import artists.models
 
 
-@admin.register(Artists)
-class ArtistsAdmin(admin.ModelAdmin):
+@django.contrib.admin.register(artists.models.Artists)
+class ArtistsAdmin(django.contrib.admin.ModelAdmin):
     list_display = (
         'artist',
         'artist_slug',

@@ -1,47 +1,50 @@
-from django.db import models
-from django.template.defaultfilters import truncatechars
-from django.utils.safestring import mark_safe
+import django.db.models
+import django.template.defaultfilters
+import django.utils.safestring
+import sorl.thumbnail
 
-from sorl.thumbnail import get_thumbnail
 
-
-class Galleries(models.Model):
-    gallery_name = models.CharField(
+class Galleries(django.db.models.Model):
+    gallery_name = django.db.models.CharField(
         'название галереи',
         max_length=50,
         help_text='Введите название галереи картин',
     )
-    gallery_location = models.CharField(
+    gallery_location = django.db.models.CharField(
         'расположение галереи',
         max_length=75,
         help_text='Введите локацию галереи',
     )
-    gallery_slug = models.SlugField(
+    gallery_slug = django.db.models.SlugField(
         'url галереи', max_length=55, help_text='Введите url адрес для галереи'
     )
-    gallery_description = models.TextField(
+    gallery_description = django.db.models.TextField(
         'интересные факты о галереи',
         max_length=1000,
         help_text='Максимум 1000 символов',
     )
-    gallery_image = models.ImageField(
+    gallery_image = django.db.models.ImageField(
         'путь до изображения галереи',
         upload_to='galleries/',
         help_text='Введите путь до изображения галереи',
     )
 
     def get_short_description(self):
-        return truncatechars(self.gallery_description, 100)
+        return django.template.defaultfilters.truncatechars(
+            self.gallery_description, 100
+        )
 
     @property
     def get_image(self):
-        return get_thumbnail(
+        return sorl.thumbnail.get_thumbnail(
             self.gallery_image, '200x200', crop='center', quality=51
         )
 
     def image_tmb(self):
         if self.gallery_image:
-            return mark_safe(f'<img src={self.get_image.url} /')
+            return django.utils.safestring.mark_safe(
+                f'<img src={self.get_image.url} /'
+            )
         return 'нет изображения'
 
     image_tmb.short_description = 'фото галереи'
@@ -55,11 +58,13 @@ class Galleries(models.Model):
         verbose_name_plural = 'галереи'
 
 
-class GalleryPhotos(models.Model):
-    gallery_photos = models.ForeignKey(
-        Galleries, on_delete=models.CASCADE, verbose_name='фотографии галереи'
+class GalleryPhotos(django.db.models.Model):
+    gallery_photos = django.db.models.ForeignKey(
+        Galleries,
+        on_delete=django.db.models.CASCADE,
+        verbose_name='фотографии галереи',
     )
-    photo = models.ImageField(
+    photo = django.db.models.ImageField(
         'путь до фотографии галереи',
         upload_to='galleries/',
         help_text='Выберите путь до фотографии галереи',

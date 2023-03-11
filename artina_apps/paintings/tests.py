@@ -1,22 +1,19 @@
 import django.core.exceptions
-from django.test import Client, TestCase
-from django.urls import reverse
-
-from parameterized import parameterized
+import django.test
+import django.urls
+import parameterized.parameterized
 
 import artists.models
-
 import galleries.models
-
 import paintings.models
 
 
-class StaticURLTests(TestCase):
+class StaticURLTests(django.test.TestCase):
     fixtures = [
         'fixtures/data.json',
     ]
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('on_wild_north',),
             ('morning_in_pine_forest',),
@@ -24,8 +21,8 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_positive_painting_page_endpoint(self, painting_slug):
-        response = Client().get(
-            reverse(
+        response = django.test.Client().get(
+            django.urls.reverse(
                 'paintings:painting', kwargs={'painting_slug': painting_slug}
             )
         )
@@ -35,7 +32,7 @@ class StaticURLTests(TestCase):
             'Страница с описанием картины не прогружается',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('black_square',),
             ('morning_in_the_pine_forest',),
@@ -43,8 +40,8 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_negative_painting_page_endpoint(self, painting_slug):
-        response = Client().get(
-            reverse(
+        response = django.test.Client().get(
+            django.urls.reverse(
                 'paintings:painting', kwargs={'painting_slug': painting_slug}
             )
         )
@@ -56,7 +53,7 @@ class StaticURLTests(TestCase):
         )
 
 
-class ModelsTests(StaticURLTests):
+class ModelsTests(django.test.TestCase):
     def setUp(self):
         self.test_artist = artists.models.Artists.objects.create(
             artist='М. В. Васнецов',
@@ -87,7 +84,7 @@ class ModelsTests(StaticURLTests):
             painting_slug='painting',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('300x300',),
             ('1300x1300',),
@@ -105,7 +102,7 @@ class ModelsTests(StaticURLTests):
             'Не создается картина с валидным размером',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('100х111',),
             ('300*300',),
@@ -126,7 +123,7 @@ class ModelsTests(StaticURLTests):
             'Создается картина с невалидным размером',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             (800,),
             (2022,),
@@ -144,7 +141,7 @@ class ModelsTests(StaticURLTests):
             'Не создается картина с валидным годом создания',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             (177,),
             (12898,),

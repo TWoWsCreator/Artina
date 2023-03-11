@@ -1,22 +1,23 @@
 import django.core.exceptions
-from django.test import Client, TestCase
-from django.urls import reverse
-
-from parameterized import parameterized
+import django.test
+import django.urls
+import parameterized.parameterized
 
 import artists.models
 
 
-class StaticURLTests(TestCase):
+class StaticURLTests(django.test.TestCase):
     fixtures = ['fixtures/data.json']
 
     def test_artists_endpoint(self):
-        response = Client().get(reverse('artists:artists'))
+        response = django.test.Client().get(
+            django.urls.reverse('artists:artists')
+        )
         self.assertEqual(
             response.status_code, 200, 'Страница художников не прогружается'
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('serov',),
             ('perov',),
@@ -24,8 +25,10 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_positive_artist_page_endpoint(self, artist_slug):
-        response = Client().get(
-            reverse('artists:artist', kwargs={'artist_slug': artist_slug})
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'artists:artist', kwargs={'artist_slug': artist_slug}
+            )
         )
         self.assertEqual(
             response.status_code,
@@ -33,7 +36,7 @@ class StaticURLTests(TestCase):
             'Страница биографии художников не загружается',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('vasnetsov',),
             ('pushkin',),
@@ -41,8 +44,10 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_negative_artist_page_endpoint(self, artist_slug):
-        response = Client().get(
-            reverse('artists:artist', kwargs={'artist_slug': artist_slug})
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'artists:artist', kwargs={'artist_slug': artist_slug}
+            )
         )
         self.assertEqual(
             response.status_code,
@@ -51,7 +56,7 @@ class StaticURLTests(TestCase):
             'которых не в базе данных',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('ge',),
             ('repin',),
@@ -59,8 +64,8 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_positive_artist_paintings_endpoint(self, artist_slug):
-        response = Client().get(
-            reverse(
+        response = django.test.Client().get(
+            django.urls.reverse(
                 'artists:artist_painting', kwargs={'artist_slug': artist_slug}
             )
         )
@@ -70,7 +75,7 @@ class StaticURLTests(TestCase):
             'Страница картин художников не загружается',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('serov_1',),
             ('ladno',),
@@ -78,8 +83,8 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_negative_artist_paintings_endpoint(self, artist_slug):
-        response = Client().get(
-            reverse(
+        response = django.test.Client().get(
+            django.urls.reverse(
                 'artists:artist_painting', kwargs={'artist_slug': artist_slug}
             )
         )
@@ -91,7 +96,7 @@ class StaticURLTests(TestCase):
         )
 
 
-class ModelsTests(StaticURLTests):
+class ModelsTests(django.test.TestCase):
     @classmethod
     def create_artist(cls, name='А. С. Пушкин', years_of_life='1777-1800'):
         print(name, years_of_life)
@@ -103,7 +108,7 @@ class ModelsTests(StaticURLTests):
             artist_slug='pushkin',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('А. С. Пушкин',),
             ('Алесандр Сергеевич Пушкин'),
@@ -122,7 +127,7 @@ class ModelsTests(StaticURLTests):
             'Художник с валидным именем не создается',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('А Пушкин',),
             ('Алесандр Сергеевич Пушкин Карам'),
@@ -141,7 +146,7 @@ class ModelsTests(StaticURLTests):
             'Художник с невалидным именем создается',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('1800-1900',),
             ('1777-1892'),
@@ -159,7 +164,7 @@ class ModelsTests(StaticURLTests):
             'Художник с валидными годами жизни не создается',
         )
 
-    @parameterized.expand(
+    @parameterized.parameterized.expand(
         [
             ('180O-1877',),
             ('-1223-1233'),

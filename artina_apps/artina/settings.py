@@ -1,12 +1,12 @@
 import os
-from pathlib import Path
+import pathlib
 
-from dotenv import load_dotenv
+import dotenv
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 
-load_dotenv()
+dotenv.load_dotenv()
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'so-secret')
 

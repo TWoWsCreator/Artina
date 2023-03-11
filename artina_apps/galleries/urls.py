@@ -1,14 +1,20 @@
-from django.urls import path
+import django.urls
 
-from .views import GalleriesView, GalleryPaintingsView, GalleryView
+import galleries.views
 
 app_name = 'galleries'
 urlpatterns = [
-    path('', GalleriesView.as_view(), name='galleries'),
-    path('<slug:gallery_slug>/', GalleryView.as_view(), name='gallery'),
-    path(
+    django.urls.path(
+        '', galleries.views.GalleriesView.as_view(), name='galleries'
+    ),
+    django.urls.path(
+        '<slug:gallery_slug>/',
+        galleries.views.GalleryView.as_view(),
+        name='gallery',
+    ),
+    django.urls.path(
         'paintings/<slug:gallery_slug>/',
-        GalleryPaintingsView.as_view(),
+        galleries.views.GalleryPaintingsView.as_view(),
         name='gallery_paintings',
     ),
 ]

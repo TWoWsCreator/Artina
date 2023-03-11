@@ -1,14 +1,18 @@
-from django.urls import path
+import django.urls
 
-from .views import ArtistPaintingsView, ArtistView, ArtistsView
+import artists.views
 
 app_name = 'artists'
 urlpatterns = [
-    path('', ArtistsView.as_view(), name='artists'),
-    path('<slug:artist_slug>/', ArtistView.as_view(), name='artist'),
-    path(
+    django.urls.path('', artists.views.ArtistsView.as_view(), name='artists'),
+    django.urls.path(
+        '<slug:artist_slug>/',
+        artists.views.ArtistView.as_view(),
+        name='artist',
+    ),
+    django.urls.path(
         'paintings/<slug:artist_slug>/',
-        ArtistPaintingsView.as_view(),
+        artists.views.ArtistPaintingsView.as_view(),
         name='artist_painting',
     ),
 ]

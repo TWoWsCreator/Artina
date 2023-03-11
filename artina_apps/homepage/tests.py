@@ -1,8 +1,12 @@
-from django.test import Client, TestCase
-from django.urls import reverse
+import django.test
+import django.urls
 
 
-class StaticURLTests(TestCase):
+class StaticURLTests(django.test.TestCase):
     def test_homepage_endpoint(self):
-        response = Client().get(reverse('homepage:home'))
-        self.assertEqual(response.status_code, 200)
+        response = django.test.Client().get(
+            django.urls.reverse('homepage:home')
+        )
+        self.assertEqual(
+            response.status_code, 200, 'Главная страница не открывается'
+        )

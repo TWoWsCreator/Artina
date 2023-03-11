@@ -1,6 +1,10 @@
-from django.urls import path
+import django.urls
 
-from .views import FeedbackView
+import feedback.views
 
 app_name = 'feedback'
-urlpatterns = [path('', FeedbackView.as_view(), name='feedback')]
+urlpatterns = [
+    django.urls.path(
+        '', feedback.views.FeedbackView.as_view(), name='feedback'
+    )
+]

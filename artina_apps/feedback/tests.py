@@ -1,8 +1,12 @@
-from django.test import Client, TestCase
-from django.urls import reverse
+import django.test
+import django.urls
 
 
-class StaticURLTests(TestCase):
+class StaticURLTests(django.test.TestCase):
     def test_feedback_endpoint(self):
-        response = Client().get(reverse('feedback:feedback'))
-        self.assertEqual(response.status_code, 200)
+        response = django.test.Client().get(
+            django.urls.reverse('feedback:feedback')
+        )
+        self.assertEqual(
+            response.status_code, 200, 'Страница обратной связи не октрывается'
+        )
