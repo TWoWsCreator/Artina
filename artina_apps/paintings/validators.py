@@ -12,4 +12,7 @@ class SizeValidation:
             raise ValidationError(
                 'Введите 2 числа - длину и ширину картины через x'
             )
+        for size in sizes:
+            if size == '':
+                raise ValidationError('Введите заполненный размер картины')
         return painting_size

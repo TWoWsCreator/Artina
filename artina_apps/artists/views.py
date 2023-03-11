@@ -42,8 +42,7 @@ class ArtistView(TemplateView):
 
     def get_context_data(self, **kwargs):
         artist = get_object_or_404(
-            Artists,
-            artist_slug=self.kwargs['artist_slug']
+            Artists, artist_slug=self.kwargs['artist_slug']
         )
         return {
             'artist': artist.artist,
@@ -70,8 +69,7 @@ class ArtistPaintingsView(ListView):
 
     def get_queryset(self, **kwargs):
         artist = get_object_or_404(
-            Artists,
-            artist_slug=self.kwargs['artist_slug']
+            Artists, artist_slug=self.kwargs['artist_slug']
         ).artist
         paintings = Painting.objects.filter(painting_artist__artist=artist)
         result_search = self.request.GET.get('search')

@@ -14,9 +14,9 @@ class PaintingsView(ListView):
     context_object_name = 'painting'
 
     def get_context_data(self, **kwargs):
-        painting = Painting.objects.filter(
-            painting_slug=self.kwargs['painting_slug']
-        ).first()
+        painting = get_object_or_404(
+            Painting, painting_slug=self.kwargs['painting_slug']
+        )
 
         return {
             'name': painting.painting_name,

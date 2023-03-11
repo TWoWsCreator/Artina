@@ -3,14 +3,17 @@ from django.urls import reverse
 
 from parameterized import parameterized
 
+import galleries.models
+
 
 class StaticURLTests(TestCase):
     fixtures = ['fixtures/data.json']
 
     def test_galleries_endpoint(self):
         response = Client().get(reverse('galleries:galleries'))
-        self.assertEqual(response.status_code, 200,
-                         'Страница галерей не прогружается')
+        self.assertEqual(
+            response.status_code, 200, 'Страница галерей не прогружается'
+        )
 
     @parameterized.expand(
         [
@@ -20,10 +23,17 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_positive_galleries_painting_endpoint(self, gallery_slug):
-        response = Client().get(reverse('galleries:gallery_paintings',
-                                        kwargs={'gallery_slug': gallery_slug}))
-        self.assertEqual(response.status_code, 200,
-                         'Страница картин галереи не прогружается')
+        response = Client().get(
+            reverse(
+                'galleries:gallery_paintings',
+                kwargs={'gallery_slug': gallery_slug},
+            )
+        )
+        self.assertEqual(
+            response.status_code,
+            200,
+            'Страница картин галереи не прогружается',
+        )
 
     @parameterized.expand(
         [
@@ -33,11 +43,18 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_negative_galleries_painting_endpoint(self, gallery_slug):
-        response = Client().get(reverse('galleries:gallery_paintings',
-                                        kwargs={'gallery_slug': gallery_slug}))
-        self.assertEqual(response.status_code, 404,
-                         'Прогружается страница картин галереи, '
-                         'которой нет в базе данных')
+        response = Client().get(
+            reverse(
+                'galleries:gallery_paintings',
+                kwargs={'gallery_slug': gallery_slug},
+            )
+        )
+        self.assertEqual(
+            response.status_code,
+            404,
+            'Прогружается страница картин галереи, '
+            'которой нет в базе данных',
+        )
 
     @parameterized.expand(
         [
@@ -47,10 +64,14 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_positive_galleries_page_endpoint(self, gallery_slug):
-        response = Client().get(reverse('galleries:gallery',
-                                        kwargs={'gallery_slug': gallery_slug}))
-        self.assertEqual(response.status_code, 200,
-                         'Страница истории галереи не прогружается')
+        response = Client().get(
+            reverse('galleries:gallery', kwargs={'gallery_slug': gallery_slug})
+        )
+        self.assertEqual(
+            response.status_code,
+            200,
+            'Страница истории галереи не прогружается',
+        )
 
     @parameterized.expand(
         [
@@ -60,8 +81,42 @@ class StaticURLTests(TestCase):
         ]
     )
     def test_negative_galleries_page_endpoint(self, gallery_slug):
-        response = Client().get(reverse('galleries:gallery',
-                                        kwargs={'gallery_slug': gallery_slug}))
-        self.assertEqual(response.status_code, 404,
-                         'Прогружается страница истории галереи, '
-                         'которой нет в базе данных')
+        response = Client().get(
+            reverse('galleries:gallery', kwargs={'gallery_slug': gallery_slug})
+        )
+        self.assertEqual(
+            response.status_code,
+            404,
+            'Прогружается страница истории галереи, '
+            'которой нет в базе данных',
+        )
+
+
+class ModelsTests(StaticURLTests):
+    @parameterized.expand(
+        [
+            ('Третьяковка', 'Москва', 'tretyakovka', 'описание', '../'),
+            ('Национальный музей', 'Петербург', 'russian_museum', 'ок', '/.'),
+            ('Тульская галерея', 'Тула', 'art_museum', 'тула', '/../'),
+        ]
+    )
+    def test_create_gallery(self, name, location, slug, description, image):
+        amount_galleries = galleries.models.Galleries.objects.count()
+        gallery = galleries.models.Galleries(
+            gallery_name=name,
+            gallery_location=location,
+            gallery_slug=slug,
+            gallery_description=description,
+            gallery_image=image,
+        )
+        gallery.full_clean()
+        gallery.save()
+        self.assertEqual(
+            galleries.models.Galleries.objects.count(),
+            amount_galleries + 1,
+            'Объект галереи не создается',
+        )
+
+    def tearDown(self):
+        galleries.models.Galleries.objects.all().delete()
+        return super().tearDown()
