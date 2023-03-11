@@ -7,7 +7,6 @@
 {% block content %}
     <h1>{{ artist }}</h1>
     <h6>{{ years_of_life }}</h6>
-    <h5>{{ artist_photo.url }}</h5>
     {% load thumbnail %}
     {% thumbnail artist_photo '300x300' crop='center' as photo %}
         <img src="{{ photo.url }}"

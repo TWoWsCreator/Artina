@@ -26,9 +26,7 @@ urlpatterns = [
         'password_change/',
         django.contrib.auth.views.PasswordChangeView.as_view(
             template_name='users/password_change.html',
-            success_url=django.urls.path.reverse_lazy(
-                'users:password_change_done'
-            ),
+            success_url=django.urls.reverse_lazy('users:password_change_done'),
         ),
         name='password_change',
     ),
@@ -48,7 +46,7 @@ urlpatterns = [
         r'password_reset/confirm/(?P<uidb64>[-\w]+)/(?P<token>[-\w]+)/$',
         django.contrib.auth.views.PasswordResetConfirmView.as_view(
             template_name='users/password_reset_confirm.html',
-            success_url=django.urls.path.reverse_lazy(
+            success_url=django.urls.reverse_lazy(
                 'users:password_reset_complete'
             ),
         ),

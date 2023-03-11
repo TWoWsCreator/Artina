@@ -15,7 +15,7 @@ class CustomUserCreationForm(django.contrib.auth.forms.UserCreationForm):
         fields = ('username', 'email')
 
 
-class CustomUserChangeForm(django.contrib.auth.formsUserChangeForm):
+class CustomUserChangeForm(django.contrib.auth.forms.UserChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
