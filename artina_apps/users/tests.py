@@ -13,7 +13,7 @@ class StaticURLTests(django.test.TestCase):
         )
 
     def test_users_sign_up_endpoint(self):
-        response = django.testClient().get(
+        response = django.test.Client().get(
             django.urls.reverse('users:sign_up')
         )
         self.assertEqual(
@@ -37,7 +37,7 @@ class StaticURLTests(django.test.TestCase):
         self.assertEqual(
             response.status_code,
             200,
-            'Не открывается страница подтверждения сброса пароля',
+            'Не открывается страница подтверждения прихода ссылки на почту',
         )
 
     @parameterized.parameterized.expand(
@@ -48,7 +48,7 @@ class StaticURLTests(django.test.TestCase):
             ('2131232//', 'bjy5fc-4f38e570b1612bd', 404),
         ]
     )
-    def test_users_password_reset_complete_endpoint(
+    def test_users_password_reset_confirm_endpoint(
         self, uuid, token, status_code
     ):
         response = django.test.Client().get(
@@ -57,5 +57,15 @@ class StaticURLTests(django.test.TestCase):
         self.assertEqual(
             response.status_code,
             status_code,
-            'не открывается страница смены пароля ' 'после запроса на сброс',
+            'Не открывается страница смены пароля после запроса на сброс',
+        )
+
+    def test_users_password_reset_complete_endpoint(self):
+        response = django.test.Client().get(
+            django.urls.reverse('users:password_reset_complete')
+        )
+        self.assertEqual(
+            response.status_code,
+            200,
+            'Не открывается страница подтверждения сброса пароля',
         )
