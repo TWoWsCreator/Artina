@@ -1,39 +1,39 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Галереи
+  Галереи
 {% endblock %}
 
 {% block content %}
-    <div class="text-center justify-content-center"></div>
-    <h1>Галереи</h1>
-    {% for gallery in galleries %}
-        {% if forloop.counter0|divisibleby:3 %}
-            <div class="row">
-        {% endif %}
-        {% if forloop.counter0 >= 3 and forloop.counter0|divisibleby:3 %}
-            </div>
-        {% endif %}
-        <div class="col-4">
-            <h4>{{ gallery.gallery_name }}</h4>
-            <p>Расположение: {{ gallery.gallery_location }}</p>
-            {% load thumbnail %}
-            {% thumbnail gallery.gallery_image '350x200' crop='center' as image %}
-                <img src="{{ image.url }}"
+  <div class="text-center justify-content-center"></div>
+  <h1>Галереи</h1>
+  {% for gallery in galleries %}
+    {% if forloop.counter0|divisibleby:3 %}
+      <div class="row">
+    {% endif %}
+    {% if forloop.counter0 >= 3 and forloop.counter0|divisibleby:3 %}
+      </div>
+    {% endif %}
+    <div class="col-4">
+      <h4>{{ gallery.gallery_name }}</h4>
+      <p>Расположение: {{ gallery.gallery_location }}</p>
+      {% load thumbnail %}
+      {% thumbnail gallery.gallery_image '350x200' crop='center' as image %}
+        <img src="{{ image.url }}"
                      width="{{ image.width }}"
                      height="{{ image.height }}"
                      alt="изображение галереи">
-            {% endthumbnail %}
-            <div>
-                <a href="{% url 'galleries:gallery' gallery.gallery_slug %}"
+      {% endthumbnail %}
+      <div>
+        <a href="{% url 'galleries:gallery' gallery.gallery_slug %}"
                    class="btn btn-primary mt-2 mb-3 bi me-2" role="button">
-                    История галереи
-                </a>
-                <a href="{% url 'galleries:gallery_paintings' gallery_slug=gallery.gallery_slug %}"
+          История галереи
+        </a>
+        <a href="{% url 'galleries:gallery_paintings' gallery_slug=gallery.gallery_slug %}"
                    class="btn btn-primary mt-2 mb-3" role="button">
-                    Картины галереи
-                </a>
-            </div>
-        </div>
-    {% endfor %}
+          Картины галереи
+        </a>
+      </div>
+    </div>
+  {% endfor %}
 {% endblock %}
