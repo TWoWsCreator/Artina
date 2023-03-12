@@ -1,3 +1,4 @@
+autopep8==2.0.2
+black==23.1.0
 django_debug_toolbar==3.8.1
 flake8==6.0.0
-black==23.1.0
