@@ -8,7 +8,7 @@ import artists.validators
 
 class Artists(django.db.models.Model):
     artist = django.db.models.CharField(
-        'ФИО художника',
+        'фИО художника',
         max_length=50,
         help_text='Введите фамилию, имя и отчество художника через пробел',
         validators=[artists.validators.ArtistNameValidator()],
@@ -27,7 +27,7 @@ class Artists(django.db.models.Model):
     )
     artist_photo = django.db.models.ImageField(
         'путь до фотографии художника',
-        help_text='выберите путь до фотографии художника',
+        help_text='Выберите путь до фотографии художника',
         upload_to='artists/',
     )
     artist_slug = django.db.models.SlugField(

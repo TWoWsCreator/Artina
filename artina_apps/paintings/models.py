@@ -43,7 +43,7 @@ class Painting(django.db.models.Model):
     painting_materials = django.db.models.CharField(
         'материалы картины',
         max_length=25,
-        help_text='введите материала, которые использовались при создании '
+        help_text='Введите материала, которые использовались при создании '
         'картины',
     )
     painting_description = django.db.models.TextField(
@@ -53,7 +53,7 @@ class Painting(django.db.models.Model):
     )
     painting_photo = django.db.models.ImageField(
         'путь до изображения картины',
-        help_text='введите путь до изображения картины',
+        help_text='Введите путь до изображения картины',
         upload_to='picture/',
     )
     painting_slug = django.db.models.SlugField(
@@ -74,13 +74,13 @@ class Painting(django.db.models.Model):
 
     @property
     def get_image(self):
-        return django.utils.safestring.get_thumbnail(
+        return sorl.thumbnail.get_thumbnail(
             self.painting_photo, '250x150', quality=51
         )
 
     def image_tmb(self):
         if self.painting_photo:
-            return sorl.thumbnail.mark_safe(
+            return django.utils.safestring.mark_safe(
                 f'<img src={self.get_image.url} />'
             )
         return 'нет изображения'

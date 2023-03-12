@@ -4,13 +4,13 @@ import django.db.models
 
 class CustomUser(django.contrib.auth.models.AbstractUser):
     username = django.db.models.CharField(
-        'Имя пользователя',
+        'имя пользователя',
         max_length=30,
         unique=True,
-        help_text='максимальная длина 30 символов',
+        help_text='Максимальная длина 30 символов',
     )
     email = django.db.models.EmailField(
-        'Ваша почта',
+        'ваша почта',
     )
     image = django.db.models.ImageField(
         'добавьте картинку профиля', upload_to='avatar/%Y/%m/%d', blank=True
@@ -22,7 +22,7 @@ class CustomUser(django.contrib.auth.models.AbstractUser):
 
 class PasswordResetEmail(django.db.models.Model):
     user_email = django.db.models.EmailField(
-        'Ваша почта',
+        'ваша почта',
     )
 
     def __str__(self):

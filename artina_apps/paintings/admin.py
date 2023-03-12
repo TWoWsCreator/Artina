@@ -6,10 +6,10 @@ import paintings.models
 @django.contrib.admin.register(paintings.models.Painting)
 class PaintingsAdmin(django.contrib.admin.ModelAdmin):
     list_display = (
-        'painting_name',
-        'painting_slug',
-        'painting_artist',
-        'get_painting_description',
-        'image_tmb',
+        paintings.models.Painting.painting_name.field.name,
+        paintings.models.Painting.painting_slug.field.name,
+        paintings.models.Painting.painting_artist.field.name,
+        paintings.models.Painting.get_painting_description,
+        paintings.models.Painting.image_tmb,
     )
-    list_display_links = ('painting_name',)
+    list_display_links = (paintings.models.Painting.painting_name.field.name,)

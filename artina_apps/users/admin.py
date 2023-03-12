@@ -9,22 +9,34 @@ class CustomUserAdmin(django.contrib.auth.admin.UserAdmin):
     add_form = users.forms.CustomUserCreationForm
     form = users.forms.CustomUserChangeForm
     model = users.models.CustomUser
-    list_display = ('email', 'username', 'is_staff')
+    list_display = (
+        users.models.CustomUser.email.field.name,
+        users.models.CustomUser.username.field.name,
+        users.models.CustomUser.is_staff.field.name,
+    )
     fieldsets = (
         (
-            None,
+            'данные пользователя',
             {
                 'fields': (
-                    'email',
-                    'username',
-                    'password',
-                    'first_name',
-                    'last_name',
-                    'image',
+                    users.models.CustomUser.email.field.name,
+                    users.models.CustomUser.username.field.name,
+                    users.models.CustomUser.password.field.name,
+                    users.models.CustomUser.first_name.field.name,
+                    users.models.CustomUser.last_name.field.name,
+                    users.models.CustomUser.image.field.name,
                 )
             },
         ),
-        ('Permissions', {'fields': ('is_staff', 'is_active')}),
+        (
+            'разрешения',
+            {
+                'fields': (
+                    users.models.CustomUser.is_staff.field.name,
+                    users.models.CustomUser.is_active.field.name,
+                )
+            },
+        ),
     )
 
 

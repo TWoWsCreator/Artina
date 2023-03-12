@@ -50,12 +50,12 @@ class Galleries(django.db.models.Model):
     image_tmb.short_description = 'фото галереи'
     image_tmb.allow_tags = True
 
-    def __str__(self):
-        return self.gallery_name
-
     class Meta:
         verbose_name = 'галерея'
         verbose_name_plural = 'галереи'
+
+    def __str__(self):
+        return self.gallery_name
 
 
 class GalleryPhotos(django.db.models.Model):

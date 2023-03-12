@@ -15,9 +15,9 @@ class Feedback(django.db.models.Model):
         'дата создания', auto_now_add=True
     )
 
-    def __str__(self):
-        return self.feedback_text[:20]
-
     class Meta:
         verbose_name = 'отзыв'
         verbose_name_plural = 'отзывы'
+
+    def __str__(self):
+        return self.feedback_text[:20]
