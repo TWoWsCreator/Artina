@@ -15,7 +15,7 @@
       <p>Размер: {{ painting.painting_size }}</p>
       {% load thumbnail %}
       {% thumbnail painting.painting_photo '350x200' crop='center' as photo %}
-        <img src="{{ photo.url }}"
+        <img class='img-fluid' src="{{ photo.url }}"
                      width="{{ photo.width }}"
                      height="{{ photo.height }}"
                      alt="картина художника">

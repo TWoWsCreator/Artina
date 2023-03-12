@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block content %}
-  <div class="text-center justify-content-center"></div>
   <h1>Галереи</h1>
   {% for gallery in galleries %}
     {% if forloop.counter0|divisibleby:3 %}
@@ -14,12 +13,12 @@
     {% if forloop.counter0 >= 3 and forloop.counter0|divisibleby:3 %}
       </div>
     {% endif %}
-    <div class="col-4">
+    <div class="no-padding col-lg-4 col-md-6 col-sm-12 col-xs-12">
       <h4>{{ gallery.gallery_name }}</h4>
       <p>Расположение: {{ gallery.gallery_location }}</p>
       {% load thumbnail %}
       {% thumbnail gallery.gallery_image '350x200' crop='center' as image %}
-        <img src="{{ image.url }}"
+        <img class="img-fluid" src="{{ image.url }}"
                      width="{{ image.width }}"
                      height="{{ image.height }}"
                      alt="изображение галереи">
@@ -35,5 +34,8 @@
         </a>
       </div>
     </div>
+    {% if forloop.last %}
+      </div>
+    {% endif %}
   {% endfor %}
 {% endblock %}

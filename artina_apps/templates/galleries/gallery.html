@@ -12,7 +12,7 @@
   {% load thumbnail %}
   <div class="d-block">
     {% thumbnail photo '550x350' as ph %}
-      <img src="{{ ph.url }}"
+      <img class='img-fluid' src="{{ ph.url }}"
                  width="{{ ph.width }}"
                  height="{{ ph.height }}"
                  alt="картина">
