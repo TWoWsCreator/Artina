@@ -1,14 +1,13 @@
-from django.db.models import Q
-from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, TemplateView
+import django.shortcuts
+import django.views.generic
 
-from core.views import searching_paintings
-from paintings.models import Painting
-from .models import Artists
+import artists.models
+import core.views
+import paintings.models
 
 
-class ArtistsView(ListView):
-    model = Artists
+class ArtistsView(django.views.generic.ListView):
+    model = artists.models.Artists
     context_object_name = 'artists'
 
     def get_template_names(self):
@@ -22,25 +21,26 @@ class ArtistsView(ListView):
             return 'artists/artists.html'
 
     def get_queryset(self):
-        artists = Artists.objects.all()
+        artists_search = artists.models.Artists.objects.all()
         result_search = self.request.GET.get('search')
         if result_search:
-            return artists.filter(
-                Q(artist__iregex=result_search)
-                | Q(years_of_life__iregex=result_search)
-                | Q(short_biography__iregex=result_search)
+            return (
+                artists_search.filter(artist__iregex=result_search)
+                | artists_search.filter(years_of_life__iregex=result_search)
+                | artists_search.filter(short_biography__iregex=result_search)
             )
         else:
-            return artists
+            return artists_search
 
 
-class ArtistView(TemplateView):
-    model = Artists
+class ArtistView(django.views.generic.TemplateView):
+    model = artists.models.Artists
     template_name = 'artists/artist.html'
 
     def get_context_data(self, **kwargs):
-        artist = get_object_or_404(
-            Artists, artist_slug=self.kwargs['artist_slug']
+        artist = django.shortcuts.get_object_or_404(
+            artists.models.Artists,
+            artist_slug=kwargs[artists.models.Artists.artist_slug.field.name]
         )
         return {
             'artist': artist.artist,
@@ -51,8 +51,8 @@ class ArtistView(TemplateView):
         }
 
 
-class ArtistPaintingsView(ListView):
-    model = Painting
+class ArtistPaintingsView(django.views.generic.ListView):
+    model = paintings.models.Painting
     context_object_name = 'paintings'
 
     def get_template_names(self):
@@ -65,11 +65,16 @@ class ArtistPaintingsView(ListView):
         else:
             return 'paintings/paintings.html'
 
-    def get_queryset(self, **kwargs):
-        artist = get_object_or_404(
-            Artists, artist_slug=self.kwargs['artist_slug']
-        ).artist
-        paintings = Painting.objects.filter(painting_artist__artist=artist)
+    def get_queryset(self):
+        artist = django.shortcuts.get_object_or_404(
+            artists.models.Artists, artist_slug=self.kwargs[
+                artists.models.Artists.artist_slug.field.name]
+        ).pk
+        paintings_artist = paintings.models.Painting.objects.filter(
+            painting_artist=artist)
         result_search = self.request.GET.get('search')
-        filter_paintings = searching_paintings(paintings, result_search)
+        filter_paintings = core.views.searching_paintings(
+            paintings_artist,
+            result_search
+        )
         return filter_paintings
