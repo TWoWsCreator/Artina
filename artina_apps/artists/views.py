@@ -21,16 +21,20 @@ class ArtistsView(django.views.generic.ListView):
             return 'artists/artists.html'
 
     def get_queryset(self):
-        artists_search = artists.models.Artists.objects.all()
+        artists_page = artists.models.Artists.objects.all()
         result_search = self.request.GET.get('search')
         if result_search:
-            return (
-                artists_search.filter(artist__iregex=result_search)
-                | artists_search.filter(years_of_life__iregex=result_search)
-                | artists_search.filter(short_biography__iregex=result_search)
+            artists_page = (
+                artists_page.filter(artist__iregex=result_search)
+                | artists_page.filter(years_of_life__iregex=result_search)
+                | artists_page.filter(short_biography__iregex=result_search)
             )
-        else:
-            return artists_search
+        return artists_page.only(
+            artists.models.Artists.artist.field.name,
+            artists.models.Artists.years_of_life.field.name,
+            artists.models.Artists.artist_photo.field.name,
+            artists.models.Artists.artist_slug.field.name,
+        )
 
 
 class ArtistView(django.views.generic.TemplateView):
@@ -40,15 +44,9 @@ class ArtistView(django.views.generic.TemplateView):
     def get_context_data(self, **kwargs):
         artist = django.shortcuts.get_object_or_404(
             artists.models.Artists,
-            artist_slug=kwargs[artists.models.Artists.artist_slug.field.name]
+            artist_slug=kwargs[artists.models.Artists.artist_slug.field.name],
         )
-        return {
-            'artist': artist.artist,
-            'years_of_life': artist.years_of_life,
-            'artist_photo': artist.artist_photo,
-            'biography': artist.short_biography,
-            'slug': artist.artist_slug,
-        }
+        return {'artist': artist}
 
 
 class ArtistPaintingsView(django.views.generic.ListView):
@@ -66,15 +64,26 @@ class ArtistPaintingsView(django.views.generic.ListView):
             return 'paintings/paintings.html'
 
     def get_queryset(self):
+        artist_queryset = artists.models.Artists.objects.only(
+            artists.models.Artists.artist_slug.field.name
+        )
         artist = django.shortcuts.get_object_or_404(
-            artists.models.Artists, artist_slug=self.kwargs[
-                artists.models.Artists.artist_slug.field.name]
+            artist_queryset,
+            artist_slug=self.kwargs[
+                artists.models.Artists.artist_slug.field.name
+            ],
         ).pk
         paintings_artist = paintings.models.Painting.objects.filter(
-            painting_artist=artist)
+            painting_artist=artist
+        )
         result_search = self.request.GET.get('search')
         filter_paintings = core.views.searching_paintings(
-            paintings_artist,
-            result_search
+            paintings_artist, result_search
+        ).only(
+            paintings.models.Painting.painting_name.field.name,
+            paintings.models.Painting.painting_size.field.name,
+            paintings.models.Painting.painting_photo.field.name,
+            paintings.models.Painting.painting_creation_year.field.name,
+            paintings.models.Painting.painting_slug.field.name,
         )
         return filter_paintings

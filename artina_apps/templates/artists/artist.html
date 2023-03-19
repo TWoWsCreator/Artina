@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block content %}
-  <h1>{{ artist }}</h1>
-  <h6>{{ years_of_life }}</h6>
+  <h1>{{ artist.artist }}</h1>
+  <h6>{{ artist.years_of_life }}</h6>
   {% load thumbnail %}
-  {% thumbnail artist_photo '300x300' crop='center' as photo %}
+  {% thumbnail artist.artist_photo '300x300' crop='center' as photo %}
     <img src="{{ photo.url }}"
              width="{{ photo.width }}"
              height="{{ photo.height }}"
@@ -17,14 +17,14 @@
   {% endthumbnail %}
   <h5 class="mt-2">Краткая биография художника</h5>
   <div class="mt-2 mb-3 col-6 text-center mx-auto">
-    {{ biography }}
+    {{ artist.short_biography }}
   </div>
   <div>
     <a href="{% url 'artists:artists' %}"
            role="button" class="btn btn-primary mb-3 bi me-2">
       К художникам
     </a>
-    <a href="{% url 'artists:artist_painting' artist_slug=slug %}"
+    <a href="{% url 'artists:artist_painting' artist_slug=artist.artist_slug %}"
            role="button" class="btn btn-primary mb-3">
       Картины художника
     </a>
