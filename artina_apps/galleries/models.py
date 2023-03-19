@@ -61,6 +61,7 @@ class Galleries(django.db.models.Model):
 class GalleryPhotos(django.db.models.Model):
     gallery_photos = django.db.models.ForeignKey(
         Galleries,
+        related_name='images',
         on_delete=django.db.models.CASCADE,
         verbose_name='фотографии галереи',
     )

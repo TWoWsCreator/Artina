@@ -1,3 +1,4 @@
+import django.db.models
 import django.shortcuts
 import django.views.generic
 
@@ -25,15 +26,19 @@ class GalleriesView(django.views.generic.ListView):
         all_galleries = galleries.models.Galleries.objects.all()
         result_search = self.request.GET.get('search')
         if result_search:
-            return all_galleries.filter(
+            all_galleries = all_galleries.filter(
                 all_galleries.filter(gallery_name__iregex=result_search)
                 | all_galleries.filter(
                     gallery_description__iregex=result_search
                 )
                 | all_galleries.filter(gallery_location__iregex=result_search)
             )
-        else:
-            return galleries.models.Galleries.objects.all()
+        return all_galleries.only(
+            galleries.models.Galleries.gallery_name.field.name,
+            galleries.models.Galleries.gallery_location.field.name,
+            galleries.models.Galleries.gallery_image.field.name,
+            galleries.models.Galleries.gallery_slug.field.name,
+        )
 
 
 class GalleryView(django.views.generic.TemplateView):
@@ -41,21 +46,23 @@ class GalleryView(django.views.generic.TemplateView):
     template_name = 'galleries/gallery.html'
 
     def get_context_data(self, **kwargs):
-        gallery = django.shortcuts.get_object_or_404(
-            galleries.models.Galleries,
-            gallery_slug=self.kwargs['gallery_slug'],
+        gallery_queryset = galleries.models.Galleries.objects.prefetch_related(
+            django.db.models.Prefetch(
+                galleries.models.GalleryPhotos.
+                gallery_photos.field.related_query_name(),
+                queryset=galleries.models.GalleryPhotos.objects.only(
+                    galleries.models.GalleryPhotos.photo.field.name,
+                    galleries.models.GalleryPhotos.
+                    gallery_photos_id.field.name,
+                )
+            )
         )
-        photos = galleries.models.GalleryPhotos.objects.filter(
-            gallery_photos=gallery
-        ).order_by('gallery_photos_id')
-        return {
-            'name': gallery.gallery_name,
-            'location': gallery.gallery_location,
-            'description': gallery.gallery_description,
-            'photo': gallery.gallery_image,
-            'slug': gallery.gallery_slug,
-            'photos': photos,
-        }
+        gallery = django.shortcuts.get_object_or_404(
+            gallery_queryset,
+            gallery_slug=kwargs[galleries.models.Galleries.
+                                gallery_slug.field.name],
+        )
+        return {'gallery': gallery}
 
 
 class GalleryPaintingsView(django.views.generic.ListView):
@@ -75,11 +82,20 @@ class GalleryPaintingsView(django.views.generic.ListView):
     def get_queryset(self):
         result_search = self.request.GET.get('search')
         gallery = django.shortcuts.get_object_or_404(
-            galleries.models.Galleries,
-            gallery_slug=self.kwargs['gallery_slug'],
-        ).gallery_name
+            galleries.models.Galleries.objects.only(
+                galleries.models.Galleries.gallery_slug.field.name
+            ),
+            gallery_slug=self.kwargs[galleries.models.Galleries.
+                                     gallery_slug.field.name],
+        ).pk
         paintings_gallery = paintings.models.Painting.objects.filter(
-            painting_gallery__gallery_name=gallery
+            painting_gallery=gallery
+        ).only(
+            paintings.models.Painting.painting_name.field.name,
+            paintings.models.Painting.painting_size.field.name,
+            paintings.models.Painting.painting_photo.field.name,
+            paintings.models.Painting.painting_creation_year.field.name,
+            paintings.models.Painting.painting_slug.field.name,
         )
         filter_paintings = core.views.searching_paintings(
             paintings_gallery, result_search
