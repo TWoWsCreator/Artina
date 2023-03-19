@@ -7,30 +7,30 @@
 {% load static %}
 
 {% block content %}
-  <h1>{{ name }}</h1>
-  <h4>Художник: {{ artist }}</h4>
-  <h5>Галерея: {{ gallery }}</h5>
-  <h6 class="mb-2">размер: {{ size }}</h6>
+  <h1>{{ painting.painting_name }}</h1>
+  <h4>Художник: {{ painting.painting_artist }}</h4>
+  <h5>Галерея: {{ painting.painting_gallery }}</h5>
+  <h6 class="mb-2">размер: {{ painting.painting_size }}</h6>
   {% load thumbnail %}
-  {% thumbnail photo '550x350' as ph %}
+  {% thumbnail painting.painting_photo '550x350' as ph %}
     <img src="{{ ph.url }}"
              width="{{ ph.width }}"
              height="{{ ph.height }}"
              alt="картина">
   {% endthumbnail %}
-  <h6 class="mt-2 mb-2">год создания: {{ creation_year }}</h6>
-  <h6 class="mt-2 mb-2">материалы: {{ materials }}</h6>
+  <h6 class="mt-2 mb-2">год создания: {{ painting.painting_creation_year }}</h6>
+  <h6 class="mt-2 mb-2">материалы: {{ painting.painting_materials }}</h6>
   <h4>Описание</h4>
-  <p class="col-6 mx-auto">{{ description }}</p>
+  <p class="col-6 mx-auto">{{ painting.painting_description }}</p>
 
   <h6 class="text-black">
-    Количество лайков: {{ likes.count }}
+    Количество лайков: {{ painting.likes.count }}
   </h6>
   <div class="d-inline-block">
-    <form method="post" action="{% url 'paintings:likes' painting_slug=slug %}">
+    <form method="post" action="{% url 'paintings:likes' painting_slug=painting.painting_slug %}">
       {% csrf_token %}
       <button type="submit" class="border-0 button" style="background-color: #9ee2ff;">
-        {% if request.user in likes %}
+        {% if request.user in painting.likes.all %}
           <img class="image" style="width: 40px; height: 40px; background-color: #9ee2ff;"
                          src="{% static 'img/like_red.png' %}" alt="Лайк!">
         {% else %}
@@ -41,12 +41,12 @@
     </form>
   </div>
   <div>
-    <a class='btn btn-primary' href="{% url 'artists:artist' artist.artist_slug %}">Биография художника</a>
-    <a class='btn btn-primary' href="{% url 'galleries:gallery' gallery.gallery_slug %}">Информация о галереи</a>
+    <a class='btn btn-primary' href="{% url 'artists:artist' painting.painting_artist.artist_slug %}">Биография художника</a>
+    <a class='btn btn-primary' href="{% url 'galleries:gallery' painting.painting_gallery.gallery_slug %}">Информация о галереи</a>
   </div>
   <div>
     <a class='btn btn-primary mt-2 mb-3'
-           href="{% url 'artists:artist_painting' artist_slug=artist.artist_slug %}">
+           href="{% url 'artists:artist_painting' artist_slug=painting.painting_artist.artist_slug %}">
       Назад к картинам
     </a>
   </div>

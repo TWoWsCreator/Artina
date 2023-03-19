@@ -64,11 +64,10 @@ class ArtistPaintingsView(django.views.generic.ListView):
             return 'paintings/paintings.html'
 
     def get_queryset(self):
-        artist_queryset = artists.models.Artists.objects.only(
-            artists.models.Artists.artist_slug.field.name
-        )
         artist = django.shortcuts.get_object_or_404(
-            artist_queryset,
+            artists.models.Artists.objects.only(
+                artists.models.Artists.artist_slug.field.name
+            ),
             artist_slug=self.kwargs[
                 artists.models.Artists.artist_slug.field.name
             ],
