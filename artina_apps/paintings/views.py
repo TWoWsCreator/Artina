@@ -19,13 +19,15 @@ class PaintingsView(django.views.generic.ListView):
             paintings.models.Painting.objects.select_related(
                 paintings.models.Painting.painting_artist.field.name,
                 paintings.models.Painting.painting_gallery.field.name,
-            ).prefetch_related(
+            )
+            .prefetch_related(
                 django.db.models.Prefetch(
                     paintings.models.Painting.likes.field.name,
                     queryset=users.models.CustomUser.objects.all(),
                     to_attr='painting_likes',
                 )
-            ).only(
+            )
+            .only(
                 paintings.models.Painting.painting_name.field.name,
                 paintings.models.Painting.painting_creation_year.field.name,
                 paintings.models.Painting.painting_materials.field.name,
@@ -52,8 +54,9 @@ class LikePaintingView(django.views.generic.FormView):
         painting_slug = kwargs[
             paintings.models.Painting.painting_slug.field.name
         ]
+        slug_field = paintings.models.Painting.painting_slug.field.name
         success_url = django.urls.reverse_lazy(
-            'paintings:painting', kwargs={'painting_slug': painting_slug}
+            'paintings:painting', kwargs={slug_field: painting_slug}
         )
         response = django.shortcuts.get_object_or_404(
             paintings.models.Painting.objects.filter(

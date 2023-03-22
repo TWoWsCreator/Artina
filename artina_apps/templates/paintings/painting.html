@@ -18,6 +18,8 @@
              height="{{ ph.height }}"
              alt="картина">
   {% endthumbnail %}
+  <a href="{% url 'download:image' painting.painting_photo %}" class=
+  "mx-auto d-block col-lg-2 col-md-3 col-sm-3 col-xs-6 btn text-blue btn-outline-primary mt-2 mb-3">Скачать изображение</a>
   <h6 class="mt-2 mb-2">год создания: {{ painting.painting_creation_year }}</h6>
   <h6 class="mt-2 mb-2">материалы: {{ painting.painting_materials }}</h6>
   <h4>Описание</h4>

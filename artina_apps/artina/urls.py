@@ -12,6 +12,7 @@ urlpatterns = [
     ),
     django.urls.path('galleries/', django.urls.include('galleries.urls')),
     django.urls.path('artists/', django.urls.include('artists.urls')),
+    django.urls.path('download/', django.urls.include('download.urls')),
     django.urls.path('feedback/', django.urls.include('feedback.urls')),
     django.urls.path('paintings/', django.urls.include('paintings.urls')),
 ]

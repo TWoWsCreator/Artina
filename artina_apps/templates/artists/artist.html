@@ -15,6 +15,8 @@
              class="rounded-circle z-depth-0"
              alt="фото художника">
   {% endthumbnail %}
+  <a href="{% url 'download:image' artist.artist_photo %}" class=
+  "mx-auto d-block col-lg-2 col-md-3 col-sm-3 col-xs-6 btn text-blue btn-outline-primary mt-2 mb-3">Скачать изображение</a>
   <h5 class="mt-2">Краткая биография художника</h5>
   <div class="mt-2 mb-3 col-6 text-center mx-auto">
     {{ artist.short_biography }}

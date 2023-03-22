@@ -16,6 +16,8 @@
                  alt="картина">
     {% endthumbnail %}
   </div>
+  <a href="{% url 'download:image' gallery.gallery_image %}" class=
+  "mx-auto d-block col-lg-2 col-md-3 col-sm-3 col-xs-6 btn text-blue btn-outline-primary mt-2 mb-3">Скачать изображение</a>
   {% if gallery.images %}
     <h4 class="mt-2 mb-3">Ещё фотографии</h4>
     {% for ph in gallery.images.all %}

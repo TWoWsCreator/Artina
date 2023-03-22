@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
     'artists.apps.ArtistsConfig',
+    'download.apps.DownloadConfig',
     'feedback.apps.FeedbackConfig',
     'galleries.apps.GalleriesConfig',
     'homepage.apps.HomepageConfig',

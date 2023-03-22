@@ -48,13 +48,13 @@ class GalleryView(django.views.generic.TemplateView):
     def get_context_data(self, **kwargs):
         gallery_photos = galleries.models.GalleryPhotos.objects.only(
             galleries.models.GalleryPhotos.photo.field.name,
-            galleries.models.GalleryPhotos.gallery_photos_id.field.name
+            galleries.models.GalleryPhotos.gallery_photos_id.field.name,
         )
         gallery_photos_field = galleries.models.GalleryPhotos.gallery_photos
         gallery_queryset = galleries.models.Galleries.objects.prefetch_related(
             django.db.models.Prefetch(
                 gallery_photos_field.field.related_query_name(),
-                queryset=gallery_photos
+                queryset=gallery_photos,
             ),
         )
         gallery = django.shortcuts.get_object_or_404(
