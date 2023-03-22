@@ -71,5 +71,18 @@ class GalleryPhotos(django.db.models.Model):
         help_text='Выберите путь до фотографии галереи',
     )
 
+    @property
+    def get_image(self):
+        return sorl.thumbnail.get_thumbnail(
+            self.photo, '600x300', crop='center', quality=51
+        )
+
+    def image_tmb(self):
+        if self.gallery_image:
+            return django.utils.safestring.mark_safe(
+                f'<img src={self.get_image.url} /'
+            )
+        return 'нет изображения'
+
     def __str__(self):
         return self.photo.url

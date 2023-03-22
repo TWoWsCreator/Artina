@@ -4,44 +4,62 @@
   Галерея
 {% endblock %}
 
+{% load static %}
+
 {% block content %}
   <h1>{{ gallery.gallery_name }}</h1>
   <h5>Местоположение: {{ gallery.gallery_location }}</h5>
   {% load thumbnail %}
   <div class="d-block">
-    {% thumbnail gallery.gallery_image '550x350' as ph %}
+  {% thumbnail gallery.gallery_image '550x350' as ph %}
       <img class='img-fluid' src="{{ ph.url }}"
                  width="{{ ph.width }}"
                  height="{{ ph.height }}"
                  alt="картина">
-    {% endthumbnail %}
+  {% endthumbnail %}
   </div>
   <a href="{% url 'download:image' gallery.gallery_image %}" class=
   "mx-auto d-block col-lg-2 col-md-3 col-sm-3 col-xs-6 btn text-blue btn-outline-primary mt-2 mb-3">Скачать изображение</a>
   {% if gallery.images %}
-    <h4 class="mt-2 mb-3">Ещё фотографии</h4>
-    {% for ph in gallery.images.all %}
-      <div class="d-inline-block">
-        {% load thumbnail %}
-        {% thumbnail ph.photo '250x150' crop='center' as ph %}
-          <img src="{{ ph.url }}"
-                         width="{{ ph.width }}"
-                         height="{{ ph.height }}"
-                         alt="картина">
-        {% endthumbnail %}
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        {% for gallery_image in gallery.images.all %}
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ forloop.counter0 }}" class="active" aria-label="Slide forloop.counter" aria-current="true"></button>
+        {% endfor %}
       </div>
-    {% endfor %}
+      <div class="carousel-inner">
+        {% for gallery_image in gallery.images.all %}
+          <div class="carousel-item{% if forloop.first %} active{% endif %} text-center">
+            <img src="{{ gallery_image.get_image.url }}" />
+          </div>
+          <div class="container">
+            <div class="carousel-caption text-start">
+              <p><a href="{% url 'download:image' gallery_image.photo %}" class="
+                mx-auto d-block col-lg-2 col-md-3 col-sm-3 col-xs-6 btn text-blue btn-outline-primary mt-2 mb-3">Скачать изображение</a></p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
   {% endif %}
   <h4 class="mt-2">История</h4>
   <p class="col-6 mx-auto">{{ gallery.gallery_description }}</p>
   <div>
-    <a href="{% url 'galleries:galleries' %}"
+  <a href="{% url 'galleries:galleries' %}"
            class="btn btn-primary bi me-2 mb-2" role="button">
       К галереям
-    </a>
-    <a href="{% url 'galleries:gallery_paintings' gallery_slug=gallery.gallery_slug %}"
+  </a>
+  <a href="{% url 'galleries:gallery_paintings' gallery_slug=gallery.gallery_slug %}"
            class="btn btn-primary mb-2" role="button">
       Картины галереи
-    </a>
+  </a>
   </div>
 {% endblock %}

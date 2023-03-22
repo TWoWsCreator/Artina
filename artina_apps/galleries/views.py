@@ -38,7 +38,7 @@ class GalleriesView(django.views.generic.ListView):
             galleries.models.Galleries.gallery_location.field.name,
             galleries.models.Galleries.gallery_image.field.name,
             galleries.models.Galleries.gallery_slug.field.name,
-        )
+        ).order_by(galleries.models.Galleries.gallery_name.field.name)
 
 
 class GalleryView(django.views.generic.TemplateView):
@@ -98,7 +98,7 @@ class GalleryPaintingsView(django.views.generic.ListView):
             paintings.models.Painting.painting_photo.field.name,
             paintings.models.Painting.painting_creation_year.field.name,
             paintings.models.Painting.painting_slug.field.name,
-        )
+        ).order_by(paintings.models.Painting.painting_name.field.name)
         filter_paintings = core.views.searching_paintings(
             paintings_gallery, result_search
         )

@@ -34,7 +34,7 @@ class ArtistsView(django.views.generic.ListView):
             artists.models.Artists.years_of_life.field.name,
             artists.models.Artists.artist_photo.field.name,
             artists.models.Artists.artist_slug.field.name,
-        )
+        ).order_by(artists.models.Artists.artist.field.name)
 
 
 class ArtistView(django.views.generic.TemplateView):
@@ -84,5 +84,5 @@ class ArtistPaintingsView(django.views.generic.ListView):
             paintings.models.Painting.painting_photo.field.name,
             paintings.models.Painting.painting_creation_year.field.name,
             paintings.models.Painting.painting_slug.field.name,
-        )
+        ).order_by(paintings.models.Painting.painting_name.field.name)
         return filter_paintings
