@@ -268,15 +268,17 @@ class ContextTests(CheckFieldsTestCase):
 
     def test_artist_painting_in_context(self):
         response = django.test.Client().get(
-            django.urls.reverse('artists:artist',
-                                kwargs={'artist_slug': 'shishkin'})
+            django.urls.reverse(
+                'artists:artist', kwargs={'artist_slug': 'shishkin'}
+            )
         )
         self.assertIn('artist', response.context)
 
     def test_artist_painting_types(self):
         response = django.test.Client().get(
-            django.urls.reverse('artists:artist',
-                                kwargs={'artist_slug': 'shishkin'})
+            django.urls.reverse(
+                'artists:artist', kwargs={'artist_slug': 'shishkin'}
+            )
         )
         self.assertIsInstance(
             response.context['artist'],
