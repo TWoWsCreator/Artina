@@ -189,15 +189,15 @@ class ModelsTests(django.test.TestCase):
     def tearDown(self):
         artists.models.Artists.objects.all().delete()
         return super().tearDown()
-    
+
 
 class CheckFieldsTestCase(django.test.TestCase):
     def check_content_value(
         self,
         item,
         exists,
-        prefetched,
-        not_loaded,
+        prefetched=(),
+        not_loaded=(),
     ):
         check_dict = item.__dict__
 
@@ -216,15 +216,17 @@ class ContextTests(CheckFieldsTestCase):
 
     def test_artists_in_context(self):
         response = django.test.Client().get(
-            django.urls.reverse('artists:artists'))
+            django.urls.reverse('artists:artists')
+        )
         self.assertIn('artists', response.context)
 
     def test_amount_artists_in_context(self):
         response = django.test.Client().get(
-            django.urls.reverse('artists:artists'))
+            django.urls.reverse('artists:artists')
+        )
         self.assertEqual(len(response.context['artists']), 14)
 
-    def test_items_types(self):
+    def test_artists_types(self):
         response = django.test.Client().get(
             django.urls.reverse('artists:artists')
         )
@@ -238,39 +240,45 @@ class ContextTests(CheckFieldsTestCase):
             )
         )
 
-    def test_items_loaded_values(self):
+    def test_artists_loaded_values(self):
         response = django.test.Client().get(
             django.urls.reverse('artists:artists')
         )
-        for item in response.context['items']:
+        for artist in response.context['artists']:
             self.check_content_value(
-                item,
+                artist,
                 (
-                    'name',
-                    'text',
-                    'category_id',
-                ),
-                ('tags',),
-                (
-                    'is_on_main',
-                    'image',
-                    'images',
-                    'is_published',
+                    artists.models.Artists.artist.field.name,
+                    artists.models.Artists.years_of_life.field.name,
+                    artists.models.Artists.artist_photo.field.name,
+                    artists.models.Artists.artist_slug.field.name,
                 ),
             )
 
+    def test_sorted_artists_in_context(self):
+        response = django.test.Client().get(
+            django.urls.reverse('artists:artists')
+        )
+        self.assertQuerysetEqual(
+            artists.models.Artists.objects.order_by(
+                artists.models.Artists.artist.field.name
+            ),
+            response.context['artists'],
+        )
 
-    # def test_sorted_artists_in_context(self):
-    #     response = django.test.Client().get(
-    #         django.urls.reverse('artists:artists'))
-    #     artists.models.Artists.objects.order_by(
-    #         artists.models.Artists.artist.field.name
-    #     )
-    #     print(artists.models.Artists.objects.order_by(artists.models.Artists.artist.field.name),
-    #           response.context['artists'])
-    #     print(artists.models.Artists.objects.order_by(artists.models.Artists.artist.field.name),
-    #           response.context['artists'])
-        # self.assertEqual(
-        #     artists.models.Artists.objects.order_by(artists.models.Artists.artist.field.name),
-        #     response.context['artists']
-        # )
+    def test_artist_painting_in_context(self):
+        response = django.test.Client().get(
+            django.urls.reverse('artists:artist',
+                                kwargs={'artist_slug': 'shishkin'})
+        )
+        self.assertIn('artist', response.context)
+
+    def test_artist_painting_types(self):
+        response = django.test.Client().get(
+            django.urls.reverse('artists:artist',
+                                kwargs={'artist_slug': 'shishkin'})
+        )
+        self.assertIsInstance(
+            response.context['artist'],
+            artists.models.Artists,
+        )
