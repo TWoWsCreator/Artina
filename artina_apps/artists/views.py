@@ -76,13 +76,15 @@ class ArtistPaintingsView(django.views.generic.ListView):
             painting_artist=artist
         )
         result_search = self.request.GET.get('search')
-        filter_paintings = core.views.searching_paintings(
-            paintings_artist, result_search
-        ).only(
-            paintings.models.Painting.painting_name.field.name,
-            paintings.models.Painting.painting_size.field.name,
-            paintings.models.Painting.painting_photo.field.name,
-            paintings.models.Painting.painting_creation_year.field.name,
-            paintings.models.Painting.painting_slug.field.name,
-        ).order_by(paintings.models.Painting.painting_name.field.name)
+        filter_paintings = (
+            core.views.searching_paintings(paintings_artist, result_search)
+            .only(
+                paintings.models.Painting.painting_name.field.name,
+                paintings.models.Painting.painting_size.field.name,
+                paintings.models.Painting.painting_photo.field.name,
+                paintings.models.Painting.painting_creation_year.field.name,
+                paintings.models.Painting.painting_slug.field.name,
+            )
+            .order_by(paintings.models.Painting.painting_name.field.name)
+        )
         return filter_paintings

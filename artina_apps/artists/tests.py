@@ -189,3 +189,88 @@ class ModelsTests(django.test.TestCase):
     def tearDown(self):
         artists.models.Artists.objects.all().delete()
         return super().tearDown()
+    
+
+class CheckFieldsTestCase(django.test.TestCase):
+    def check_content_value(
+        self,
+        item,
+        exists,
+        prefetched,
+        not_loaded,
+    ):
+        check_dict = item.__dict__
+
+        for value in exists:
+            self.assertIn(value, check_dict)
+
+        for value in prefetched:
+            self.assertIn(value, check_dict['_prefetched_objects_cache'])
+
+        for value in not_loaded:
+            self.assertNotIn(value, check_dict)
+
+
+class ContextTests(CheckFieldsTestCase):
+    fixtures = ['fixtures/data.json']
+
+    def test_artists_in_context(self):
+        response = django.test.Client().get(
+            django.urls.reverse('artists:artists'))
+        self.assertIn('artists', response.context)
+
+    def test_amount_artists_in_context(self):
+        response = django.test.Client().get(
+            django.urls.reverse('artists:artists'))
+        self.assertEqual(len(response.context['artists']), 14)
+
+    def test_items_types(self):
+        response = django.test.Client().get(
+            django.urls.reverse('artists:artists')
+        )
+        self.assertTrue(
+            all(
+                isinstance(
+                    artist,
+                    artists.models.Artists,
+                )
+                for artist in response.context['artists']
+            )
+        )
+
+    def test_items_loaded_values(self):
+        response = django.test.Client().get(
+            django.urls.reverse('artists:artists')
+        )
+        for item in response.context['items']:
+            self.check_content_value(
+                item,
+                (
+                    'name',
+                    'text',
+                    'category_id',
+                ),
+                ('tags',),
+                (
+                    'is_on_main',
+                    'image',
+                    'images',
+                    'is_published',
+                ),
+            )
+
+
+    # def test_sorted_artists_in_context(self):
+    #     response = django.test.Client().get(
+    #         django.urls.reverse('artists:artists'))
+    #     artists.models.Artists.objects.order_by(
+    #         artists.models.Artists.artist.field.name
+    #     )
+    #     print(artists.models.Artists.objects.order_by(artists.models.Artists.artist.field.name),
+    #           response.context['artists'])
+    #     print(artists.models.Artists.objects.order_by(artists.models.Artists.artist.field.name),
+    #           response.context['artists'])
+        # self.assertEqual(
+        #     artists.models.Artists.objects.order_by(artists.models.Artists.artist.field.name),
+        #     response.context['artists']
+        # )

@@ -90,15 +90,17 @@ class GalleryPaintingsView(django.views.generic.ListView):
                 galleries.models.Galleries.gallery_slug.field.name
             ],
         ).pk
-        paintings_gallery = paintings.models.Painting.objects.filter(
-            painting_gallery=gallery
-        ).only(
-            paintings.models.Painting.painting_name.field.name,
-            paintings.models.Painting.painting_size.field.name,
-            paintings.models.Painting.painting_photo.field.name,
-            paintings.models.Painting.painting_creation_year.field.name,
-            paintings.models.Painting.painting_slug.field.name,
-        ).order_by(paintings.models.Painting.painting_name.field.name)
+        paintings_gallery = (
+            paintings.models.Painting.objects.filter(painting_gallery=gallery)
+            .only(
+                paintings.models.Painting.painting_name.field.name,
+                paintings.models.Painting.painting_size.field.name,
+                paintings.models.Painting.painting_photo.field.name,
+                paintings.models.Painting.painting_creation_year.field.name,
+                paintings.models.Painting.painting_slug.field.name,
+            )
+            .order_by(paintings.models.Painting.painting_name.field.name)
+        )
         filter_paintings = core.views.searching_paintings(
             paintings_gallery, result_search
         )
