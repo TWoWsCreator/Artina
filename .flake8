@@ -1,4 +1,4 @@
 [flake8]
-application-import-names = artists,core,feedback,galleries,paintings,users,homepage
+application-import-names = artists,core,download,feedback,galleries,paintings,users,homepage
 exclude = .git,__pycache__,venv,migrations
 import-order-style = google
