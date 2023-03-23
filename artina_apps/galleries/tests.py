@@ -2,6 +2,7 @@ import django.test
 import django.urls
 import parameterized.parameterized
 
+import core.tests
 import galleries.models
 
 
@@ -125,3 +126,72 @@ class ModelsTests(django.test.TestCase):
     def tearDown(self):
         galleries.models.Galleries.objects.all().delete()
         return super().tearDown()
+
+
+class ContextTests(core.tests.CheckFieldsTestCase):
+    fixtures = ['fixtures/data.json']
+
+    def test_galleries_in_context(self):
+        response = django.test.Client().get(
+            django.urls.reverse('galleries:galleries')
+        )
+        self.assertIn('galleries', response.context)
+
+    def test_amount_galleries_in_context(self):
+        response = django.test.Client().get(
+            django.urls.reverse('galleries:galleries')
+        )
+        self.assertEqual(len(response.context['galleries']), 8)
+
+    def test_sorted_galleries_in_context(self):
+        response = django.test.Client().get(
+            django.urls.reverse('galleries:galleries')
+        )
+        self.assertQuerysetEqual(galleries.models.Galleries.objects.order_by(
+            galleries.models.Galleries.gallery_name.field.name
+        ),
+            response.context['galleries'])
+
+    def test_galleries_types(self):
+        response = django.test.Client().get(
+            django.urls.reverse('galleries:galleries')
+        )
+        self.assertTrue(
+            all(
+                isinstance(
+                    gallery,
+                    galleries.models.Galleries
+                )
+                for gallery in response.context['galleries']
+            )
+        )
+
+    def test_galleries_loaded_values(self):
+        response = django.test.Client().get(
+            django.urls.reverse('galleries:galleries')
+        )
+        for gallery in response.context['galleries']:
+            self.check_content_value(
+                gallery,
+                (
+                    galleries.models.Galleries.gallery_name.field.name,
+                    galleries.models.Galleries.gallery_location.field.name,
+                    galleries.models.Galleries.gallery_image.field.name,
+                    galleries.models.Galleries.gallery_slug.field.name,
+                )
+            )
+
+    def test_gallery_page_context(self):
+        response = django.test.Client().get(
+            django.urls.reverse('galleries:gallery',
+                                kwargs={'gallery_slug': 'tretyakovskaya'})
+        )
+        self.assertIn('gallery', response.context)
+
+    def test_gallery_page_types(self):
+        response = django.test.Client().get(
+            django.urls.reverse('galleries:gallery',
+                                kwargs={'gallery_slug': 'tretyakovskaya'})
+        )
+        self.assertIsInstance(response.context['gallery'],
+                              galleries.models.Galleries)

@@ -4,6 +4,7 @@ import django.urls
 import parameterized.parameterized
 
 import artists.models
+import core.tests
 
 
 class StaticURLTests(django.test.TestCase):
@@ -191,27 +192,7 @@ class ModelsTests(django.test.TestCase):
         return super().tearDown()
 
 
-class CheckFieldsTestCase(django.test.TestCase):
-    def check_content_value(
-        self,
-        item,
-        exists,
-        prefetched=(),
-        not_loaded=(),
-    ):
-        check_dict = item.__dict__
-
-        for value in exists:
-            self.assertIn(value, check_dict)
-
-        for value in prefetched:
-            self.assertIn(value, check_dict['_prefetched_objects_cache'])
-
-        for value in not_loaded:
-            self.assertNotIn(value, check_dict)
-
-
-class ContextTests(CheckFieldsTestCase):
+class ContextTests(core.tests.CheckFieldsTestCase):
     fixtures = ['fixtures/data.json']
 
     def test_artists_in_context(self):
@@ -266,7 +247,7 @@ class ContextTests(CheckFieldsTestCase):
             response.context['artists'],
         )
 
-    def test_artist_painting_in_context(self):
+    def test_artist_page_in_context(self):
         response = django.test.Client().get(
             django.urls.reverse(
                 'artists:artist', kwargs={'artist_slug': 'shishkin'}
@@ -274,7 +255,7 @@ class ContextTests(CheckFieldsTestCase):
         )
         self.assertIn('artist', response.context)
 
-    def test_artist_painting_types(self):
+    def test_artist_page_types(self):
         response = django.test.Client().get(
             django.urls.reverse(
                 'artists:artist', kwargs={'artist_slug': 'shishkin'}
