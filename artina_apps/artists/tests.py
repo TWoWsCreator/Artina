@@ -5,10 +5,12 @@ import parameterized.parameterized
 
 import artists.models
 import core.tests
+import paintings.models
 
 
 class StaticURLTests(django.test.TestCase):
     fixtures = ['fixtures/data.json']
+    artists_slug = artists.models.Artists.artist_slug.field.name
 
     def test_artists_endpoint(self):
         response = django.test.Client().get(
@@ -28,7 +30,7 @@ class StaticURLTests(django.test.TestCase):
     def test_positive_artist_page_endpoint(self, artist_slug):
         response = django.test.Client().get(
             django.urls.reverse(
-                'artists:artist', kwargs={'artist_slug': artist_slug}
+                'artists:artist', kwargs={self.artists_slug: artist_slug}
             )
         )
         self.assertEqual(
@@ -47,7 +49,7 @@ class StaticURLTests(django.test.TestCase):
     def test_negative_artist_page_endpoint(self, artist_slug):
         response = django.test.Client().get(
             django.urls.reverse(
-                'artists:artist', kwargs={'artist_slug': artist_slug}
+                'artists:artist', kwargs={self.artists_slug: artist_slug}
             )
         )
         self.assertEqual(
@@ -67,7 +69,8 @@ class StaticURLTests(django.test.TestCase):
     def test_positive_artist_paintings_endpoint(self, artist_slug):
         response = django.test.Client().get(
             django.urls.reverse(
-                'artists:artist_painting', kwargs={'artist_slug': artist_slug}
+                'artists:artist_painting',
+                kwargs={self.artists_slug: artist_slug},
             )
         )
         self.assertEqual(
@@ -86,7 +89,8 @@ class StaticURLTests(django.test.TestCase):
     def test_negative_artist_paintings_endpoint(self, artist_slug):
         response = django.test.Client().get(
             django.urls.reverse(
-                'artists:artist_painting', kwargs={'artist_slug': artist_slug}
+                'artists:artist_painting',
+                kwargs={self.artists_slug: artist_slug},
             )
         )
         self.assertEqual(
@@ -194,6 +198,7 @@ class ModelsTests(django.test.TestCase):
 
 class ContextTests(core.tests.CheckFieldsTestCase):
     fixtures = ['fixtures/data.json']
+    artist_slug = artists.models.Artists.artist_slug.field.name
 
     def test_artists_in_context(self):
         response = django.test.Client().get(
@@ -250,7 +255,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
     def test_artist_page_in_context(self):
         response = django.test.Client().get(
             django.urls.reverse(
-                'artists:artist', kwargs={'artist_slug': 'shishkin'}
+                'artists:artist', kwargs={self.artist_slug: 'shishkin'}
             )
         )
         self.assertIn('artist', response.context)
@@ -258,10 +263,94 @@ class ContextTests(core.tests.CheckFieldsTestCase):
     def test_artist_page_types(self):
         response = django.test.Client().get(
             django.urls.reverse(
-                'artists:artist', kwargs={'artist_slug': 'shishkin'}
+                'artists:artist', kwargs={self.artist_slug: 'shishkin'}
             )
         )
         self.assertIsInstance(
             response.context['artist'],
             artists.models.Artists,
         )
+
+    def test_artist_loaded_values(self):
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'artists:artist', kwargs={self.artist_slug: 'shishkin'}
+            )
+        )
+        self.check_content_value(
+            response.context['artist'],
+            (
+                artists.models.Artists.artist.field.name,
+                artists.models.Artists.years_of_life.field.name,
+                artists.models.Artists.artist_photo.field.name,
+                artists.models.Artists.artist_slug.field.name,
+                artists.models.Artists.short_biography.field.name,
+            ),
+        )
+
+    def test_artists_paintings_context(self):
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'artists:artist_painting',
+                kwargs={self.artist_slug: 'shishkin'},
+            )
+        )
+        self.assertIn('paintings', response.context)
+
+    def test_artists_paintings_amount_items(self):
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'artists:artist_painting',
+                kwargs={self.artist_slug: 'shishkin'},
+            )
+        )
+        self.assertEqual(len(response.context['paintings']), 5)
+
+    def test_artists_paintings_sorted_items(self):
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'artists:artist_painting',
+                kwargs={self.artist_slug: 'shishkin'},
+            )
+        )
+        self.assertQuerysetEqual(
+            paintings.models.Painting.objects.filter(
+                painting_artist__artist_slug='shishkin'
+            ).order_by(paintings.models.Painting.painting_name.field.name),
+            response.context['paintings'],
+        )
+
+    def test_artists_paintings_types(self):
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'artists:artist_painting',
+                kwargs={self.artist_slug: 'shishkin'},
+            )
+        )
+        self.assertTrue(
+            all(
+                isinstance(painting, paintings.models.Painting)
+                for painting in response.context['paintings']
+            )
+        )
+
+    def test_artists_paintings_loaded_values(self):
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'artists:artist_painting',
+                kwargs={self.artist_slug: 'shishkin'},
+            )
+        )
+        painting_response_context = response.context['paintings']
+        creation_year = paintings.models.Painting.painting_creation_year
+        for painting in painting_response_context:
+            self.check_content_value(
+                painting,
+                (
+                    paintings.models.Painting.painting_name.field.name,
+                    paintings.models.Painting.painting_size.field.name,
+                    paintings.models.Painting.painting_photo.field.name,
+                    creation_year.field.name,
+                    paintings.models.Painting.painting_slug.field.name,
+                ),
+            )

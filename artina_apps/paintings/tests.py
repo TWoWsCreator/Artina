@@ -4,6 +4,7 @@ import django.urls
 import parameterized.parameterized
 
 import artists.models
+import core.tests
 import galleries.models
 import paintings.models
 
@@ -165,3 +166,48 @@ class ModelsTests(django.test.TestCase):
         paintings.models.Painting.objects.all().delete()
 
         return super().tearDown()
+
+
+class ContextTests(core.tests.CheckFieldsTestCase):
+    fixtures = ['fixtures/data.json']
+    painting_slug = paintings.models.Painting.painting_slug.field.name
+
+    def test_painting_context(self):
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'paintings:painting', kwargs={self.painting_slug: 'rye'}
+            )
+        )
+        self.assertIn('painting', response.context)
+
+    def test_painting_types(self):
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'paintings:painting', kwargs={self.painting_slug: 'rye'}
+            )
+        )
+        self.assertIsInstance(
+            response.context['painting'], paintings.models.Painting
+        )
+
+    def test_painting_loaded_values(self):
+        response = django.test.Client().get(
+            django.urls.reverse(
+                'paintings:painting', kwargs={self.painting_slug: 'rye'}
+            )
+        )
+        self.check_content_value(
+            response.context['painting'],
+            (
+                paintings.models.Painting.painting_name.field.name,
+                paintings.models.Painting.painting_creation_year.field.name,
+                paintings.models.Painting.painting_materials.field.name,
+                paintings.models.Painting.painting_size.field.name,
+                paintings.models.Painting.painting_slug.field.name,
+                paintings.models.Painting.painting_description.field.name,
+                paintings.models.Painting.painting_photo.field.name,
+                'painting_artist_id',
+                'painting_gallery_id',
+                'painting_likes',
+            ),
+        )
