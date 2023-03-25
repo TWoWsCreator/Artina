@@ -138,13 +138,22 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse('galleries:galleries')
         )
-        self.assertIn('galleries', response.context)
+        self.assertIn(
+            'galleries',
+            response.context,
+            'Списка галерей нет в context',
+        )
 
     def test_amount_galleries_in_context(self):
         response = django.test.Client().get(
             django.urls.reverse('galleries:galleries')
         )
-        self.assertEqual(len(response.context['galleries']), 8)
+        fail_text = 'Количество галерей на странице не соответствует заданному'
+        self.assertEqual(
+            len(response.context['galleries']),
+            8,
+            fail_text,
+        )
 
     def test_sorted_galleries_in_context(self):
         response = django.test.Client().get(
@@ -155,6 +164,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 galleries.models.Galleries.gallery_name.field.name
             ),
             response.context['galleries'],
+            msg='Список галерей на странице неосортирован',
         )
 
     def test_galleries_types(self):
@@ -165,7 +175,8 @@ class ContextTests(core.tests.CheckFieldsTestCase):
             all(
                 isinstance(gallery, galleries.models.Galleries)
                 for gallery in response.context['galleries']
-            )
+            ),
+            '(Не все) модели галерей являются сущностями модели Galleries',
         )
 
     def test_galleries_loaded_values(self):
@@ -181,6 +192,9 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                     galleries.models.Galleries.gallery_image.field.name,
                     galleries.models.Galleries.gallery_slug.field.name,
                 ),
+                not_loaded=(
+                    galleries.models.Galleries.gallery_description.field.name,
+                ),
             )
 
     def test_gallery_page_context(self):
@@ -190,7 +204,11 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 kwargs={self.gallery_slug: 'tretyakovskaya'},
             )
         )
-        self.assertIn('gallery', response.context)
+        self.assertIn(
+            'gallery',
+            response.context,
+            'Информации о галереи нет в context',
+        )
 
     def test_gallery_page_types(self):
         response = django.test.Client().get(
@@ -200,7 +218,9 @@ class ContextTests(core.tests.CheckFieldsTestCase):
             )
         )
         self.assertIsInstance(
-            response.context['gallery'], galleries.models.Galleries
+            response.context['gallery'],
+            galleries.models.Galleries,
+            'галерея не соответсвует сущности модели Galleries',
         )
 
     def test_gallery_page_loaded_values(self):
@@ -228,7 +248,11 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 kwargs={self.gallery_slug: 'tretyakovskaya'},
             )
         )
-        self.assertIn('paintings', response.context)
+        self.assertIn(
+            'paintings',
+            response.context,
+            'Списка картин галереи нет в context',
+        )
 
     def test_gallery_paintings_amount_items(self):
         response = django.test.Client().get(
@@ -237,7 +261,12 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 kwargs={self.gallery_slug: 'tretyakovskaya'},
             )
         )
-        self.assertEqual(len(response.context['paintings']), 41)
+        text_fail = 'Количество картин в галереи не соответствует заданному'
+        self.assertEqual(
+            len(response.context['paintings']),
+            41,
+            text_fail,
+        )
 
     def test_gallery_paintings_sorted_items(self):
         response = django.test.Client().get(
@@ -251,6 +280,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 painting_gallery__gallery_slug='tretyakovskaya'
             ).order_by(paintings.models.Painting.painting_name.field.name),
             response.context['paintings'],
+            msg='Список картин на странице галереи неотсортирован',
         )
 
     def test_gallery_paintings_types(self):
@@ -264,7 +294,8 @@ class ContextTests(core.tests.CheckFieldsTestCase):
             all(
                 isinstance(painting, paintings.models.Painting)
                 for painting in response.context['paintings']
-            )
+            ),
+            '(Не все) картин являются сущностями модели Painting',
         )
 
     def test_gallery_paintings_loaded_values(self):
@@ -285,5 +316,11 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                     paintings.models.Painting.painting_photo.field.name,
                     creation_year.field.name,
                     paintings.models.Painting.painting_slug.field.name,
+                ),
+                not_loaded=(
+                    paintings.models.Painting.painting_artist.field.name,
+                    paintings.models.Painting.painting_gallery.field.name,
+                    paintings.models.Painting.painting_description.field.name,
+                    paintings.models.Painting.painting_materials.field.name,
                 ),
             )

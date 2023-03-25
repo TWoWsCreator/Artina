@@ -178,7 +178,11 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 'paintings:painting', kwargs={self.painting_slug: 'rye'}
             )
         )
-        self.assertIn('painting', response.context)
+        self.assertIn(
+            'painting',
+            response.context,
+            'Информации о картине нет в context',
+        )
 
     def test_painting_types(self):
         response = django.test.Client().get(
@@ -187,7 +191,9 @@ class ContextTests(core.tests.CheckFieldsTestCase):
             )
         )
         self.assertIsInstance(
-            response.context['painting'], paintings.models.Painting
+            response.context['painting'],
+            paintings.models.Painting,
+            'Картина не является сущностью модели Painting',
         )
 
     def test_painting_loaded_values(self):
@@ -209,5 +215,9 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 'painting_artist_id',
                 'painting_gallery_id',
                 'painting_likes',
+            ),
+            not_loaded=(
+                paintings.models.Painting.painting_artist.field.name,
+                paintings.models.Painting.painting_gallery.field.name,
             ),
         )

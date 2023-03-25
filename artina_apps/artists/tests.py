@@ -204,13 +204,21 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse('artists:artists')
         )
-        self.assertIn('artists', response.context)
+        self.assertIn(
+            'artists',
+            response.context,
+            'Список художников не передается в context',
+        )
 
     def test_amount_artists_in_context(self):
         response = django.test.Client().get(
             django.urls.reverse('artists:artists')
         )
-        self.assertEqual(len(response.context['artists']), 14)
+        self.assertEqual(
+            len(response.context['artists']),
+            14,
+            'Кооличество художников не соответсвует заданному',
+        )
 
     def test_artists_types(self):
         response = django.test.Client().get(
@@ -223,7 +231,8 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                     artists.models.Artists,
                 )
                 for artist in response.context['artists']
-            )
+            ),
+            '(Не все) художники являются сущностями модели Artists',
         )
 
     def test_artists_loaded_values(self):
@@ -239,6 +248,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                     artists.models.Artists.artist_photo.field.name,
                     artists.models.Artists.artist_slug.field.name,
                 ),
+                not_loaded=(artists.models.Artists.short_biography.field.name),
             )
 
     def test_sorted_artists_in_context(self):
@@ -250,6 +260,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 artists.models.Artists.artist.field.name
             ),
             response.context['artists'],
+            msg='Передаваемый в контекст список художников неосортирован',
         )
 
     def test_artist_page_in_context(self):
@@ -258,7 +269,11 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 'artists:artist', kwargs={self.artist_slug: 'shishkin'}
             )
         )
-        self.assertIn('artist', response.context)
+        self.assertIn(
+            'artist',
+            response.context,
+            'Информация о художнике не передается в context',
+        )
 
     def test_artist_page_types(self):
         response = django.test.Client().get(
@@ -269,6 +284,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         self.assertIsInstance(
             response.context['artist'],
             artists.models.Artists,
+            'Художник не является сущностью модели Artist',
         )
 
     def test_artist_loaded_values(self):
@@ -295,7 +311,11 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 kwargs={self.artist_slug: 'shishkin'},
             )
         )
-        self.assertIn('paintings', response.context)
+        self.assertIn(
+            'paintings',
+            response.context,
+            'Картины художника не передаются в context',
+        )
 
     def test_artists_paintings_amount_items(self):
         response = django.test.Client().get(
@@ -304,7 +324,12 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 kwargs={self.artist_slug: 'shishkin'},
             )
         )
-        self.assertEqual(len(response.context['paintings']), 5)
+        fail_text = 'Количество картин на страниц не соответсвует нужному'
+        self.assertEqual(
+            len(response.context['paintings']),
+            5,
+            fail_text,
+        )
 
     def test_artists_paintings_sorted_items(self):
         response = django.test.Client().get(
@@ -318,6 +343,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 painting_artist__artist_slug='shishkin'
             ).order_by(paintings.models.Painting.painting_name.field.name),
             response.context['paintings'],
+            msg='Передаваемый в контекст список картин неотсортирован',
         )
 
     def test_artists_paintings_types(self):
@@ -331,7 +357,8 @@ class ContextTests(core.tests.CheckFieldsTestCase):
             all(
                 isinstance(painting, paintings.models.Painting)
                 for painting in response.context['paintings']
-            )
+            ),
+            '(Не все) картины являюся сущностью модели Painting',
         )
 
     def test_artists_paintings_loaded_values(self):
@@ -352,5 +379,11 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                     paintings.models.Painting.painting_photo.field.name,
                     creation_year.field.name,
                     paintings.models.Painting.painting_slug.field.name,
+                ),
+                not_loaded=(
+                    paintings.models.Painting.painting_artist.field.name,
+                    paintings.models.Painting.painting_gallery.field.name,
+                    paintings.models.Painting.painting_description.field.name,
+                    paintings.models.Painting.painting_materials.field.name,
                 ),
             )
