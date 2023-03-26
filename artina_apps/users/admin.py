@@ -25,6 +25,7 @@ class CustomUserAdmin(django.contrib.auth.admin.UserAdmin):
                     users.models.CustomUser.first_name.field.name,
                     users.models.CustomUser.last_name.field.name,
                     users.models.CustomUser.image.field.name,
+                    users.models.CustomUser.feedback_mails.field.name,
                 )
             },
         ),

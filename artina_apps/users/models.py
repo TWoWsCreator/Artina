@@ -1,6 +1,8 @@
 import django.contrib.auth.models
 import django.db.models
 
+import feedback.models
+
 
 class CustomUser(django.contrib.auth.models.AbstractUser):
     username = django.db.models.CharField(
@@ -14,6 +16,13 @@ class CustomUser(django.contrib.auth.models.AbstractUser):
     )
     image = django.db.models.ImageField(
         'добавьте картинку профиля', upload_to='avatar/%Y/%m/%d', blank=True
+    )
+    feedback_mails = django.db.models.ForeignKey(
+        feedback.models.Feedback,
+        on_delete=django.db.models.CASCADE,
+        related_name='feedback',
+        verbose_name='письма от пользователя',
+        null=True,
     )
 
     def __str__(self):
