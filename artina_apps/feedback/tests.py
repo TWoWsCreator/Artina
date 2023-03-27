@@ -148,5 +148,5 @@ class FeedbackContextTests(django.test.TestCase):
         self.assertRedirects(
             response,
             django.urls.reverse('feedback:feedback'),
-            'Неправильный redirect после отправки формы',
+            msg_prefix='Неправильный redirect после отправки формы',
         )
