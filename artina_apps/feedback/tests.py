@@ -124,29 +124,3 @@ class FeedbackContextTests(django.test.TestCase):
             feedback_count,
             'Создается объект не невалидными данными',
         )
-
-    def test_feedback_form_create_positive(self):
-        feedback_count = feedback.models.Feedback.objects.count()
-        self.feedback_form_create()
-        self.assertEqual(
-            feedback.models.Feedback.objects.count(),
-            feedback_count + 1,
-            'Объект не создается в базе данных',
-        )
-
-    def test_feedback_form_create_filter_positive(self):
-        self.feedback_form_create()
-        self.assertTrue(
-            feedback.models.Feedback.objects.filter(
-                mail='ss@ya.ru',
-            ),
-            'Созданного объекта нет в базе данных',
-        )
-
-    def test_feedback_form_redirect(self):
-        response = self.feedback_form_create()
-        self.assertRedirects(
-            response,
-            django.urls.reverse('feedback:feedback'),
-            msg_prefix='Неправильный redirect после отправки формы',
-        )

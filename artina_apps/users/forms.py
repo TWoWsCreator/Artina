@@ -1,37 +1,26 @@
 import django.contrib.auth.forms
-import django.forms
 
-from .models import CustomUser, PasswordResetEmail
+import core.forms
+import users.models
 
 
-class CustomUserCreationForm(django.contrib.auth.forms.UserCreationForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
-
+class CustomUserCreationForm(
+    django.contrib.auth.forms.UserCreationForm, core.forms.BootstrapControlForm
+):
     class Meta:
-        model = CustomUser
+        model = users.models.CustomUser
         fields = ('username', 'email')
 
 
-class CustomUserChangeForm(django.contrib.auth.forms.UserChangeForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
-
+class CustomUserChangeForm(
+    django.contrib.auth.forms.UserChangeForm, core.forms.BootstrapControlForm
+):
     class Meta:
-        model = CustomUser
+        model = users.models.CustomUser
         fields = ('username', 'email', 'first_name', 'last_name', 'image')
 
 
-class PasswordResetEmailForm(django.forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
-
+class PasswordResetEmailForm(core.forms.BootstrapControlForm):
     class Meta:
-        model = PasswordResetEmail
-        fields = (PasswordResetEmail.user_email.field.name,)
+        model = users.models.PasswordResetEmail
+        fields = (users.models.PasswordResetEmail.user_email.field.name,)

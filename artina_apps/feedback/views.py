@@ -39,12 +39,8 @@ class FeedbackView(django.views.generic.FormView):
 
     def form_valid(self, form):
         from_mail = 'artina.djangoproject@gmail.com'
-        name = form.cleaned_data[
-            feedback.models.Feedback.name.field.name
-        ]
-        mail = form.cleaned_data[
-            feedback.models.Feedback.mail.field.name
-        ]
+        name = form.cleaned_data[feedback.models.Feedback.name.field.name]
+        mail = form.cleaned_data[feedback.models.Feedback.mail.field.name]
         feedback_text = form.cleaned_data[
             feedback.models.Feedback.feedback_text.field.name
         ]
@@ -58,12 +54,22 @@ class FeedbackView(django.views.generic.FormView):
             for file in self.request.FILES.getlist(
                 feedback.models.Feedback.files.field.name
             ):
-                media_feedback_path = f'media/feedback/{user_feedback.pk}'
+                media_root = os.path.join(
+                    django.conf.settings.MEDIA_ROOT, 'feedback_files'
+                )
+                user_feedback_media_root = os.path.join(
+                    media_root, str(user_feedback.pk)
+                )
+                media_feedback_path = os.path.join(
+                    user_feedback_media_root, f'{time.time()}_{file.name}'
+                )
                 feedback_dir = os.path.join(
-                    f'{media_feedback_path}/{time.time()}_{file.name}')
+                    f'{media_feedback_path}/{time.time()}_{file.name}'
+                )
                 os.makedirs(feedback_dir)
                 file_system = django.core.files.storage.FileSystemStorage(
-                    location=feedback_dir)
+                    location=feedback_dir
+                )
                 filename = file_system.save(file.name, file)
                 feedback_file = feedback.models.FeedbackFiles(
                     feedback=user_feedback,
