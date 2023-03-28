@@ -1,3 +1,6 @@
+import tempfile
+
+import django.core.files.uploadedfile
 import django.test
 import django.urls
 
@@ -123,4 +126,38 @@ class FeedbackContextTests(django.test.TestCase):
             feedback.models.Feedback.objects.count(),
             feedback_count,
             'Создается объект не невалидными данными',
+        )
+
+    @staticmethod
+    def create_feedback_request(files):
+        form_data = {
+            'name': 'Имя',
+            'feedback_text': 'текст отзыва',
+            'mail': 's@ya.ru',
+            'files': files,
+        }
+        django.test.Client().post(
+            django.urls.reverse('feedback:feedback'),
+            data=form_data,
+            follow=True,
+        )
+
+    @django.test.override_settings(
+        MEDIA_ROOT=tempfile.TemporaryDirectory().name
+    )
+    def test_amount_feedback_files(self):
+        files = [
+            django.core.files.base.ContentFile(
+                f'file_{index}'.encode(),
+            )
+            for index in range(10)
+        ]
+        self.create_feedback_request(files)
+        self.assertEqual(
+            feedback.models.FeedbackFiles.objects.filter(
+                feedback=feedback.models.Feedback.objects.get(
+                    name='Имя',
+                )
+            ).count(),
+            10,
         )

@@ -100,7 +100,7 @@ dmypy.json
 static/
 
 cache/
-media/feedback/
+feedback_files/
 
 db.sqlite3
 
