@@ -101,6 +101,7 @@ static/
 
 cache/
 feedback_files/
+feedback_mails/
 
 db.sqlite3
 

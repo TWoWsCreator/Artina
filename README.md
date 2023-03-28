@@ -23,21 +23,44 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 #### 3) Установите зависимости
+For Windows:
 ```commandline
 pip install -r requirements.txt
 ```
+For Mac OS/Linux:
+```commandline
+pip3 install -r requirements.txt
+```
 #### 4) Сделайте миграции
+For Windows:
 ```commandline
 python manage.py migrate
 ```
+For Mac OS/Linux:
+```commandline
+python3 manage.py migrate
+```
 #### 5) Загрузите фикстуры
+For Windows:
 ```commandline
 python manage.py loaddata fixtures/data.json
 ```
+For Mac OS/Linux:
+```commandline
+python3 manage.py loaddata fixtures/data.json
+```
 #### 6) Запустите сайт
+For Windows:
 ```commandline
 python manage.py runserver
 ```
-##### 7) перейдите по адресу http://127.0.0.1:8000
-
+For Mac OS/Linux:
+```commandline
+python3 manage.py runserver
+```
+##### 7) перейдите по адресу 
+```commandline
+http://127.0.0.1:8000
+```
 ### Структура базы данных
+![Картины Третьяковской Галереи](/media_for_readme/ArtinaDB.png)
