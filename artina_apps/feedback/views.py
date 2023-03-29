@@ -1,7 +1,6 @@
 import email.mime.text
 import os
 import smtplib
-import time
 
 import django.contrib
 import django.core.files.storage
@@ -9,6 +8,7 @@ import django.core.mail
 import django.urls
 import django.views.generic
 import dotenv
+import multi_form_view.base
 
 import feedback.forms
 import feedback.models
@@ -16,10 +16,12 @@ import feedback.models
 dotenv.load_dotenv()
 
 
-class FeedbackView(django.views.generic.FormView):
+class FeedbackView(multi_form_view.base.MultiFormView):
     template_name = 'feedback/feedback.html'
-    form_class = feedback.forms.FeedbackForm
-    model = feedback.models.Feedback
+    form_classes = {
+        'feedback': feedback.forms.FeedbackForm,
+        'feedback_files': feedback.forms.FeedbackFilesForm,
+    }
     success_url = django.urls.reverse_lazy('feedback:feedback')
 
     @classmethod
@@ -37,45 +39,30 @@ class FeedbackView(django.views.generic.FormView):
         except smtplib.SMTPException:
             pass
 
-    def form_valid(self, form):
+    def forms_valid(self, forms):
         from_mail = 'artina.djangoproject@gmail.com'
-        name = form.cleaned_data[feedback.models.Feedback.name.field.name]
-        mail = form.cleaned_data[feedback.models.Feedback.mail.field.name]
-        feedback_text = form.cleaned_data[
+        feedback_form = forms['feedback']
+        name = feedback_form.cleaned_data[
+            feedback.models.Feedback.name.field.name
+        ]
+        mail = feedback_form.cleaned_data[
+            feedback.models.Feedback.mail.field.name
+        ]
+        feedback_text = feedback_form.cleaned_data[
             feedback.models.Feedback.feedback_text.field.name
         ]
-        user_feedback = feedback.models.Feedback(
-            name=name, feedback_text=feedback_text, mail=mail
+        feedback_item = feedback.models.Feedback.objects.create(
+            **feedback_form.cleaned_data
         )
-        user_feedback.save()
-        if self.request.FILES.getlist(
-            feedback.models.Feedback.files.field.name
+        feedback_item.save()
+
+        for file in self.request.FILES.getlist(
+            feedback.models.FeedbackFiles.file.field.name,
         ):
-            for file in self.request.FILES.getlist(
-                feedback.models.Feedback.files.field.name
-            ):
-                media_root = os.path.join(
-                    django.conf.settings.MEDIA_ROOT, 'feedback_files'
-                )
-                user_feedback_media_root = os.path.join(
-                    media_root, str(user_feedback.pk)
-                )
-                media_feedback_path = os.path.join(
-                    user_feedback_media_root, f'{time.time()}_{file.name}'
-                )
-                feedback_dir = os.path.join(
-                    f'{media_feedback_path}/{time.time()}_{file.name}'
-                )
-                os.makedirs(feedback_dir)
-                file_system = django.core.files.storage.FileSystemStorage(
-                    location=feedback_dir
-                )
-                filename = file_system.save(file.name, file)
-                feedback_file = feedback.models.FeedbackFiles(
-                    feedback=user_feedback,
-                    file=filename,
-                )
-                feedback_file.save()
+            feedback.models.FeedbackFiles.objects.create(
+                file=file,
+                feedback=feedback_item,
+            )
         message = (
             f'Здравствуйте, {name}.\nСпасибо что оставили свой feedback.\n '
             f'Ваша отзывчивость помогает нам развиваться\n'
@@ -93,4 +80,4 @@ class FeedbackView(django.views.generic.FormView):
         django.contrib.messages.success(
             self.request, 'Ваше сообщение отправлено'
         )
-        return super().form_valid(form)
+        return super().forms_valid(forms)

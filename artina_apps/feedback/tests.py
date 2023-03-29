@@ -1,4 +1,5 @@
 import tempfile
+import pathlib
 
 import django.core.files.uploadedfile
 import django.test
@@ -31,7 +32,7 @@ class FeedbackContextTests(django.test.TestCase):
             django.urls.reverse('feedback:feedback')
         )
         self.assertIn(
-            'form',
+            'forms',
             response.context,
             'Форма не передается в context',
         )
@@ -115,7 +116,7 @@ class FeedbackContextTests(django.test.TestCase):
     def test_feedback_form_error_mail(self):
         response = self.feedback_form_create(mail='ssya.ru')
         self.assertTrue(
-            response.context['form'].has_error('mail'),
+            response.context['forms']['feedback'].has_error('mail'),
             'У невалидного поле mail не возникает ошибка',
         )
 
@@ -128,13 +129,19 @@ class FeedbackContextTests(django.test.TestCase):
             'Создается объект не невалидными данными',
         )
 
-    @staticmethod
-    def create_feedback_request(files):
+    def create_feedback_request(self):
+        files = [
+            django.core.files.base.ContentFile(
+                f'file_{index}'.encode(),
+                name='filename'
+            )
+            for index in range(10)
+        ]
         form_data = {
             'name': 'Имя',
             'feedback_text': 'текст отзыва',
             'mail': 's@ya.ru',
-            'files': files,
+            'file': files,
         }
         django.test.Client().post(
             django.urls.reverse('feedback:feedback'),
@@ -146,18 +153,33 @@ class FeedbackContextTests(django.test.TestCase):
         MEDIA_ROOT=tempfile.TemporaryDirectory().name
     )
     def test_amount_feedback_files(self):
-        files = [
-            django.core.files.base.ContentFile(
-                f'file_{index}'.encode(),
-            )
-            for index in range(10)
-        ]
-        self.create_feedback_request(files)
+        self.create_feedback_request()
+        feedback_item_files = feedback.models.Feedback.objects.get(
+            mail='s@ya.ru',
+        ).files
+
         self.assertEqual(
-            feedback.models.FeedbackFiles.objects.filter(
-                feedback=feedback.models.Feedback.objects.get(
-                    name='Имя',
-                )
-            ).count(),
+            feedback_item_files.count(),
             10,
         )
+        for index, file in enumerate(feedback_item_files.all()):
+            uploaded_file = pathlib.Path(file.file.path)
+            self.assertEqual(
+                uploaded_file.open().read(),
+                f'file_{index}'
+            )
+
+    @django.test.override_settings(
+        MEDIA_ROOT=tempfile.TemporaryDirectory().name
+    )
+    def test_text_feedback_files(self):
+        self.create_feedback_request()
+        feedback_item_files = feedback.models.Feedback.objects.get(
+            mail='s@ya.ru',
+        ).files
+        for index, file in enumerate(feedback_item_files.all()):
+            uploaded_file = pathlib.Path(file.file.path)
+            self.assertEqual(
+                uploaded_file.open().read(),
+                f'file_{index}'
+            )

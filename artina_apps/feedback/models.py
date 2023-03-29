@@ -4,9 +4,6 @@ import django.db.models
 
 
 class Feedback(django.db.models.Model):
-    def get_path(self, filename):
-        return f'feedback/{time.time()}_{filename}'
-
     name = django.db.models.CharField(
         'введите свое имя', max_length=150, help_text='Максимум 150 символов'
     )
@@ -19,11 +16,6 @@ class Feedback(django.db.models.Model):
     created_on = django.db.models.DateTimeField(
         'дата создания', auto_now_add=True
     )
-    files = django.db.models.FileField(
-        verbose_name='файлы',
-        help_text='Приложите файлы к отзыву',
-        blank=True,
-    )
 
     class Meta:
         verbose_name = 'отзыв'
@@ -34,14 +26,20 @@ class Feedback(django.db.models.Model):
 
 
 class FeedbackFiles(django.db.models.Model):
+    def get_path(self, filename):
+        return f'feedback_files/{self.feedback_id}/{time.time()}_{filename}'
+
     feedback = django.db.models.ForeignKey(
         Feedback,
+        related_name='files',
         on_delete=django.db.models.CASCADE,
     )
+
     file = django.db.models.FileField(
-        verbose_name='',
+        'Файлы',
+        upload_to=get_path,
         blank=True,
-        null=True,
+        help_text='Прикрепите файлы к отзыву'
     )
 
     class Meta:

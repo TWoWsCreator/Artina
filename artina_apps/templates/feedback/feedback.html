@@ -12,21 +12,36 @@
     {% endfor %}
   {% endif %}
   <form method="post" enctype="multipart/form-data">
-    {% for field in form %}
-      {% csrf_token %}
-      <div class="col-sm-5 mx-auto">
-        {{ field.label_tag }}
-        {{ field }}
-        {% if field.help_text %}
-          <small class="fw-light">{{ field.help_text }}</small>
-        {% endif %}
-        {% if field.errors %}
-          <div class="alert alert-danger">
-            {{ field.errors }}
-          </div>
-        {% endif %}
-      </div>
-    {% endfor %}
+      {% for field in forms.feedback %}
+        {% csrf_token %}
+        <div class="col-sm-5 mx-auto">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.help_text %}
+            <small class="fw-light">{{ field.help_text }}</small>
+          {% endif %}
+          {% if field.errors %}
+            <div class="alert alert-danger">
+              {{ field.errors }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      {% for field in forms.feedback_files %}
+        {% csrf_token %}
+        <div class="col-sm-5 mx-auto">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.help_text %}
+            <small class="fw-light">{{ field.help_text }}</small>
+          {% endif %}
+          {% if field.errors %}
+            <div class="alert alert-danger">
+              {{ field.errors }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
     <div>
       <button class="btn btn-primary mt-2 mb-3" type="submit">Отправить</button>
     </div>
