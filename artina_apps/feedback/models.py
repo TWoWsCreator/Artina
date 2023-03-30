@@ -39,7 +39,7 @@ class FeedbackFiles(django.db.models.Model):
         'Файлы',
         upload_to=get_path,
         blank=True,
-        help_text='Прикрепите файлы к отзыву'
+        help_text='Прикрепите файлы к отзыву',
     )
 
     class Meta:

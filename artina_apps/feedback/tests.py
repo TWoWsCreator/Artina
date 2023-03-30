@@ -1,5 +1,5 @@
-import tempfile
 import pathlib
+import tempfile
 
 import django.core.files.uploadedfile
 import django.test
@@ -132,8 +132,7 @@ class FeedbackContextTests(django.test.TestCase):
     def create_feedback_request(self):
         files = [
             django.core.files.base.ContentFile(
-                f'file_{index}'.encode(),
-                name='filename'
+                f'file_{index}'.encode(), name='filename'
             )
             for index in range(10)
         ]
@@ -164,10 +163,7 @@ class FeedbackContextTests(django.test.TestCase):
         )
         for index, file in enumerate(feedback_item_files.all()):
             uploaded_file = pathlib.Path(file.file.path)
-            self.assertEqual(
-                uploaded_file.open().read(),
-                f'file_{index}'
-            )
+            self.assertEqual(uploaded_file.open().read(), f'file_{index}')
 
     @django.test.override_settings(
         MEDIA_ROOT=tempfile.TemporaryDirectory().name
@@ -179,7 +175,4 @@ class FeedbackContextTests(django.test.TestCase):
         ).files
         for index, file in enumerate(feedback_item_files.all()):
             uploaded_file = pathlib.Path(file.file.path)
-            self.assertEqual(
-                uploaded_file.open().read(),
-                f'file_{index}'
-            )
+            self.assertEqual(uploaded_file.open().read(), f'file_{index}')
