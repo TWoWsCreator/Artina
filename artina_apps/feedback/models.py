@@ -36,13 +36,14 @@ class FeedbackFiles(django.db.models.Model):
     )
 
     file = django.db.models.FileField(
-        'Файлы',
+        'файлы',
         upload_to=get_path,
         blank=True,
         help_text='Прикрепите файлы к отзыву',
     )
 
     class Meta:
+        verbose_name = 'файл, приложенный к отзыву'
         verbose_name_plural = 'файлы, приложенные к отзыву'
 
     def __str__(self):

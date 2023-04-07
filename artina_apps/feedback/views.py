@@ -1,19 +1,14 @@
-import email.mime.text
-import os
-import smtplib
-
+import django.conf
 import django.contrib
 import django.core.files.storage
 import django.core.mail
 import django.urls
 import django.views.generic
-import dotenv
 import multi_form_view.base
 
+import core.views
 import feedback.forms
 import feedback.models
-
-dotenv.load_dotenv()
 
 
 class FeedbackView(multi_form_view.base.MultiFormView):
@@ -24,23 +19,7 @@ class FeedbackView(multi_form_view.base.MultiFormView):
     }
     success_url = django.urls.reverse_lazy('feedback:feedback')
 
-    @classmethod
-    def send_mail_user(cls, msg, from_mail, to_mail):
-        password = os.environ.get('gmail_password', 'gmail_data')
-        server = smtplib.SMTP('smtp.gmail.com', port=587)
-        server.starttls()
-
-        try:
-            server.login(from_mail, password)
-            msg = email.mime.text.MIMEText(msg)
-            msg['Subject'] = 'Спасибо за отзыв'
-            server.sendmail(from_mail, to_mail, msg.as_string())
-
-        except smtplib.SMTPException:
-            pass
-
     def forms_valid(self, forms):
-        from_mail = 'artina.djangoproject@gmail.com'
         feedback_form = forms['feedback']
         name = feedback_form.cleaned_data[
             feedback.models.Feedback.name.field.name
@@ -69,11 +48,11 @@ class FeedbackView(multi_form_view.base.MultiFormView):
             f'Ваш отзыв: {feedback_text}\n'
             f'Спасибо от команды Artina.'
         )
-        self.send_mail_user(message, from_mail, mail)
+        core.views.send_mail_user(message, mail, msg_subj='Спасибо за отзыв')
         django.core.mail.send_mail(
             'Спасибо за отзыв',
             message=message,
-            from_email=from_mail,
+            from_email=django.conf.settings.APP_MAIL,
             recipient_list=[mail],
             fail_silently=False,
         )

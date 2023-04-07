@@ -57,7 +57,7 @@ class Painting(django.db.models.Model):
         upload_to='picture/',
     )
     painting_slug = django.db.models.SlugField(
-        'url картины',
+        'слаг картины',
         max_length=55,
         help_text='Введите url адрес для картины',
     )

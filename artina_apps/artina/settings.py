@@ -15,13 +15,6 @@ DEBUG = os.getenv('debug', 't').lower() in ('y', 'yes', '1', 't', 'true')
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django_cleanup.apps.CleanupConfig',
     'artists.apps.ArtistsConfig',
     'download.apps.DownloadConfig',
     'feedback.apps.FeedbackConfig',
@@ -29,6 +22,13 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'paintings.apps.PaintingsConfig',
     'users.apps.UsersConfig',
+    'django_cleanup.apps.CleanupConfig',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
     'widget_tweaks',
     'sorl.thumbnail',
 ]
@@ -74,20 +74,27 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.'
-        'UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation'
+            '.UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.'
-        'MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.MinimumLengthValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.'
-        'CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation'
+            '.CommonPasswordValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.'
-        'NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation'
+            '.NumericPasswordValidator'
+        ),
     },
 ]
 
@@ -115,6 +122,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = BASE_DIR / 'feedback_mails'
+
+APP_MAIL = os.getenv('APP_MAIL', 'example@gmail.com')
+SMTP_MAIL = os.getenv('SMTP_MAIL', 'smtp.gmail.com')
+SMTP_KEY = os.getenv('SMTP_KEY', '1234567890')
 
 if DEBUG:
     INSTALLED_APPS.append('debug_toolbar')

@@ -16,10 +16,12 @@ class Galleries(django.db.models.Model):
         help_text='Введите локацию галереи',
     )
     gallery_slug = django.db.models.SlugField(
-        'url галереи', max_length=55, help_text='Введите url адрес для галереи'
+        'слаг галереи',
+        max_length=55,
+        help_text='Введите url адрес для галереи',
     )
     gallery_description = django.db.models.TextField(
-        'интересные факты о галереи',
+        'описание галереи',
         max_length=1000,
         help_text='Максимум 1000 символов',
     )

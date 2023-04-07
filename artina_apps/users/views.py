@@ -1,6 +1,4 @@
-import email.mime.text
 import os
-import smtplib
 
 import django.contrib
 import django.contrib.auth
@@ -13,6 +11,7 @@ import django.utils.http
 import django.views.generic
 import dotenv
 
+import core.views
 import users.forms
 import users.models
 
@@ -71,21 +70,6 @@ class PasswordReset(django.views.generic.FormView):
     model = users.models.PasswordResetEmail
     form_class = users.forms.PasswordResetEmailForm
 
-    @staticmethod
-    def send_mail_for_reset_password(msg, from_mail, to_mail):
-        password = os.environ.get('gmail_password', 'gmail_data')
-        server = smtplib.SMTP('smtp.gmail.com', port=587)
-        server.starttls()
-
-        try:
-            server.login(from_mail, password)
-            msg = email.mime.text.MIMEText(msg)
-            msg['Subject'] = 'Сброс пароля'
-            server.sendmail(from_mail, to_mail, msg.as_string())
-
-        except smtplib.SMTPException:
-            pass
-
     def form_valid(self, form):
         user_email = form.cleaned_data['user_email']
         try:
@@ -118,8 +102,7 @@ class PasswordReset(django.views.generic.FormView):
             f' Если вы не запрашивали сброс пароля, напишите нам.'
             f'С уважением от команды Artina'
         )
-        from_mail = 'artina.djangoproject@gmail.com'
-        self.send_mail_for_reset_password(message, from_mail, user.email)
+        core.views.send_mail_user(message, user_email, msg_subj='Сброс пароля')
         return django.shortcuts.redirect(
             django.urls.reverse_lazy('users:password_reset_done')
         )
