@@ -1,3 +1,5 @@
+import re
+
 import django.shortcuts
 import django.views.generic
 
@@ -25,13 +27,24 @@ class ArtistsView(django.views.generic.ListView):
         result_search = self.request.GET.get('search')
         if result_search:
             artists_page = (
-                artists_page.filter(artist__iregex=result_search)
-                | artists_page.filter(years_of_life__iregex=result_search)
-                | artists_page.filter(short_biography__iregex=result_search)
+                artists_page.filter(
+                    short_biography__iregex=re.escape(result_search)
+                )
+                | artists_page.filter(
+                    birth_date__iregex=re.escape(result_search)
+                )
+                | artists_page.filter(
+                    death_date__iregex=re.escape(result_search)
+                )
+                | artists_page.filter(
+                    short_biography__iregex=re.escape(result_search)
+                )
             )
         return artists_page.only(
             artists.models.Artists.artist.field.name,
-            artists.models.Artists.years_of_life.field.name,
+            artists.models.Artists.birth_date.field.name,
+            artists.models.Artists.death_date.field.name,
+            artists.models.Artists.alived.field.name,
             artists.models.Artists.artist_photo.field.name,
             artists.models.Artists.artist_slug.field.name,
         ).order_by(artists.models.Artists.artist.field.name)

@@ -1,3 +1,7 @@
+import datetime
+
+import django.core.exceptions
+import django.core.validators
 import django.db.models
 import django.template.defaultfilters
 import django.utils.safestring
@@ -11,14 +15,36 @@ class Artists(django.db.models.Model):
         'ФИО художника',
         max_length=50,
         help_text='Введите фамилию, имя и отчество художника через пробел',
-        validators=[artists.validators.ArtistNameValidator()],
+        # validators=[artists.validators.ArtistNameValidator()],
     )
-    years_of_life = django.db.models.CharField(
-        'годы жизни',
-        max_length=10,
-        help_text='Введите год рождения и смерти художника через тире. '
-        'Пример: 1899-1977',
-        validators=[artists.validators.ArtistYearsValidator()],
+    birth_date = django.db.models.IntegerField(
+        'дата рождения художника',
+        help_text='Введите дату рождения художника',
+        validators=[
+            django.core.validators.MinValueValidator(800),
+            django.core.validators.MaxValueValidator(
+                datetime.date.today().year
+            ),
+        ],
+        blank=True,
+        null=True,
+    )
+    death_date = django.db.models.IntegerField(
+        'дата смерти художника',
+        help_text='Введите дату сметри художника',
+        validators=[
+            django.core.validators.MinValueValidator(800),
+            django.core.validators.MaxValueValidator(
+                datetime.date.today().year
+            ),
+        ],
+        blank=True,
+        null=True,
+    )
+    alived = django.db.models.BooleanField(
+        'жив ли сейчас',
+        default=False,
+        help_text='Поставьте галочку, если художник жив до сих пор',
     )
     short_biography = django.db.models.TextField(
         'краткая биография',
@@ -44,6 +70,25 @@ class Artists(django.db.models.Model):
     get_short_biography.short_description = 'краткая биография'
 
     @property
+    def years_of_life(self):
+        if self.birth_date is None:
+            if self.alived is True:
+                return '?-до н.в.'
+            else:
+                if self.death_date is None:
+                    return '?-?'
+                else:
+                    return f'?-{self.death_date}'
+        else:
+            if self.alived is True:
+                return f'{self.birth_date}-до н.в.'
+            else:
+                if self.death_date is None:
+                    return f'{self.birth_date}-?'
+                else:
+                    return f'{self.birth_date}-{self.death_date}'
+
+    @property
     def get_image(self):
         return sorl.thumbnail.get_thumbnail(
             self.artist_photo, '200x200', crop='center', quality=51
@@ -58,6 +103,13 @@ class Artists(django.db.models.Model):
 
     image_tmb.short_description = 'фото художника'
     image_tmb.allow_tags = True
+
+    def clean(self):
+        if (self.birth_date is not None) and (self.death_date is not None):
+            if self.birth_date >= int(self.death_date):
+                raise django.core.exceptions.ValidationError(
+                    'Год сметри должен идти позже года рождения'
+                )
 
     class Meta:
         verbose_name = 'художник'

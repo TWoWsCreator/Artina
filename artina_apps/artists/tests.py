@@ -103,11 +103,16 @@ class StaticURLTests(django.test.TestCase):
 
 class ModelsTests(django.test.TestCase):
     @classmethod
-    def create_artist(cls, name='А. С. Пушкин', years_of_life='1777-1800'):
-        print(name, years_of_life)
+    def create_artist(
+        cls,
+        name='Пушкин Александр Сергеевич',
+        birth_date=1700,
+        death_date=1770,
+    ):
         cls.test_artist = artists.models.Artists(
             artist=name,
-            years_of_life=years_of_life,
+            birth_date=birth_date,
+            death_date=death_date,
             short_biography='что то интересное',
             artist_photo='.../...',
             artist_slug='pushkin',
@@ -115,52 +120,17 @@ class ModelsTests(django.test.TestCase):
 
     @parameterized.parameterized.expand(
         [
-            ('А. С. Пушкин',),
-            ('Алесандр Сергеевич Пушкин'),
-            ('Ладно Ладно Ладно',),
-            ('Вова Карамзин Никитич',),
+            (1800, 1880),
+            (800, 882),
+            (2000, 2022),
+            (None, None),
+            (None, 2022),
+            (2000, None),
         ]
     )
-    def test_positive_artist_name(self, artist_name):
+    def test_positive_artist_years_of_life(self, birth_date, death_date):
         artists_amount = artists.models.Artists.objects.count()
-        self.create_artist(name=artist_name)
-        self.test_artist.full_clean()
-        self.test_artist.save()
-        self.assertEqual(
-            artists.models.Artists.objects.count(),
-            artists_amount + 1,
-            'Художник с валидным именем не создается',
-        )
-
-    @parameterized.parameterized.expand(
-        [
-            ('А Пушкин',),
-            ('Алесандр Сергеевич Пушкин Карам'),
-            ('А.С.Пушкин',),
-            ('Хорошо Ладно',),
-        ]
-    )
-    def test_negative_artist_name(self, artist_name):
-        artists_amount = artists.models.Artists.objects.count()
-        with self.assertRaises(django.core.exceptions.ValidationError):
-            self.create_artist(name=artist_name)
-            self.test_artist.full_clean()
-        self.assertEqual(
-            artists.models.Artists.objects.count(),
-            artists_amount,
-            'Художник с невалидным именем создается',
-        )
-
-    @parameterized.parameterized.expand(
-        [
-            ('1800-1900',),
-            ('1777-1892'),
-            ('1600-1655',),
-        ]
-    )
-    def test_positive_artist_years_of_life(self, artist_years_of_life):
-        artists_amount = artists.models.Artists.objects.count()
-        self.create_artist(years_of_life=artist_years_of_life)
+        self.create_artist(birth_date=birth_date, death_date=death_date)
         self.test_artist.full_clean()
         self.test_artist.save()
         self.assertEqual(
@@ -171,19 +141,16 @@ class ModelsTests(django.test.TestCase):
 
     @parameterized.parameterized.expand(
         [
-            ('180O-1877',),
-            ('-1223-1233'),
-            ('1899=1977',),
-            ('1977-',),
-            ('-1999',),
-            ('121233-1222',),
-            ('1900-12334',),
+            (1967, 1929),
+            (2000, 2024),
+            (1899, 1899),
+            (799, 842),
         ]
     )
-    def test_negative_artist_years_of_life(self, artist_years_of_life):
+    def test_negative_artist_years_of_life(self, birth_date, death_date):
         artists_amount = artists.models.Artists.objects.count()
         with self.assertRaises(django.core.exceptions.ValidationError):
-            self.create_artist(years_of_life=artist_years_of_life)
+            self.create_artist(birth_date=birth_date, death_date=death_date)
             self.test_artist.full_clean()
         self.assertEqual(
             artists.models.Artists.objects.count(),
@@ -244,7 +211,9 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 artist,
                 (
                     artists.models.Artists.artist.field.name,
-                    artists.models.Artists.years_of_life.field.name,
+                    artists.models.Artists.birth_date.field.name,
+                    artists.models.Artists.death_date.field.name,
+                    artists.models.Artists.alived.field.name,
                     artists.models.Artists.artist_photo.field.name,
                     artists.models.Artists.artist_slug.field.name,
                 ),
@@ -297,7 +266,9 @@ class ContextTests(core.tests.CheckFieldsTestCase):
             response.context['artist'],
             (
                 artists.models.Artists.artist.field.name,
-                artists.models.Artists.years_of_life.field.name,
+                artists.models.Artists.birth_date.field.name,
+                artists.models.Artists.death_date.field.name,
+                artists.models.Artists.alived.field.name,
                 artists.models.Artists.artist_photo.field.name,
                 artists.models.Artists.artist_slug.field.name,
                 artists.models.Artists.short_biography.field.name,

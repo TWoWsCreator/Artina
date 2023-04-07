@@ -8,7 +8,8 @@ class ArtistsAdmin(django.contrib.admin.ModelAdmin):
     list_display = (
         artists.models.Artists.artist.field.name,
         artists.models.Artists.artist_slug.field.name,
-        artists.models.Artists.years_of_life.field.name,
+        artists.models.Artists.birth_date.field.name,
+        artists.models.Artists.death_date.field.name,
         artists.models.Artists.get_short_biography,
         artists.models.Artists.image_tmb,
     )

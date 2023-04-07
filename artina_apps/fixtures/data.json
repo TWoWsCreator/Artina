@@ -4,7 +4,9 @@
         "pk": 1,
         "fields": {
             "artist": "Шишкин Иван Иванович",
-            "years_of_life": "1832-1898",
+            "birth_date": 1832,
+            "death_date": 1898,
+            "alived": false,
             "short_biography": "Родина одного из самых известных, даже культовых художников России – город Елабуга. Он родился в этом провинциальном местечке 13 января 1832 года. В будущем стал известен, как пейзажист, с фотографической точностью передающий мельчайшие детали природы родного края.",
             "artist_photo": "artists/shishkin.jpeg",
             "artist_slug": "shishkin"
@@ -15,7 +17,9 @@
         "pk": 2,
         "fields": {
             "artist": "Репин Илья Ефимович",
-            "years_of_life": "1844-1930",
+            "birth_date": 1844,
+            "death_date": 1930,
+            "alived": false,
             "short_biography": "Илья Ефимович Репин является одним из самых ярких представителей русской живописи XIX-XX веков. Как утверждал сам художник, искусство было с ним всегда и везде и никогда его не покидало.",
             "artist_photo": "artists/repin.jpeg",
             "artist_slug": "repin"
@@ -26,7 +30,9 @@
         "pk": 3,
         "fields": {
             "artist": "Левитан Исаак Ильич",
-            "years_of_life": "1860-1900",
+            "birth_date": 1860,
+            "death_date": 1900,
+            "alived": false,
             "short_biography": "Исаак Левитан не получил законченного художественного образования, однако его картины пополняли коллекцию Павла Третьякова, появлялись в экспозициях передвижников и на Всемирной выставке в Париже. В 38 лет живописец получил звание академика пейзажной живописи и стал преподавать в Училище живописи, ваяния и зодчества, которое когда-то не окончил сам.",
             "artist_photo": "artists/levitan.jpeg",
             "artist_slug": "levitan"
@@ -37,7 +43,9 @@
         "pk": 4,
         "fields": {
             "artist": "Саврасов Алексей Кондратьевич",
-            "years_of_life": "1830-1897",
+            "birth_date": 1830,
+            "death_date": 1897,
+            "alived": false,
             "short_biography": "При упоминании Саврасова все вспоминают хрестоматийную «Грачи прилетели», наиболее просвещенные – ещё два – три пейзажа: «Лосиный остров в Сокольниках», «Просёлок», «Радуга», а также расхожие штампы – художник одной картины, спился, умер в нищете, царская действительность загубила большой талант. Но так ли уж это верно?",
             "artist_photo": "artists/savrasov.jpg",
             "artist_slug": "savrasov"
@@ -48,7 +56,9 @@
         "pk": 5,
         "fields": {
             "artist": "Суриков Василий Иванович",
-            "years_of_life": "1848-1916",
+            "birth_date": 1848,
+            "death_date": 1916,
+            "alived": false,
             "short_biography": "Трудно рассказывать о человеке, который овеян легендами и прочими вещами, которые сопутствуют знаменитым людям. Василий Иванович Суриков ещё при жизни стал великим художником и удивительным мастером исторического полотна.",
             "artist_photo": "artists/syrikov.jpg",
             "artist_slug": "syrikov"
@@ -59,7 +69,9 @@
         "pk": 6,
         "fields": {
             "artist": "Маковский Константин Егорович",
-            "years_of_life": "1839-1915",
+            "birth_date": 1839,
+            "death_date": 1915,
+            "alived": false,
             "short_biography": "Константин Маковский – один из самых крупных живописцев и портретистов России 19 века, член творческого объединения передвижных художественных выставок, автор жанрово-исторических произведений, человек большого таланта и мастерства.",
             "artist_photo": "artists/konstantin_makovskiy.jpg",
             "artist_slug": "konstantin_makovskiy"
@@ -70,7 +82,9 @@
         "pk": 7,
         "fields": {
             "artist": "Поленов Василий Дмитриевич",
-            "years_of_life": "1844-1927",
+            "birth_date": 1844,
+            "death_date": 1927,
+            "alived": false,
             "short_biography": "Известный художник-живописец-пейзажист, Василий Дмитриевич Поленов в своих произведениях отражает свой внутренний мир. Он непревзойдённый пейзажист. В его полотнах природа нашего удивительного края – средней полосы России, изображена так, что создается впечатление, что она продолжает там жить и радовать его почитателей. Всем поклонникам таланта Поленова известна любовь к дорогому его сердцу родовому деревенскому дому-усадьбе, основанному им в средней полосе России, в Тульской области. Там же, вокруг дома, заложил и основал Василий Поленов потрясающий парк, находящийся на живописных берегах реки Оки, дошедший до нас совсем без изменений.",
             "artist_photo": "artists/polenov.jpeg",
             "artist_slug": "polenov"
@@ -81,7 +95,9 @@
         "pk": 8,
         "fields": {
             "artist": "Серов Валентин Александрович",
-            "years_of_life": "1865-1911",
+            "birth_date": 1865,
+            "death_date": 1911,
+            "alived": false,
             "short_biography": "Валентин Серов писал портреты и пейзажи, рисовал иллюстрации и выпускал журнал «Мир искусства», преподавал живопись и состоял в совете Третьяковской галереи. «Девочка с персиками», полотна с членами императорской семьи, афиша с Анной Павловой и портрет обнаженной Иды Рубинштейн — вспоминаем творчество известного русского художника.",
             "artist_photo": "artists/serov.jpg",
             "artist_slug": "serov"
@@ -92,7 +108,9 @@
         "pk": 9,
         "fields": {
             "artist": "Перов Василий Григорьевич",
-            "years_of_life": "1833-1882",
+            "birth_date": 1833,
+            "death_date": 1882,
+            "alived": false,
             "short_biography": "Василия Перова один из его учеников называл «подлинным певцом скорби». И не зря: постоянными персонажами его жанровых картин были измученные крестьяне, голодные, замерзшие или оплакивающие умерших родственников. Однако кисти Перова принадлежат не только социальные работы, но и целая портретная галерея, а также картины на исторические сюжеты.",
             "artist_photo": "artists/perov.jpeg",
             "artist_slug": "perov"
@@ -103,7 +121,9 @@
         "pk": 10,
         "fields": {
             "artist": "Куинджи Архип Иванович",
-            "years_of_life": "1842-1910",
+            "birth_date": 1842,
+            "death_date": 1910,
+            "alived": false,
             "short_biography": "Слава пришла к Архипу Куинджи не сразу: Айвазовский не брал его в ученики, Академия художеств не принимала даже в вольнослушатели. Однако он стал одним из самых известных художников эпохи, его полотна покупали коллекционеры и члены императорской семьи, а на выставках выстраивались очереди.",
             "artist_photo": "artists/kuindzhi.jpg",
             "artist_slug": "kuindzhi"
@@ -114,7 +134,9 @@
         "pk": 11,
         "fields": {
             "artist": "Ге Николай Николаевич",
-            "years_of_life": "1831-1894",
+            "birth_date": 1831,
+            "death_date": 1894,
+            "alived": false,
             "short_biography": "Путь к виртуозному мастерству Ге не был прост: долгие годы художник учился на математика, а потом пошел против воли отца и поступил в Академию художеств.",
             "artist_photo": "artists/ge.jpg",
             "artist_slug": "ge"
@@ -125,7 +147,9 @@
         "pk": 12,
         "fields": {
             "artist": "Васнецов Аполлинарий Михайлович",
-            "years_of_life": "1856-1933",
+            "birth_date": 1856,
+            "death_date": 1933,
+            "alived": false,
             "short_biography": "Аполлинарий Васнецов — младший брат знаменитого живописца Виктора Васнецова. В тени своего успешного родственника и первого учителя он не затерялся. Художник и ученый, историк и поэт русской природы. Изучая историю и археологию, в своем творчестве выбрал главной темой родные просторы и старую Москву.",
             "artist_photo": "artists/appolinariy_vasnetsov.jpg",
             "artist_slug": "appolinariy_vasnetsov"
@@ -136,7 +160,9 @@
         "pk": 13,
         "fields": {
             "artist": "Васнецов Виктор Михайлович",
-            "years_of_life": "1848-1926",
+            "birth_date": 1848,
+            "death_date": 1926,
+            "alived": false,
             "short_biography": "Виктор Васнецов был известным мастером бытовой и исторической живописи — его картины приобретали коллекционеры Павел Третьяков и Савва Мамонтов. Полотно Васнецова «Богатыри» стало одним из первых обращений к былинному сюжету в истории русской живописи. Кроме написания картин Васнецов делал иллюстрации к книгам, создавал эскизы архитектурных сооружений и расписывал храмы в разных городах России.",
             "artist_photo": "artists/viktor_vasnetsov.jpg",
             "artist_slug": "viktor_vasnetsov"
@@ -147,10 +173,272 @@
         "pk": 14,
         "fields": {
             "artist": "Маковский Владимир Егорович",
-            "years_of_life": "1846-1920",
+            "birth_date": 1846,
+            "death_date": 1920,
+            "alived": false,
             "short_biography": "Вместе со своими братьями и сестрами Владимир Маковский с детства учился рисовать и мечтал стать художником. Он закончил Московское училище живописи, ваяния и зодчества и стал одним из основателей и членов правления Товарищества передвижных выставок. Маковский прославился благодаря своим жанровым сценкам, картинам на революционные сюжеты, портретам украинских крестьян.",
             "artist_photo": "artists/vladimir_makovskiy.jpg",
             "artist_slug": "vladimir_makovskiy"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 1,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "wdefrgrt",
+            "created_on": "2023-03-29T20:38:51.908Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 2,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "ыфвяаиап",
+            "created_on": "2023-03-29T21:31:51.470Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 3,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "dwefrv",
+            "created_on": "2023-03-29T21:32:37.588Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 4,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "sdvdfxbgnh",
+            "created_on": "2023-03-29T22:35:37.078Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 5,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "sefghmjkl",
+            "created_on": "2023-03-31T09:49:31.405Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 6,
+        "fields": {
+            "name": "sxcdfvg",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "dwsvf",
+            "created_on": "2023-04-07T10:01:41.617Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 7,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "cdvfbgnh",
+            "created_on": "2023-04-07T10:02:13.301Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 8,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "dcvfgbhnj",
+            "created_on": "2023-04-07T10:03:36.265Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 9,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "eragsthyjuki",
+            "created_on": "2023-04-07T10:04:28.738Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 10,
+        "fields": {
+            "name": "ывса",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "ывсма",
+            "created_on": "2023-04-07T10:28:47.803Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 11,
+        "fields": {
+            "name": "Максим Леонидович Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "цусмкиер",
+            "created_on": "2023-04-07T10:41:18.343Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 12,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "вфуыамип",
+            "created_on": "2023-04-07T10:48:34.636Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 13,
+        "fields": {
+            "name": "sad v",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "adsvf",
+            "created_on": "2023-04-07T10:55:11.032Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 14,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "вфуыамип",
+            "created_on": "2023-04-07T10:56:43.123Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 15,
+        "fields": {
+            "name": "sad",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "ФЫВмяап",
+            "created_on": "2023-04-07T10:57:46.300Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 16,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "dasfdfbg",
+            "created_on": "2023-04-07T10:58:48.167Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 17,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "sacdvfbgnh",
+            "created_on": "2023-04-07T11:01:03.215Z"
+        }
+    },
+    {
+        "model": "feedback.feedback",
+        "pk": 18,
+        "fields": {
+            "name": "Наталья Владимировна Овчар",
+            "mail": "ss3ovchar@yandex.ru",
+            "feedback_text": "sacdvfbgnh",
+            "created_on": "2023-04-07T11:01:42.445Z"
+        }
+    },
+    {
+        "model": "feedback.feedbackfiles",
+        "pk": 1,
+        "fields": {
+            "feedback": 1,
+            "file": "uploads/1/1680122331.9242523_speech_text.docx"
+        }
+    },
+    {
+        "model": "feedback.feedbackfiles",
+        "pk": 2,
+        "fields": {
+            "feedback": 1,
+            "file": "uploads/1/1680122331.9379194_Л6._обработка_post-запросов.pdf"
+        }
+    },
+    {
+        "model": "feedback.feedbackfiles",
+        "pk": 3,
+        "fields": {
+            "feedback": 2,
+            "file": "uploads/2/1680125511.7983623_speech_text.docx"
+        }
+    },
+    {
+        "model": "feedback.feedbackfiles",
+        "pk": 4,
+        "fields": {
+            "feedback": 2,
+            "file": "uploads/2/1680125511.8143973_Л6._обработка_post-запросов.pdf"
+        }
+    },
+    {
+        "model": "feedback.feedbackfiles",
+        "pk": 5,
+        "fields": {
+            "feedback": 3,
+            "file": "feedback_files/3/1680125557.975837_speech_text.docx"
+        }
+    },
+    {
+        "model": "feedback.feedbackfiles",
+        "pk": 6,
+        "fields": {
+            "feedback": 3,
+            "file": "feedback_files/3/1680125557.989281_Л6._обработка_post-запросов.pdf"
+        }
+    },
+    {
+        "model": "feedback.feedbackfiles",
+        "pk": 7,
+        "fields": {
+            "feedback": 4,
+            "file": "feedback_files/4/1680129337.092942_speech_text.docx"
+        }
+    },
+    {
+        "model": "feedback.feedbackfiles",
+        "pk": 8,
+        "fields": {
+            "feedback": 4,
+            "file": "feedback_files/4/1680129337.104266_Л6._обработка_post-запросов.pdf"
+        }
+    },
+    {
+        "model": "feedback.feedbackfiles",
+        "pk": 9,
+        "fields": {
+            "feedback": 5,
+            "file": "feedback_files/5/1680256171.4299057_speech_text.docx"
+        }
+    },
+    {
+        "model": "feedback.feedbackfiles",
+        "pk": 10,
+        "fields": {
+            "feedback": 5,
+            "file": "feedback_files/5/1680256171.4461255_Л6._обработка_post-запросов.pdf"
         }
     },
     {
@@ -1287,6 +1575,1066 @@
             "painting_photo": "picture/play_in_babki.jpg",
             "painting_slug": "play_in_babki",
             "likes": []
+        }
+    },
+    {
+        "model": "users.customuser",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$390000$KLUCka6DN6LSu1VjV9h5ci$+/nX4zWUT+o/Tszq3hlRSoZ5wOPqbinKDEsUtzifaZ4=",
+            "last_login": "2023-04-07T19:57:12.624Z",
+            "is_superuser": true,
+            "first_name": "",
+            "last_name": "",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-03-29T20:38:22.059Z",
+            "username": "semen",
+            "email": "s@ya.ru",
+            "image": "",
+            "feedback_mails": null,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "users.customuser",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$390000$wd9g8qeSGpkhD9U2Aum0j3$9hb2BTkKO5QNERzXMnZ+rH93O8g/WxtVMCCAdYVeDe4=",
+            "last_login": "2023-04-07T10:32:14.658Z",
+            "is_superuser": false,
+            "first_name": "",
+            "last_name": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-04-07T10:32:13.929Z",
+            "username": "ssss",
+            "email": "q@ya.ru",
+            "image": "",
+            "feedback_mails": null,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "users.customuser",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$390000$BGvOcajwwuJ7yens1z8GbA$Nz3wzrfqNoBCR2iXNzR3DH+sOAT99lpkCorHHcIVbDY=",
+            "last_login": "2023-04-07T10:33:36.665Z",
+            "is_superuser": false,
+            "first_name": "",
+            "last_name": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-04-07T10:32:33.457Z",
+            "username": "sssss",
+            "email": "ss3ovchar@yandex.ru",
+            "image": "",
+            "feedback_mails": null,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 1,
+        "fields": {
+            "action_time": "2023-04-07T15:00:25.430Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "14",
+            "object_repr": "Маковский Владимир Егорович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 2,
+        "fields": {
+            "action_time": "2023-04-07T15:09:52.480Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "14",
+            "object_repr": "Маковский Владимир Егорович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 3,
+        "fields": {
+            "action_time": "2023-04-07T21:44:59.505Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Шишкин Иван Иванович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 4,
+        "fields": {
+            "action_time": "2023-04-07T21:45:13.975Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "2",
+            "object_repr": "Репин Илья Ефимович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 5,
+        "fields": {
+            "action_time": "2023-04-07T21:45:32.463Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "3",
+            "object_repr": "Левитан Исаак Ильич",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 6,
+        "fields": {
+            "action_time": "2023-04-07T21:45:52.541Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "4",
+            "object_repr": "Саврасов Алексей Кондратьевич",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 7,
+        "fields": {
+            "action_time": "2023-04-07T21:46:14.252Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "5",
+            "object_repr": "Суриков Василий Иванович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 8,
+        "fields": {
+            "action_time": "2023-04-07T21:46:31.791Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "3",
+            "object_repr": "Левитан Исаак Ильич",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 9,
+        "fields": {
+            "action_time": "2023-04-07T21:46:51.784Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "2",
+            "object_repr": "Репин Илья Ефимович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 10,
+        "fields": {
+            "action_time": "2023-04-07T21:47:09.208Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "Шишкин Иван Иванович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 11,
+        "fields": {
+            "action_time": "2023-04-07T21:47:39.549Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "6",
+            "object_repr": "Маковский Константин Егорович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 12,
+        "fields": {
+            "action_time": "2023-04-07T21:47:54.643Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "7",
+            "object_repr": "Поленов Василий Дмитриевич",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 13,
+        "fields": {
+            "action_time": "2023-04-07T21:48:28.394Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "7",
+            "object_repr": "Поленов Василий Дмитриевич",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 14,
+        "fields": {
+            "action_time": "2023-04-07T21:48:39.241Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "8",
+            "object_repr": "Серов Валентин Александрович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 15,
+        "fields": {
+            "action_time": "2023-04-07T21:48:52.930Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "9",
+            "object_repr": "Перов Василий Григорьевич",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 16,
+        "fields": {
+            "action_time": "2023-04-07T21:49:03.417Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "10",
+            "object_repr": "Куинджи Архип Иванович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 17,
+        "fields": {
+            "action_time": "2023-04-07T21:49:17.731Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "11",
+            "object_repr": "Ге Николай Николаевич",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 18,
+        "fields": {
+            "action_time": "2023-04-07T21:49:28.165Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "12",
+            "object_repr": "Васнецов Аполлинарий Михайлович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 19,
+        "fields": {
+            "action_time": "2023-04-07T21:49:40.994Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "13",
+            "object_repr": "Васнецов Виктор Михайлович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 20,
+        "fields": {
+            "action_time": "2023-04-07T21:49:49.946Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "14",
+            "object_repr": "Маковский Владимир Егорович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "0toufmeoz3uv23luaye3z9qgf1i4u5pq",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGlkQe_2hpOcM0a53jQPIluKkQtwdIqWA9s3Me6kR16WMa5d5nFidlVGH340wPaRugO9Yb02nVpd5Ir0peqddXxvL87K7fwcFe_nWCImCQQRicxTywUVBgpyNNS6nGNHGTMgcIgFncYH9AHACy-IxDur9ARq3OQ8:1pkjPU:xRW_AjAozKBK3rMhrRTZl0W08T2Ko3vadHIpBiF2kkc",
+            "expire_date": "2023-04-21T10:33:36.739Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "hpik53ojoh8gftci3uv7k72dwdfylyx9",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGln-fyjpOYNl765xADlSnFSIu0OkFNC-mXkvlvK2trQNWtKE7MwkO_1uJcOD-g7wnvtt5jD3dZkK3xV-0MGvM9Lzcrh_By2P9q2tslVCDlLoqLQXECPpYLAa6bFqNKQKaBeCU9F7B1S1NQpEJaxIWNj7A8kWOBY:1phcZS:WcYI_bba56HZiEGZsTc4TJXwqwn1MW6aAeyLzrh1Rho",
+            "expire_date": "2023-04-12T20:39:02.212Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "jln65z72rbyxafwmjeboe6ghg8xrj0ht",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGln-fyjpOYNl765xADlSnFSIu0OkFNC-mXkvlvK2trQNWtKE7MwkO_1uJcOD-g7wnvtt5jD3dZkK3xV-0MGvM9Lzcrh_By2P9q2tslVCDlLoqLQXECPpYLAa6bFqNKQKaBeCU9F7B1S1NQpEJaxIWNj7A8kWOBY:1pksCu:Wn2_CEVHMl7bo7yuymXGJuKF4Nqq7pCctSJnE4nDJVA",
+            "expire_date": "2023-04-21T19:57:12.665Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "s8vxn4wzq3jf4ze08bu18m5koipx5nbk",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGln-fyjpOYNl765xADlSnFSIu0OkFNC-mXkvlvK2trQNWtKE7MwkO_1uJcOD-g7wnvtt5jD3dZkK3xV-0MGvM9Lzcrh_By2P9q2tslVCDlLoqLQXECPpYLAa6bFqNKQKaBeCU9F7B1S1NQpEJaxIWNj7A8kWOBY:1phdPp:2-vdt0MxAQMw3JdwGXl-Ziydr3xG1djGNuII3UWzB3A",
+            "expire_date": "2023-04-12T21:33:09.146Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "zz2m1tfmjh7zd33ev3o09tk89g45rbks",
+        "fields": {
+            "session_data": ".eJxVjDsOwjAQBe_iGln-fyjpOYNl765xADlSnFSIu0OkFNC-mXkvlvK2trQNWtKE7MwkO_1uJcOD-g7wnvtt5jD3dZkK3xV-0MGvM9Lzcrh_By2P9q2tslVCDlLoqLQXECPpYLAa6bFqNKQKaBeCU9F7B1S1NQpEJaxIWNj7A8kWOBY:1pknWU:TNZbzm8XNZtwke1SjxTi0dAnJisZVGHkiMkbJ60f14E",
+            "expire_date": "2023-04-21T14:57:06.666Z"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||029d80e1fee1da73749f763e7d733bf1",
+        "fields": {
+            "value": "{\"name\": \"artists/perov.jpeg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [2335, 3000]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||0490a6f8663bfc43d8eb191cfb87af8a",
+        "fields": {
+            "value": "{\"name\": \"artists/ge.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1917, 2573]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||0d6490f0e0aead0e56e8ddecfd23b32f",
+        "fields": {
+            "value": "{\"name\": \"cache/f0/d3/f0d381834788e0ff31416f5f72273c62.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [350, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||0f54570425e7860ec6996de4f8292fe4",
+        "fields": {
+            "value": "{\"name\": \"galleries/ulyanovck_art_museum.jpeg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1200, 800]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||109cab63e6775a0d6fdeaf62aa668b25",
+        "fields": {
+            "value": "{\"name\": \"cache/85/f2/85f278bc4175b1e64c1909e0cf6921b3.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||12302d6484e1ea33e951143795cbcdff",
+        "fields": {
+            "value": "{\"name\": \"cache/df/8f/df8fc56b861b063150215264be7f2d3a.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||1970fc8e73ae444eee2246e56215bc2d",
+        "fields": {
+            "value": "{\"name\": \"artists/appolinariy_vasnetsov.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [684, 873]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||1f5502096a8b9142875a8a95bca027a7",
+        "fields": {
+            "value": "{\"name\": \"galleries/russian_museum_pushkin.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1087, 720]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||1fb1a35144a6ae66598958540a855a56",
+        "fields": {
+            "value": "{\"name\": \"cache/2d/c0/2dc0c97cde5010b09438e425f24007a2.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||2221ff143c1079ae7a6e8f8904523590",
+        "fields": {
+            "value": "{\"name\": \"galleries/tylskiy_3.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1000, 666]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||22cf59afdd7de070b2b8589c3c8828f5",
+        "fields": {
+            "value": "{\"name\": \"galleries/tylskiy_1.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [860, 570]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||286aa177ccde55c8b202a0ee2c7b6896",
+        "fields": {
+            "value": "{\"name\": \"cache/e2/96/e296c3db6b034b91199f5647e2c2aef6.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [350, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||2b1d23c99bd5848d1908e853f3e762d4",
+        "fields": {
+            "value": "{\"name\": \"cache/b8/38/b8381f60a3901723c4e557594979120e.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||2cbb6175bee68790762e176538e31a2a",
+        "fields": {
+            "value": "{\"name\": \"cache/33/2d/332d2087514cff52a79aa300d7eea44b.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||2e3d851e5b519e365af3f41ff82f4f1e",
+        "fields": {
+            "value": "{\"name\": \"artists/vladimir_makovskiy.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1200, 1063]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||342df48b328bc6f5dce4b4f8d4063289",
+        "fields": {
+            "value": "{\"name\": \"cache/92/e1/92e1bd337205b9e78d5352c4f029d2ef.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||346ea6d296e7129c5b415dc658aacd5c",
+        "fields": {
+            "value": "{\"name\": \"cache/c1/2c/c12c99ab0834f39f31373f66d16242be.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||35640075726b2bde50612ed27d54dfb6",
+        "fields": {
+            "value": "{\"name\": \"galleries/private_collections.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1024, 762]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||39e001063afefdada4220752769daedc",
+        "fields": {
+            "value": "{\"name\": \"artists/konstantin_makovskiy.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [800, 1071]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||43a03cb20a3d862c1b14e4627d1c4e85",
+        "fields": {
+            "value": "{\"name\": \"cache/81/0d/810db0398792c4810f3177dcde695244.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [350, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||43c75f59e5174a8b49e5174dfdc8556a",
+        "fields": {
+            "value": "{\"name\": \"galleries/tylskiy_2.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1202, 800]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||4b5e0c2067c825927549e57c16785a60",
+        "fields": {
+            "value": "{\"name\": \"cache/ba/b6/bab61742aa908acc4510b48fbc50bd06.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [350, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||4c662d7e0c965b42897c8a6191838ff1",
+        "fields": {
+            "value": "{\"name\": \"cache/3e/27/3e270b86c93e6d9e5b8129257981ae00.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [600, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||526e29153e20766611c0132bde4a5029",
+        "fields": {
+            "value": "{\"name\": \"cache/f0/a8/f0a8e356617e084e7a75c2b79cb16c1b.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [600, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||53da57b01eecce445baca037a8da0605",
+        "fields": {
+            "value": "{\"name\": \"cache/2d/89/2d89bc024a4081f965215e82060ee5ee.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||550b99b00c78df30c0f052266e21d052",
+        "fields": {
+            "value": "{\"name\": \"cache/a6/2c/a62c0c88b9a3b296f120624898f5f877.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||583d140092604dfc695e88613cb7c66d",
+        "fields": {
+            "value": "{\"name\": \"cache/66/d5/66d536cdb8c4045bb1f0edcb8a0807fb.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||5b0193c523e8fe1f3703997bd35d0b7e",
+        "fields": {
+            "value": "{\"name\": \"cache/b7/37/b737f09f0643fcda1b894b0ce82dc4be.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [550, 289]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||5b332f8fafab3a9045cc96ed6527b1ef",
+        "fields": {
+            "value": "{\"name\": \"cache/86/77/8677241aeaa007079d87e2f54c9e5801.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||5ce2b865d59be61aa831bad30f45b6eb",
+        "fields": {
+            "value": "{\"name\": \"cache/aa/cf/aacf6e20a065bbda4cd0a48c519cd651.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||5f5e7b62745834ae36ebd6841fb9e4cf",
+        "fields": {
+            "value": "{\"name\": \"cache/fa/df/fadf21cfacd38ab999b182817d176d60.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||633f106219b60ad00fa8cb158d16c25c",
+        "fields": {
+            "value": "{\"name\": \"galleries/state_russian_museum.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1200, 750]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||657e640b7ad4644913962b56eeae3660",
+        "fields": {
+            "value": "{\"name\": \"galleries/tretyakovskaya.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1200, 630]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||6beef14d20ce1ce5dddd751191e794d6",
+        "fields": {
+            "value": "{\"name\": \"cache/74/cc/74ccba129e8bb2287f11d2bff66f9959.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||6eed79bb5024f85daaefcefcef6b1097",
+        "fields": {
+            "value": "{\"name\": \"galleries/tretyakovka_3_GxDRzrY.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1600, 1066]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||716ae762a38bc804046cca2394d8230c",
+        "fields": {
+            "value": "{\"name\": \"cache/85/4a/854af399e29c7e4c2ab7a0c6ddd0cac1.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [600, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||730e055af599eb1febef7e8f323c400d",
+        "fields": {
+            "value": "{\"name\": \"cache/14/58/1458ab47a95b82887a6e58a4184efe19.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||80853631df914a0f60a71865199d5a55",
+        "fields": {
+            "value": "{\"name\": \"artists/levitan.jpeg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1369, 965]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||80f5b0154895e8b21eecd594a5032584",
+        "fields": {
+            "value": "{\"name\": \"cache/58/24/582451a8779c24391b3ac826e2e42592.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [600, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||8116525d77f53acbae5b98ce5b02db53",
+        "fields": {
+            "value": "{\"name\": \"artists/kuindzhi.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [835, 555]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||840cae5d6cdc85112415a0165a880ccb",
+        "fields": {
+            "value": "{\"name\": \"cache/3e/cf/3ecf55d15941e0ed96092dd9b405c9de.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||8bced83ca554b78c01c5b8bd2a85f986",
+        "fields": {
+            "value": "{\"name\": \"cache/58/9a/589a5240dcb4abcad2091067efc39fef.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||8da9d18e9d0d0df089d9ea45af51f717",
+        "fields": {
+            "value": "{\"name\": \"artists/serov.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [736, 961]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||91cae8586df0665cd48574681f20b708",
+        "fields": {
+            "value": "{\"name\": \"galleries/tretyakovka_1_MaIqBr7.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [800, 532]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||92f25f0ac968ed2b3e87cbae921e9a7c",
+        "fields": {
+            "value": "{\"name\": \"cache/f3/79/f3790b3209d7f43449283329a40ba47f.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||931b16d1921e558b3da7daac6b74d2b6",
+        "fields": {
+            "value": "{\"name\": \"cache/f6/60/f660167b3889e9b23339bdd37d2bc01e.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [600, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||9c9ff781c5c0c183757cc75953911290",
+        "fields": {
+            "value": "{\"name\": \"cache/25/fe/25fe8cf495ec5ab3757d74f695d1eb7b.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||9e4d77514f3121f8f841ac581d09aec0",
+        "fields": {
+            "value": "{\"name\": \"cache/e9/ed/e9ed4c05cadfafb83ef9654f0661082f.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||a3a851c41751e6bd211afcbe103201f0",
+        "fields": {
+            "value": "{\"name\": \"cache/3c/fa/3cfa58212a1aeb7ea5e9df3420ba65da.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [350, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||ab9c292036f2e08599dddf531cbfa78f",
+        "fields": {
+            "value": "{\"name\": \"artists/savrasov.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1200, 900]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||ac37bc2a9d550f7a4bcb46f631b79550",
+        "fields": {
+            "value": "{\"name\": \"cache/5b/61/5b61d8274a867b09a833ee28a29f62d7.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||b94cfb8345f538c110d11f7db84f5c29",
+        "fields": {
+            "value": "{\"name\": \"galleries/tretyakovka_2.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1100, 825]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||c235ab23d23c8219b5699e4398ab4496",
+        "fields": {
+            "value": "{\"name\": \"cache/ff/5e/ff5e58741ee67617c634b8f14e9aaf47.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [525, 350]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||c33899a17e4fc7c016500e75f7efca63",
+        "fields": {
+            "value": "{\"name\": \"galleries/tulskiy_art_museum.jpeg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1772, 1181]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||cbcd51e2183d7be4a989fe9133e07212",
+        "fields": {
+            "value": "{\"name\": \"artists/repin.jpeg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [747, 864]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||cc49d78068b3aca2959ca0c1c57a887e",
+        "fields": {
+            "value": "{\"name\": \"cache/04/5e/045e432b7006bfdd9a5a208382847214.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||ce524885b17d4c57b36be57b7c879338",
+        "fields": {
+            "value": "{\"name\": \"cache/46/b6/46b6a37564c2550b81998b9a34ba6c9f.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||ce89d45f21f5e4bd28b7b06c597a0fbe",
+        "fields": {
+            "value": "{\"name\": \"artists/viktor_vasnetsov.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [800, 901]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||d104c421488c2729aff7e0965ded7789",
+        "fields": {
+            "value": "{\"name\": \"cache/11/03/11039085b997596842e85e0716bfc74e.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [600, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||d2dde4891cfffd8a95dec72f74763cd9",
+        "fields": {
+            "value": "{\"name\": \"artists/syrikov.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [720, 540]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||d3f15d584cf2fca7d5fde7f4241eaf37",
+        "fields": {
+            "value": "{\"name\": \"galleries/kievskaya_gApqLSu.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [3672, 2294]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||d744518cc8385d48f12fc15f08270c76",
+        "fields": {
+            "value": "{\"name\": \"cache/70/a5/70a58141cdeed7d9ed7f7dc0393f8f7d.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||dbde9644d0b1e6549264b965e1556b56",
+        "fields": {
+            "value": "{\"name\": \"artists/shishkin.jpeg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [864, 647]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||de2e45454e493a0f6c5a13a09c2f1ab5",
+        "fields": {
+            "value": "{\"name\": \"cache/6e/f1/6ef1217fd4ec0c4d4b03c71de523fe2a.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [350, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||e09e9776282b107e97b516ff7a8969af",
+        "fields": {
+            "value": "{\"name\": \"cache/23/90/239007778ed2513bacbe4c44080cce92.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [350, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||e93d8e411a81c80b8da995447a8f6331",
+        "fields": {
+            "value": "{\"name\": \"galleries/serpuhovskiy_art_museum.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [1280, 853]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||f0058a3ea4b397f4b09bdf3a71917fc5",
+        "fields": {
+            "value": "{\"name\": \"cache/12/ed/12ede2ee91729d533033c83e60d41334.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||f1e7d84e843e2bb4d3dd3837ba758ff4",
+        "fields": {
+            "value": "{\"name\": \"cache/43/92/439298cb049446975f2095a0d2af9822.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||f3efcca4de3a6205b273382e41908d42",
+        "fields": {
+            "value": "{\"name\": \"cache/42/09/4209e70e086f1199a21942d3f403dff8.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||f6e3447d142ca5eb1c211a9c0dca71dd",
+        "fields": {
+            "value": "{\"name\": \"cache/78/51/7851ffc39fb50df095885676a754a1f2.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [200, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||f94075128e7a1dcc2d0f0d252e42d9e9",
+        "fields": {
+            "value": "{\"name\": \"cache/47/9c/479c99346126746aba829138d04a72e5.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [350, 200]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||image||fbe412e67f4aba884ddbb7b57d05fcbc",
+        "fields": {
+            "value": "{\"name\": \"artists/polenov.jpeg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [900, 900]}"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||029d80e1fee1da73749f763e7d733bf1",
+        "fields": {
+            "value": "[\"f0058a3ea4b397f4b09bdf3a71917fc5\", \"12302d6484e1ea33e951143795cbcdff\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||0490a6f8663bfc43d8eb191cfb87af8a",
+        "fields": {
+            "value": "[\"d744518cc8385d48f12fc15f08270c76\", \"109cab63e6775a0d6fdeaf62aa668b25\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||0f54570425e7860ec6996de4f8292fe4",
+        "fields": {
+            "value": "[\"a3a851c41751e6bd211afcbe103201f0\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||1970fc8e73ae444eee2246e56215bc2d",
+        "fields": {
+            "value": "[\"92f25f0ac968ed2b3e87cbae921e9a7c\", \"5ce2b865d59be61aa831bad30f45b6eb\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||1f5502096a8b9142875a8a95bca027a7",
+        "fields": {
+            "value": "[\"286aa177ccde55c8b202a0ee2c7b6896\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||2221ff143c1079ae7a6e8f8904523590",
+        "fields": {
+            "value": "[\"931b16d1921e558b3da7daac6b74d2b6\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||22cf59afdd7de070b2b8589c3c8828f5",
+        "fields": {
+            "value": "[\"4c662d7e0c965b42897c8a6191838ff1\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||2e3d851e5b519e365af3f41ff82f4f1e",
+        "fields": {
+            "value": "[\"1fb1a35144a6ae66598958540a855a56\", \"5f5e7b62745834ae36ebd6841fb9e4cf\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||35640075726b2bde50612ed27d54dfb6",
+        "fields": {
+            "value": "[\"e09e9776282b107e97b516ff7a8969af\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||39e001063afefdada4220752769daedc",
+        "fields": {
+            "value": "[\"730e055af599eb1febef7e8f323c400d\", \"f1e7d84e843e2bb4d3dd3837ba758ff4\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||43c75f59e5174a8b49e5174dfdc8556a",
+        "fields": {
+            "value": "[\"d104c421488c2729aff7e0965ded7789\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||633f106219b60ad00fa8cb158d16c25c",
+        "fields": {
+            "value": "[\"f94075128e7a1dcc2d0f0d252e42d9e9\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||657e640b7ad4644913962b56eeae3660",
+        "fields": {
+            "value": "[\"0d6490f0e0aead0e56e8ddecfd23b32f\", \"5b0193c523e8fe1f3703997bd35d0b7e\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||6eed79bb5024f85daaefcefcef6b1097",
+        "fields": {
+            "value": "[\"526e29153e20766611c0132bde4a5029\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||80853631df914a0f60a71865199d5a55",
+        "fields": {
+            "value": "[\"f3efcca4de3a6205b273382e41908d42\", \"5b332f8fafab3a9045cc96ed6527b1ef\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||8116525d77f53acbae5b98ce5b02db53",
+        "fields": {
+            "value": "[\"f6e3447d142ca5eb1c211a9c0dca71dd\", \"cc49d78068b3aca2959ca0c1c57a887e\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||8da9d18e9d0d0df089d9ea45af51f717",
+        "fields": {
+            "value": "[\"6beef14d20ce1ce5dddd751191e794d6\", \"53da57b01eecce445baca037a8da0605\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||91cae8586df0665cd48574681f20b708",
+        "fields": {
+            "value": "[\"716ae762a38bc804046cca2394d8230c\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||ab9c292036f2e08599dddf531cbfa78f",
+        "fields": {
+            "value": "[\"2cbb6175bee68790762e176538e31a2a\", \"8bced83ca554b78c01c5b8bd2a85f986\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||b94cfb8345f538c110d11f7db84f5c29",
+        "fields": {
+            "value": "[\"80f5b0154895e8b21eecd594a5032584\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||c33899a17e4fc7c016500e75f7efca63",
+        "fields": {
+            "value": "[\"c235ab23d23c8219b5699e4398ab4496\", \"de2e45454e493a0f6c5a13a09c2f1ab5\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||cbcd51e2183d7be4a989fe9133e07212",
+        "fields": {
+            "value": "[\"ce524885b17d4c57b36be57b7c879338\", \"2b1d23c99bd5848d1908e853f3e762d4\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||ce89d45f21f5e4bd28b7b06c597a0fbe",
+        "fields": {
+            "value": "[\"840cae5d6cdc85112415a0165a880ccb\", \"9e4d77514f3121f8f841ac581d09aec0\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||d2dde4891cfffd8a95dec72f74763cd9",
+        "fields": {
+            "value": "[\"9c9ff781c5c0c183757cc75953911290\", \"346ea6d296e7129c5b415dc658aacd5c\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||d3f15d584cf2fca7d5fde7f4241eaf37",
+        "fields": {
+            "value": "[\"4b5e0c2067c825927549e57c16785a60\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||dbde9644d0b1e6549264b965e1556b56",
+        "fields": {
+            "value": "[\"550b99b00c78df30c0f052266e21d052\", \"ac37bc2a9d550f7a4bcb46f631b79550\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||e93d8e411a81c80b8da995447a8f6331",
+        "fields": {
+            "value": "[\"43a03cb20a3d862c1b14e4627d1c4e85\"]"
+        }
+    },
+    {
+        "model": "thumbnail.kvstore",
+        "pk": "sorl-thumbnail||thumbnails||fbe412e67f4aba884ddbb7b57d05fcbc",
+        "fields": {
+            "value": "[\"342df48b328bc6f5dce4b4f8d4063289\", \"583d140092604dfc695e88613cb7c66d\"]"
         }
     }
 ]
