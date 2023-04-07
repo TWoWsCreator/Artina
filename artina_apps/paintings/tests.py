@@ -57,8 +57,11 @@ class StaticURLTests(django.test.TestCase):
 class ModelsTests(django.test.TestCase):
     def setUp(self):
         self.test_artist = artists.models.Artists.objects.create(
-            artist='М. В. Васнецов',
-            years_of_life='1700-1777',
+            name='Иван',
+            surname='Шишкин',
+            patronymic='Иванович',
+            birth_date=1700,
+            death_date=1777,
             short_biography='что то интересное',
             artist_photo='.../...',
             artist_slug='pushkin',

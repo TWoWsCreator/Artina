@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>{{ artist.artist }}</h1>
+  <h1>{{ artist.get_full_name }}</h1>
   <h6>{{ artist.years_of_life }}</h6>
   {% load thumbnail %}
   {% thumbnail artist.artist_photo '300x300' crop='center' as photo %}

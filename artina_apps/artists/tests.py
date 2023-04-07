@@ -105,12 +105,13 @@ class ModelsTests(django.test.TestCase):
     @classmethod
     def create_artist(
         cls,
-        name='Пушкин Александр Сергеевич',
-        birth_date=1700,
-        death_date=1770,
+        birth_date,
+        death_date,
     ):
         cls.test_artist = artists.models.Artists(
-            artist=name,
+            name='Александр',
+            surname='Пушкин',
+            patronymic='Сергеевич',
             birth_date=birth_date,
             death_date=death_date,
             short_biography='что то интересное',
@@ -210,7 +211,9 @@ class ContextTests(core.tests.CheckFieldsTestCase):
             self.check_content_value(
                 artist,
                 (
-                    artists.models.Artists.artist.field.name,
+                    artists.models.Artists.name.field.name,
+                    artists.models.Artists.surname.field.name,
+                    artists.models.Artists.patronymic.field.name,
                     artists.models.Artists.birth_date.field.name,
                     artists.models.Artists.death_date.field.name,
                     artists.models.Artists.alived.field.name,
@@ -226,7 +229,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         )
         self.assertQuerysetEqual(
             artists.models.Artists.objects.order_by(
-                artists.models.Artists.artist.field.name
+                artists.models.Artists.surname.field.name
             ),
             response.context['artists'],
             msg='Передаваемый в контекст список художников неосортирован',
@@ -265,7 +268,9 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         self.check_content_value(
             response.context['artist'],
             (
-                artists.models.Artists.artist.field.name,
+                artists.models.Artists.name.field.name,
+                artists.models.Artists.surname.field.name,
+                artists.models.Artists.patronymic.field.name,
                 artists.models.Artists.birth_date.field.name,
                 artists.models.Artists.death_date.field.name,
                 artists.models.Artists.alived.field.name,

@@ -3,7 +3,9 @@
         "model": "artists.artists",
         "pk": 1,
         "fields": {
-            "artist": "Шишкин Иван Иванович",
+            "name": "Иван",
+            "surname": "Шишкин",
+            "patronymic": "Иванович",
             "birth_date": 1832,
             "death_date": 1898,
             "alived": false,
@@ -16,7 +18,9 @@
         "model": "artists.artists",
         "pk": 2,
         "fields": {
-            "artist": "Репин Илья Ефимович",
+            "name": "Илья",
+            "surname": "Репин",
+            "patronymic": "Ефимович",
             "birth_date": 1844,
             "death_date": 1930,
             "alived": false,
@@ -29,7 +33,9 @@
         "model": "artists.artists",
         "pk": 3,
         "fields": {
-            "artist": "Левитан Исаак Ильич",
+            "name": "Исаак",
+            "surname": "Левитан",
+            "patronymic": "Ильич",
             "birth_date": 1860,
             "death_date": 1900,
             "alived": false,
@@ -42,7 +48,9 @@
         "model": "artists.artists",
         "pk": 4,
         "fields": {
-            "artist": "Саврасов Алексей Кондратьевич",
+            "name": "Алексей",
+            "surname": "Саврасов",
+            "patronymic": "Кондратьевич",
             "birth_date": 1830,
             "death_date": 1897,
             "alived": false,
@@ -55,7 +63,9 @@
         "model": "artists.artists",
         "pk": 5,
         "fields": {
-            "artist": "Суриков Василий Иванович",
+            "name": "Василий",
+            "surname": "Суриков",
+            "patronymic": "Иванович",
             "birth_date": 1848,
             "death_date": 1916,
             "alived": false,
@@ -68,7 +78,9 @@
         "model": "artists.artists",
         "pk": 6,
         "fields": {
-            "artist": "Маковский Константин Егорович",
+            "name": "Константин",
+            "surname": "Маковский",
+            "patronymic": "Егорович",
             "birth_date": 1839,
             "death_date": 1915,
             "alived": false,
@@ -81,7 +93,9 @@
         "model": "artists.artists",
         "pk": 7,
         "fields": {
-            "artist": "Поленов Василий Дмитриевич",
+            "name": "Василий",
+            "surname": "Поленов",
+            "patronymic": "Дмитриевич",
             "birth_date": 1844,
             "death_date": 1927,
             "alived": false,
@@ -94,7 +108,9 @@
         "model": "artists.artists",
         "pk": 8,
         "fields": {
-            "artist": "Серов Валентин Александрович",
+            "name": "Валентин",
+            "surname": "Серов",
+            "patronymic": "Александрович",
             "birth_date": 1865,
             "death_date": 1911,
             "alived": false,
@@ -107,7 +123,9 @@
         "model": "artists.artists",
         "pk": 9,
         "fields": {
-            "artist": "Перов Василий Григорьевич",
+            "name": "Василий",
+            "surname": "Перов",
+            "patronymic": "Григорьевич",
             "birth_date": 1833,
             "death_date": 1882,
             "alived": false,
@@ -120,7 +138,9 @@
         "model": "artists.artists",
         "pk": 10,
         "fields": {
-            "artist": "Куинджи Архип Иванович",
+            "name": "Архип",
+            "surname": "Куинджи",
+            "patronymic": "Иванович",
             "birth_date": 1842,
             "death_date": 1910,
             "alived": false,
@@ -133,7 +153,9 @@
         "model": "artists.artists",
         "pk": 11,
         "fields": {
-            "artist": "Ге Николай Николаевич",
+            "name": "Николай",
+            "surname": "Ге",
+            "patronymic": "Николаевич",
             "birth_date": 1831,
             "death_date": 1894,
             "alived": false,
@@ -146,7 +168,9 @@
         "model": "artists.artists",
         "pk": 12,
         "fields": {
-            "artist": "Васнецов Аполлинарий Михайлович",
+            "name": "Аполлинарий",
+            "surname": "Васнецов",
+            "patronymic": "Михайлович",
             "birth_date": 1856,
             "death_date": 1933,
             "alived": false,
@@ -159,7 +183,9 @@
         "model": "artists.artists",
         "pk": 13,
         "fields": {
-            "artist": "Васнецов Виктор Михайлович",
+            "name": "Виктор",
+            "surname": "Васнецов",
+            "patronymic": "Михайлович",
             "birth_date": 1848,
             "death_date": 1926,
             "alived": false,
@@ -172,7 +198,9 @@
         "model": "artists.artists",
         "pk": 14,
         "fields": {
-            "artist": "Маковский Владимир Егорович",
+            "name": "Владимир",
+            "surname": "Маковский",
+            "patronymic": "Егорович",
             "birth_date": 1846,
             "death_date": 1920,
             "alived": false,
@@ -1895,6 +1923,266 @@
             "object_repr": "Маковский Владимир Егорович",
             "action_flag": 2,
             "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0414\\u0430\\u0442\\u0430 \\u0441\\u043c\\u0435\\u0440\\u0442\\u0438 \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 21,
+        "fields": {
+            "action_time": "2023-04-07T22:11:35.182Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "14",
+            "object_repr": "Маковский Владимир Егорович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 22,
+        "fields": {
+            "action_time": "2023-04-07T22:11:44.348Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "14",
+            "object_repr": "Маковский Владимир Егорович",
+            "action_flag": 2,
+            "change_message": "[]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 23,
+        "fields": {
+            "action_time": "2023-04-07T22:11:49.958Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "14",
+            "object_repr": "Маковский Владимир Егорович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 24,
+        "fields": {
+            "action_time": "2023-04-07T22:11:50.138Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "14",
+            "object_repr": "Маковский Владимир Егорович",
+            "action_flag": 2,
+            "change_message": "[]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 25,
+        "fields": {
+            "action_time": "2023-04-07T22:12:04.305Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "14",
+            "object_repr": "Маковский Владимир Егорович",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0414\\u0430\\u0442\\u0430 \\u0440\\u043e\\u0436\\u0434\\u0435\\u043d\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 26,
+        "fields": {
+            "action_time": "2023-04-07T22:31:32.183Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "1",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 27,
+        "fields": {
+            "action_time": "2023-04-07T22:31:47.032Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "2",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 28,
+        "fields": {
+            "action_time": "2023-04-07T22:32:03.547Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "3",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 29,
+        "fields": {
+            "action_time": "2023-04-07T22:32:18.917Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "4",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 30,
+        "fields": {
+            "action_time": "2023-04-07T22:32:35.423Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "5",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 31,
+        "fields": {
+            "action_time": "2023-04-07T22:32:54.804Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "6",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 32,
+        "fields": {
+            "action_time": "2023-04-07T22:33:21.040Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "7",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 33,
+        "fields": {
+            "action_time": "2023-04-07T22:33:34.694Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "8",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 34,
+        "fields": {
+            "action_time": "2023-04-07T22:33:49.025Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "9",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 35,
+        "fields": {
+            "action_time": "2023-04-07T22:34:05.929Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "10",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 36,
+        "fields": {
+            "action_time": "2023-04-07T22:34:16.521Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "11",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 37,
+        "fields": {
+            "action_time": "2023-04-07T22:34:33.794Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "12",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 38,
+        "fields": {
+            "action_time": "2023-04-07T22:34:45.973Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "13",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 39,
+        "fields": {
+            "action_time": "2023-04-07T22:34:53.584Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "12",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 40,
+        "fields": {
+            "action_time": "2023-04-07T22:35:08.872Z",
+            "user": 1,
+            "content_type": 6,
+            "object_id": "14",
+            "object_repr": "self.name",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"\\u0418\\u043c\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u0424\\u0430\\u043c\\u0438\\u0438\\u043b\\u0438\\u044f \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\", \"\\u041e\\u0442\\u0447\\u0435\\u0441\\u0442\\u0432\\u043e \\u0445\\u0443\\u0434\\u043e\\u0436\\u043d\\u0438\\u043a\\u0430\"]}}]"
         }
     },
     {

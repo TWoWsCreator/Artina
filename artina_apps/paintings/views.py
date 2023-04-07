@@ -36,7 +36,11 @@ class PaintingsView(django.views.generic.ListView):
                 paintings.models.Painting.painting_description.field.name,
                 paintings.models.Painting.painting_photo.field.name,
                 f'{paintings.models.Painting.painting_artist.field.name}__'
-                f'{artists.models.Artists.artist.field.name}',
+                f'{artists.models.Artists.name.field.name}',
+                f'{paintings.models.Painting.painting_artist.field.name}__'
+                f'{artists.models.Artists.surname.field.name}',
+                f'{paintings.models.Painting.painting_artist.field.name}__'
+                f'{artists.models.Artists.patronymic.field.name}',
                 f'{paintings.models.Painting.painting_gallery.field.name}__'
                 f'{galleries.models.Galleries.gallery_name.field.name}',
             ),

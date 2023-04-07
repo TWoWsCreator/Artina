@@ -7,15 +7,22 @@ import django.template.defaultfilters
 import django.utils.safestring
 import sorl.thumbnail
 
-import artists.validators
-
 
 class Artists(django.db.models.Model):
-    artist = django.db.models.CharField(
-        'ФИО художника',
+    name = django.db.models.CharField(
+        'имя художника',
         max_length=50,
-        help_text='Введите фамилию, имя и отчество художника через пробел',
-        # validators=[artists.validators.ArtistNameValidator()],
+        help_text='Введите имя художника',
+    )
+    surname = django.db.models.CharField(
+        'фамиилия художника',
+        max_length=50,
+        help_text='Введите фамилию художника',
+    )
+    patronymic = django.db.models.CharField(
+        'отчество художника',
+        max_length=50,
+        help_text='Введите отчество художника',
     )
     birth_date = django.db.models.IntegerField(
         'дата рождения художника',
@@ -70,9 +77,13 @@ class Artists(django.db.models.Model):
     get_short_biography.short_description = 'краткая биография'
 
     @property
+    def get_full_name(self):
+        return f'{self.surname} {self.name} {self.patronymic}'
+
+    @property
     def years_of_life(self):
         if self.birth_date is None:
-            if self.alived is True:
+            if self.alived:
                 return '?-до н.в.'
             else:
                 if self.death_date is None:
@@ -80,7 +91,7 @@ class Artists(django.db.models.Model):
                 else:
                     return f'?-{self.death_date}'
         else:
-            if self.alived is True:
+            if self.alived:
                 return f'{self.birth_date}-до н.в.'
             else:
                 if self.death_date is None:
@@ -116,4 +127,4 @@ class Artists(django.db.models.Model):
         verbose_name_plural = 'художники'
 
     def __str__(self):
-        return self.artist
+        return f'{self.surname} {self.name} {self.patronymic}'
