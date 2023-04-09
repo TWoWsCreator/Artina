@@ -312,7 +312,8 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 painting,
                 (
                     paintings.models.Painting.painting_name.field.name,
-                    paintings.models.Painting.painting_size.field.name,
+                    paintings.models.Painting.painting_height.field.name,
+                    paintings.models.Painting.painting_width.field.name,
                     paintings.models.Painting.painting_photo.field.name,
                     creation_year.field.name,
                     paintings.models.Painting.slug.field.name,

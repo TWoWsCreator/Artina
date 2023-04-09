@@ -75,13 +75,15 @@ class ModelsTests(django.test.TestCase):
         )
         return super().setUp()
 
-    def create_painting(self, creation_year='1888', size='300x300'):
+    def create_painting(self, creation_year='1888', width=1000,
+                        height=1000):
         self.test_painting = paintings.models.Painting(
             painting_name='Картина',
             painting_artist=self.test_artist,
             painting_gallery=self.test_gallery,
             painting_creation_year=creation_year,
-            painting_size=size,
+            painting_width=width,
+            painting_height=height,
             painting_materials='холст',
             painting_description='описание картины',
             painting_photo='../..',
@@ -90,14 +92,14 @@ class ModelsTests(django.test.TestCase):
 
     @parameterized.parameterized.expand(
         [
-            ('300x300',),
-            ('1300x1300',),
-            ('11232x10000',),
+            (300.8, 300.676),
+            (10000, 10000),
+            (100, 100),
         ]
     )
-    def test_positive_painting_size(self, size):
+    def test_positive_painting_size(self, width, height):
         amount_paintings = paintings.models.Painting.objects.count()
-        self.create_painting(size=size)
+        self.create_painting(width=width, height=height)
         self.test_painting.save()
         self.test_painting.full_clean()
         self.assertEqual(
@@ -108,18 +110,15 @@ class ModelsTests(django.test.TestCase):
 
     @parameterized.parameterized.expand(
         [
-            ('100х111',),
-            ('300*300',),
-            ('300+300',),
-            ('300x300x300',),
-            ('x300',),
-            ('300x',),
+            (9, 100),
+            (9999, 10000.2),
+            (-1000, -2000),
         ]
     )
-    def test_negative_painting_size(self, size):
+    def test_negative_painting_size(self, width, height):
         amount_paintings = paintings.models.Painting.objects.count()
         with self.assertRaises(django.core.exceptions.ValidationError):
-            self.create_painting(size=size)
+            self.create_painting(width=width, height=height)
             self.test_painting.full_clean()
         self.assertEqual(
             paintings.models.Painting.objects.count(),
@@ -149,7 +148,7 @@ class ModelsTests(django.test.TestCase):
         [
             (177,),
             (12898,),
-            (2023,),
+            (2024,),
         ]
     )
     def test_negative_painting_creation_year(self, creation_year):
@@ -211,7 +210,8 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 paintings.models.Painting.painting_name.field.name,
                 paintings.models.Painting.painting_creation_year.field.name,
                 paintings.models.Painting.painting_materials.field.name,
-                paintings.models.Painting.painting_size.field.name,
+                paintings.models.Painting.painting_height.field.name,
+                paintings.models.Painting.painting_width.field.name,
                 paintings.models.Painting.slug.field.name,
                 paintings.models.Painting.painting_description.field.name,
                 paintings.models.Painting.painting_photo.field.name,

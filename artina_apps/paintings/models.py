@@ -1,3 +1,5 @@
+import datetime
+
 import django.core.validators
 import django.db.models
 import django.template.defaultfilters
@@ -6,7 +8,6 @@ import sorl.thumbnail
 
 import artists.models
 import galleries.models
-import paintings.validators
 import users.models
 
 
@@ -31,14 +32,26 @@ class Painting(django.db.models.Model):
         help_text='Введите реальный год создания картины',
         validators=[
             django.core.validators.MinValueValidator(800),
-            django.core.validators.MaxValueValidator(2022),
+            django.core.validators.MaxValueValidator(
+                datetime.date.today().year
+            ),
         ],
     )
-    painting_size = django.db.models.CharField(
-        'введите размер картины',
-        max_length=11,
-        help_text='Введите размер картины через x',
-        validators=[paintings.validators.SizeValidation()],
+    painting_width = django.db.models.FloatField(
+        'ширина картины',
+        help_text='Введите ширину картины',
+        validators=[
+            django.core.validators.MinValueValidator(10),
+            django.core.validators.MaxValueValidator(10000),
+        ],
+    )
+    painting_height = django.db.models.FloatField(
+        'высота картины',
+        help_text='Введите высоту картины',
+        validators=[
+            django.core.validators.MinValueValidator(10),
+            django.core.validators.MaxValueValidator(10000),
+        ],
     )
     painting_materials = django.db.models.CharField(
         'материалы картины',
@@ -71,6 +84,14 @@ class Painting(django.db.models.Model):
         )
 
     get_painting_description.short_description = 'описание картины'
+
+    @property
+    def get_painting_size(self):
+        if self.painting_height == int(self.painting_height):
+            self.painting_height = int(self.painting_height)
+        if self.painting_width == int(self.painting_width):
+            self.painting_width = int(self.painting_width)
+        return f'{self.painting_width}x{self.painting_height}'
 
     @property
     def get_image(self):

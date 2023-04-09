@@ -12,7 +12,7 @@
     {% endif %}
     <div class="col-4">
       <h5 class="mt-3">{{ painting.painting_name }}</h5>
-      <p>Размер: {{ painting.painting_size }}</p>
+      <p>Размер: {{ painting.get_painting_size }}</p>
       {% load thumbnail %}
       {% thumbnail painting.painting_photo '350x200' crop='center' as photo %}
         <img class='img-fluid' src="{{ photo.url }}"

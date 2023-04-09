@@ -14,7 +14,7 @@
   <h1>{{ painting.painting_name }}</h1>
   <h4>Художник: {{ painting.painting_artist }}</h4>
   <h5>Галерея: {{ painting.painting_gallery }}</h5>
-  <h6 class="mb-2">размер: {{ painting.painting_size }}</h6>
+  <h6 class="mb-2">размер: {{ painting.get_painting_size }}</h6>
   {% load thumbnail %}
   {% thumbnail painting.painting_photo '550x350' as ph %}
     <img src="{{ ph.url }}"

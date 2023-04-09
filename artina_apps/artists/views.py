@@ -97,7 +97,8 @@ class ArtistPaintingsView(django.views.generic.ListView):
             core.views.searching_paintings(paintings_artist, result_search)
             .only(
                 paintings.models.Painting.painting_name.field.name,
-                paintings.models.Painting.painting_size.field.name,
+                paintings.models.Painting.painting_height.field.name,
+                paintings.models.Painting.painting_width.field.name,
                 paintings.models.Painting.painting_photo.field.name,
                 paintings.models.Painting.painting_creation_year.field.name,
                 paintings.models.Painting.slug.field.name,

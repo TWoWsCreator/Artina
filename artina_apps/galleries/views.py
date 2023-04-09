@@ -94,7 +94,8 @@ class GalleryPaintingsView(django.views.generic.ListView):
             paintings.models.Painting.objects.filter(painting_gallery=gallery)
             .only(
                 paintings.models.Painting.painting_name.field.name,
-                paintings.models.Painting.painting_size.field.name,
+                paintings.models.Painting.painting_height.field.name,
+                paintings.models.Painting.painting_width.field.name,
                 paintings.models.Painting.painting_photo.field.name,
                 paintings.models.Painting.painting_creation_year.field.name,
                 paintings.models.Painting.slug.field.name,
