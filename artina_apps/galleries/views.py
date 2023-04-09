@@ -29,7 +29,7 @@ class GalleriesView(django.views.generic.ListView):
 class GalleryView(django.views.generic.DetailView):
     model = galleries.models.Galleries
     template_name = 'galleries/gallery.html'
-    queryset = galleries.models.Galleries.objects.get_gallery_with_photos()
+    queryset = model.objects.get_gallery_with_photos()
     context_object_name = 'gallery'
 
     def get_object(self):
@@ -42,7 +42,6 @@ class GalleryPaintingsView(django.views.generic.ListView):
     context_object_name = 'paintings'
 
     def get_queryset(self):
-        result_search = self.request.GET.get('search')
         gallery_id = (
             self.model.objects.only(self.model.slug.field.name)
             .get(slug=self.kwargs[self.model.slug.field.name])
@@ -52,4 +51,6 @@ class GalleryPaintingsView(django.views.generic.ListView):
         gallery_paintings = painting_objects.get_filter_paintings().filter(
             painting_gallery=gallery_id
         )
-        return core.views.searching_paintings(gallery_paintings, result_search)
+        return core.views.searching_paintings(
+            gallery_paintings, self.request.GET.get('search')
+        )

@@ -9,86 +9,51 @@ import paintings.models
 
 
 class ArtistsView(django.views.generic.ListView):
-    model = artists.models.Artists
-    # template_name = 'artists/artists.html'
+    template_name = 'artists/artists.html'
     context_object_name = 'artists'
-
-    def get_template_names(self):
-        search = self.request.GET.get('search')
-        if search:
-            if search[-1] == '\\':
-                return 'includes/danger.html'
-            else:
-                return 'artists/artists.html'
-        else:
-            return 'artists/artists.html'
+    queryset = artists.models.Artists.objects.get_all_artists()
 
     def get_queryset(self):
-        artists_page = artists.models.Artists.objects.all()
         result_search = self.request.GET.get('search')
         if result_search:
-            artists_page = (
-                artists_page.filter(name__iregex=re.escape(result_search))
-                | artists_page.filter(surname__iregex=re.escape(result_search))
-                | artists_page.filter(
-                    patronymic__iregex=re.escape(result_search)
-                )
-                | artists_page.filter(
-                    birth_date__iregex=re.escape(result_search)
-                )
-                | artists_page.filter(
-                    death_date__iregex=re.escape(result_search)
-                )
-                | artists_page.filter(
-                    short_biography__iregex=re.escape(result_search)
-                )
+            text_search = re.escape(result_search)
+            self.queryset = (
+                self.queryset.filter(name__iregex=text_search)
+                | self.queryset.filter(surname__iregex=text_search)
+                | self.queryset.filter(patronymic__iregex=text_search)
+                | self.queryset.filter(birth_date__iregex=text_search)
+                | self.queryset.filter(death_date__iregex=text_search)
+                | self.queryset.filter(short_biography__iregex=text_search)
             )
-        return artists_page.only(
-            artists.models.Artists.name.field.name,
-            artists.models.Artists.surname.field.name,
-            artists.models.Artists.patronymic.field.name,
-            artists.models.Artists.birth_date.field.name,
-            artists.models.Artists.death_date.field.name,
-            artists.models.Artists.alived.field.name,
-            artists.models.Artists.artist_photo.field.name,
-            artists.models.Artists.slug.field.name,
-        ).order_by(artists.models.Artists.surname.field.name)
+        return self.queryset
 
 
-class ArtistView(django.views.generic.TemplateView):
+class ArtistView(django.views.generic.DetailView):
     model = artists.models.Artists
     template_name = 'artists/artist.html'
+    queryset = model.objects.all()
+    context_object_name = 'artist'
 
-    def get_context_data(self, **kwargs):
-        artist = django.shortcuts.get_object_or_404(
-            artists.models.Artists,
-            slug=kwargs[artists.models.Artists.slug.field.name],
-        )
-        return {'artist': artist}
+    def get_object(self):
+        return self.queryset.get(slug=self.kwargs[self.model.slug.field.name])
 
 
 class ArtistPaintingsView(django.views.generic.ListView):
+    model = artists.models.Artists
+    template_name = 'paintings/paintings.html'
+    context_object_name = 'paintings'
+
     def get_queryset(self):
-        artist = django.shortcuts.get_object_or_404(
-            artists.models.Artists.objects.only(
-                artists.models.Artists.slug.field.name
-            ),
-            slug=self.kwargs[artists.models.Artists.slug.field.name],
-        ).pk
-        paintings_artist = paintings.models.Painting.objects.filter(
-            painting_artist=artist
+        artist_id = (
+            self.model.objects.only(self.model.slug.field.name)
+            .get(slug=self.kwargs[self.model.slug.field.name])
+            .pk
         )
-        result_search = self.request.GET.get('search')
-        filter_paintings = (
-            core.views.searching_paintings(paintings_artist, result_search)
-            .only(
-                paintings.models.Painting.painting_name.field.name,
-                paintings.models.Painting.painting_height.field.name,
-                paintings.models.Painting.painting_width.field.name,
-                paintings.models.Painting.painting_photo.field.name,
-                paintings.models.Painting.painting_creation_year.field.name,
-                paintings.models.Painting.slug.field.name,
-            )
-            .order_by(paintings.models.Painting.painting_name.field.name)
+        painting_objects = paintings.models.Painting.objects
+        paintings_artist = painting_objects.get_filter_paintings().filter(
+            painting_artist=artist_id
+        )
+        filter_paintings = core.views.searching_paintings(
+            paintings_artist, self.request.GET.get('search')
         )
         return filter_paintings

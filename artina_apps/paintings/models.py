@@ -26,6 +26,40 @@ class PaintingManager(django.db.models.Manager):
             .order_by(Painting.painting_name.field.name)
         )
 
+    def get_painting(self):
+        return (
+            self.get_queryset()
+            .select_related(
+                Painting.painting_artist.field.name,
+                Painting.painting_gallery.field.name,
+            )
+            .prefetch_related(
+                django.db.models.Prefetch(
+                    Painting.likes.field.name,
+                    queryset=users.models.CustomUser.objects.all(),
+                    to_attr='painting_likes',
+                )
+            )
+            .only(
+                Painting.painting_name.field.name,
+                Painting.painting_creation_year.field.name,
+                Painting.painting_materials.field.name,
+                Painting.painting_width.field.name,
+                Painting.painting_height.field.name,
+                Painting.slug.field.name,
+                Painting.painting_description.field.name,
+                Painting.painting_photo.field.name,
+                f'{Painting.painting_artist.field.name}__'
+                f'{artists.models.Artists.name.field.name}',
+                f'{Painting.painting_artist.field.name}__'
+                f'{artists.models.Artists.surname.field.name}',
+                f'{Painting.painting_artist.field.name}__'
+                f'{artists.models.Artists.patronymic.field.name}',
+                f'{Painting.painting_gallery.field.name}__'
+                f'{galleries.models.Galleries.gallery_name.field.name}',
+            )
+        )
+
 
 class Painting(django.db.models.Model):
     objects = PaintingManager()

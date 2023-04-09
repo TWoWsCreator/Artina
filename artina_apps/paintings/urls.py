@@ -7,7 +7,7 @@ app_name = 'paintings'
 urlpatterns = [
     django.urls.path(
         '<slug:slug>/',
-        paintings.views.PaintingsView.as_view(),
+        paintings.views.PaintingView.as_view(),
         name='painting',
     ),
     django.urls.path(

@@ -8,7 +8,28 @@ import django.utils.safestring
 import sorl.thumbnail
 
 
+class ArtistsManager(django.db.models.Manager):
+    def get_all_artists(self):
+        return (
+            self.get_queryset()
+            .all()
+            .only(
+                Artists.name.field.name,
+                Artists.surname.field.name,
+                Artists.patronymic.field.name,
+                Artists.birth_date.field.name,
+                Artists.death_date.field.name,
+                Artists.alived.field.name,
+                Artists.artist_photo.field.name,
+                Artists.slug.field.name,
+            )
+            .order_by(Artists.surname.field.name)
+        )
+
+
 class Artists(django.db.models.Model):
+    objects = ArtistsManager()
+
     name = django.db.models.CharField(
         'имя художника',
         max_length=50,
