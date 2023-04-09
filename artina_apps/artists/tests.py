@@ -10,7 +10,7 @@ import paintings.models
 
 class StaticURLTests(django.test.TestCase):
     fixtures = ['fixtures/data.json']
-    artists_slug = artists.models.Artists.artist_slug.field.name
+    artists_slug = artists.models.Artists.slug.field.name
 
     def test_artists_endpoint(self):
         response = django.test.Client().get(
@@ -27,10 +27,10 @@ class StaticURLTests(django.test.TestCase):
             ('shishkin',),
         ]
     )
-    def test_positive_artist_page_endpoint(self, artist_slug):
+    def test_positive_artist_page_endpoint(self, slug):
         response = django.test.Client().get(
             django.urls.reverse(
-                'artists:artist', kwargs={self.artists_slug: artist_slug}
+                'artists:artist', kwargs={self.artists_slug: slug}
             )
         )
         self.assertEqual(
@@ -46,10 +46,10 @@ class StaticURLTests(django.test.TestCase):
             ('mendeleev',),
         ]
     )
-    def test_negative_artist_page_endpoint(self, artist_slug):
+    def test_negative_artist_page_endpoint(self, slug):
         response = django.test.Client().get(
             django.urls.reverse(
-                'artists:artist', kwargs={self.artists_slug: artist_slug}
+                'artists:artist', kwargs={self.artists_slug: slug}
             )
         )
         self.assertEqual(
@@ -66,11 +66,11 @@ class StaticURLTests(django.test.TestCase):
             ('savrasov',),
         ]
     )
-    def test_positive_artist_paintings_endpoint(self, artist_slug):
+    def test_positive_artist_paintings_endpoint(self, slug):
         response = django.test.Client().get(
             django.urls.reverse(
                 'artists:artist_painting',
-                kwargs={self.artists_slug: artist_slug},
+                kwargs={self.artists_slug: slug},
             )
         )
         self.assertEqual(
@@ -86,11 +86,11 @@ class StaticURLTests(django.test.TestCase):
             ('nestor',),
         ]
     )
-    def test_negative_artist_paintings_endpoint(self, artist_slug):
+    def test_negative_artist_paintings_endpoint(self, slug):
         response = django.test.Client().get(
             django.urls.reverse(
                 'artists:artist_painting',
-                kwargs={self.artists_slug: artist_slug},
+                kwargs={self.artists_slug: slug},
             )
         )
         self.assertEqual(
@@ -116,7 +116,7 @@ class ModelsTests(django.test.TestCase):
             death_date=death_date,
             short_biography='что то интересное',
             artist_photo='.../...',
-            artist_slug='pushkin',
+            slug='pushkin',
         )
 
     @parameterized.parameterized.expand(
@@ -166,7 +166,7 @@ class ModelsTests(django.test.TestCase):
 
 class ContextTests(core.tests.CheckFieldsTestCase):
     fixtures = ['fixtures/data.json']
-    artist_slug = artists.models.Artists.artist_slug.field.name
+    slug = artists.models.Artists.slug.field.name
 
     def test_artists_in_context(self):
         response = django.test.Client().get(
@@ -218,7 +218,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                     artists.models.Artists.death_date.field.name,
                     artists.models.Artists.alived.field.name,
                     artists.models.Artists.artist_photo.field.name,
-                    artists.models.Artists.artist_slug.field.name,
+                    artists.models.Artists.slug.field.name,
                 ),
                 not_loaded=(artists.models.Artists.short_biography.field.name),
             )
@@ -238,7 +238,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
     def test_artist_page_in_context(self):
         response = django.test.Client().get(
             django.urls.reverse(
-                'artists:artist', kwargs={self.artist_slug: 'shishkin'}
+                'artists:artist', kwargs={self.slug: 'shishkin'}
             )
         )
         self.assertIn(
@@ -250,7 +250,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
     def test_artist_page_types(self):
         response = django.test.Client().get(
             django.urls.reverse(
-                'artists:artist', kwargs={self.artist_slug: 'shishkin'}
+                'artists:artist', kwargs={self.slug: 'shishkin'}
             )
         )
         self.assertIsInstance(
@@ -262,7 +262,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
     def test_artist_loaded_values(self):
         response = django.test.Client().get(
             django.urls.reverse(
-                'artists:artist', kwargs={self.artist_slug: 'shishkin'}
+                'artists:artist', kwargs={self.slug: 'shishkin'}
             )
         )
         self.check_content_value(
@@ -275,7 +275,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 artists.models.Artists.death_date.field.name,
                 artists.models.Artists.alived.field.name,
                 artists.models.Artists.artist_photo.field.name,
-                artists.models.Artists.artist_slug.field.name,
+                artists.models.Artists.slug.field.name,
                 artists.models.Artists.short_biography.field.name,
             ),
         )
@@ -284,7 +284,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'artists:artist_painting',
-                kwargs={self.artist_slug: 'shishkin'},
+                kwargs={self.slug: 'shishkin'},
             )
         )
         self.assertIn(
@@ -297,7 +297,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'artists:artist_painting',
-                kwargs={self.artist_slug: 'shishkin'},
+                kwargs={self.slug: 'shishkin'},
             )
         )
         fail_text = 'Количество картин на страниц не соответсвует нужному'
@@ -311,12 +311,12 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'artists:artist_painting',
-                kwargs={self.artist_slug: 'shishkin'},
+                kwargs={self.slug: 'shishkin'},
             )
         )
         self.assertQuerysetEqual(
             paintings.models.Painting.objects.filter(
-                painting_artist__artist_slug='shishkin'
+                painting_artist__slug='shishkin'
             ).order_by(paintings.models.Painting.painting_name.field.name),
             response.context['paintings'],
             msg='Передаваемый в контекст список картин неотсортирован',
@@ -326,7 +326,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'artists:artist_painting',
-                kwargs={self.artist_slug: 'shishkin'},
+                kwargs={self.slug: 'shishkin'},
             )
         )
         self.assertTrue(
@@ -341,7 +341,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'artists:artist_painting',
-                kwargs={self.artist_slug: 'shishkin'},
+                kwargs={self.slug: 'shishkin'},
             )
         )
         painting_response_context = response.context['paintings']
@@ -354,7 +354,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                     paintings.models.Painting.painting_size.field.name,
                     paintings.models.Painting.painting_photo.field.name,
                     creation_year.field.name,
-                    paintings.models.Painting.painting_slug.field.name,
+                    paintings.models.Painting.slug.field.name,
                 ),
                 not_loaded=(
                     paintings.models.Painting.painting_artist.field.name,

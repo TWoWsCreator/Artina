@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
   Картина
 {% endblock %}
 
-{% load static %}
+{% block add_css_link %}
+<link rel="stylesheet" href="{% static 'css/painting_likes.css' %}">
+{% endblock add_css_link %}
 
 {% block content %}
   <h1>{{ painting.painting_name }}</h1>
@@ -29,26 +33,24 @@
     Количество лайков: {{ painting.likes.count }}
   </h6>
   <div class="d-inline-block">
-    <form method="post" action="{% url 'paintings:likes' painting_slug=painting.painting_slug %}">
+    <form method="post" action="{% url 'paintings:likes' slug=painting.slug %}">
       {% csrf_token %}
-      <button type="submit" class="border-0 button" style="background-color: #9ee2ff;">
+      <button type="submit" class="button_painting_like border-0">
         {% if request.user in painting.likes.all %}
-          <img class="image" style="width: 40px; height: 40px; background-color: #9ee2ff;"
-                         src="{% static 'img/like_red.png' %}" alt="Лайк!">
+          <img class="img_painting_like" src="{% static 'img/like_red.png' %}" alt="Лайк!">
         {% else %}
-          <img class="image" style="width: 40px; height: 40px; background-color: #9ee2ff;"
-                         src="{% static 'img/like.jpg' %}" alt="Лайк!">
+          <img class="img_painting_like" src="{% static 'img/like.jpg' %}" alt="Лайк!">
         {% endif %}
       </button>
     </form>
   </div>
   <div>
-    <a class='btn btn-primary' href="{% url 'artists:artist' painting.painting_artist.artist_slug %}">Биография художника</a>
-    <a class='btn btn-primary' href="{% url 'galleries:gallery' painting.painting_gallery.gallery_slug %}">Информация о галереи</a>
+    <a class='btn btn-primary' href="{% url 'artists:artist' painting.painting_artist.slug %}">Биография художника</a>
+    <a class='btn btn-primary' href="{% url 'galleries:gallery' painting.painting_gallery.slug %}">Информация о галереи</a>
   </div>
   <div>
     <a class='btn btn-primary mt-2 mb-3'
-           href="{% url 'artists:artist_painting' artist_slug=painting.painting_artist.artist_slug %}">
+           href="{% url 'artists:artist_painting' slug=painting.painting_artist.slug %}">
       Назад к картинам
     </a>
   </div>

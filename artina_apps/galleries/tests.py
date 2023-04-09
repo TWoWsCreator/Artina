@@ -9,7 +9,7 @@ import paintings.models
 
 class StaticURLTests(django.test.TestCase):
     fixtures = ['fixtures/data.json']
-    gallery_slug = galleries.models.Galleries.gallery_slug.field.name
+    slug = galleries.models.Galleries.slug.field.name
 
     def test_galleries_endpoint(self):
         response = django.test.Client().get(
@@ -26,11 +26,11 @@ class StaticURLTests(django.test.TestCase):
             ('serpuhovskiy_art_museum',),
         ]
     )
-    def test_positive_galleries_painting_endpoint(self, gallery_slug):
+    def test_positive_galleries_painting_endpoint(self, slug):
         response = django.test.Client().get(
             django.urls.reverse(
                 'galleries:gallery_paintings',
-                kwargs={self.gallery_slug: gallery_slug},
+                kwargs={self.slug: slug},
             )
         )
         self.assertEqual(
@@ -46,11 +46,11 @@ class StaticURLTests(django.test.TestCase):
             ('volhskiy_art_museum',),
         ]
     )
-    def test_negative_galleries_painting_endpoint(self, gallery_slug):
+    def test_negative_galleries_painting_endpoint(self, slug):
         response = django.test.Client().get(
             django.urls.reverse(
                 'galleries:gallery_paintings',
-                kwargs={self.gallery_slug: gallery_slug},
+                kwargs={self.slug: slug},
             )
         )
         self.assertEqual(
@@ -67,10 +67,10 @@ class StaticURLTests(django.test.TestCase):
             ('russian_museum_pushkin',),
         ]
     )
-    def test_positive_galleries_page_endpoint(self, gallery_slug):
+    def test_positive_galleries_page_endpoint(self, slug):
         response = django.test.Client().get(
             django.urls.reverse(
-                'galleries:gallery', kwargs={self.gallery_slug: gallery_slug}
+                'galleries:gallery', kwargs={self.slug: slug}
             )
         )
         self.assertEqual(
@@ -86,10 +86,10 @@ class StaticURLTests(django.test.TestCase):
             ('art_museum',),
         ]
     )
-    def test_negative_galleries_page_endpoint(self, gallery_slug):
+    def test_negative_galleries_page_endpoint(self, slug):
         response = django.test.Client().get(
             django.urls.reverse(
-                'galleries:gallery', kwargs={self.gallery_slug: gallery_slug}
+                'galleries:gallery', kwargs={self.slug: slug}
             )
         )
         self.assertEqual(
@@ -113,7 +113,7 @@ class ModelsTests(django.test.TestCase):
         gallery = galleries.models.Galleries(
             gallery_name=name,
             gallery_location=location,
-            gallery_slug=slug,
+            slug=slug,
             gallery_description=description,
             gallery_image=image,
         )
@@ -132,7 +132,7 @@ class ModelsTests(django.test.TestCase):
 
 class ContextTests(core.tests.CheckFieldsTestCase):
     fixtures = ['fixtures/data.json']
-    gallery_slug = galleries.models.Galleries.gallery_slug.field.name
+    slug = galleries.models.Galleries.slug.field.name
 
     def test_galleries_in_context(self):
         response = django.test.Client().get(
@@ -190,7 +190,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                     galleries.models.Galleries.gallery_name.field.name,
                     galleries.models.Galleries.gallery_location.field.name,
                     galleries.models.Galleries.gallery_image.field.name,
-                    galleries.models.Galleries.gallery_slug.field.name,
+                    galleries.models.Galleries.slug.field.name,
                 ),
                 not_loaded=(
                     galleries.models.Galleries.gallery_description.field.name,
@@ -201,7 +201,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'galleries:gallery',
-                kwargs={self.gallery_slug: 'tretyakovskaya'},
+                kwargs={self.slug: 'tretyakovskaya'},
             )
         )
         self.assertIn(
@@ -214,7 +214,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'galleries:gallery',
-                kwargs={self.gallery_slug: 'tretyakovskaya'},
+                kwargs={self.slug: 'tretyakovskaya'},
             )
         )
         self.assertIsInstance(
@@ -227,7 +227,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'galleries:gallery',
-                kwargs={self.gallery_slug: 'tretyakovskaya'},
+                kwargs={self.slug: 'tretyakovskaya'},
             )
         )
         self.check_content_value(
@@ -236,7 +236,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 galleries.models.Galleries.gallery_name.field.name,
                 galleries.models.Galleries.gallery_location.field.name,
                 galleries.models.Galleries.gallery_image.field.name,
-                galleries.models.Galleries.gallery_slug.field.name,
+                galleries.models.Galleries.slug.field.name,
                 galleries.models.Galleries.gallery_description.field.name,
             ),
         )
@@ -245,7 +245,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'galleries:gallery_paintings',
-                kwargs={self.gallery_slug: 'tretyakovskaya'},
+                kwargs={self.slug: 'tretyakovskaya'},
             )
         )
         self.assertIn(
@@ -258,7 +258,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'galleries:gallery_paintings',
-                kwargs={self.gallery_slug: 'tretyakovskaya'},
+                kwargs={self.slug: 'tretyakovskaya'},
             )
         )
         text_fail = 'Количество картин в галереи не соответствует заданному'
@@ -272,12 +272,12 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'galleries:gallery_paintings',
-                kwargs={self.gallery_slug: 'tretyakovskaya'},
+                kwargs={self.slug: 'tretyakovskaya'},
             )
         )
         self.assertQuerysetEqual(
             paintings.models.Painting.objects.filter(
-                painting_gallery__gallery_slug='tretyakovskaya'
+                painting_gallery__slug='tretyakovskaya'
             ).order_by(paintings.models.Painting.painting_name.field.name),
             response.context['paintings'],
             msg='Список картин на странице галереи неотсортирован',
@@ -287,7 +287,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'galleries:gallery_paintings',
-                kwargs={self.gallery_slug: 'tretyakovskaya'},
+                kwargs={self.slug: 'tretyakovskaya'},
             )
         )
         self.assertTrue(
@@ -302,7 +302,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
         response = django.test.Client().get(
             django.urls.reverse(
                 'galleries:gallery_paintings',
-                kwargs={self.gallery_slug: 'tretyakovskaya'},
+                kwargs={self.slug: 'tretyakovskaya'},
             )
         )
         painting_response_context = response.context['paintings']
@@ -315,7 +315,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                     paintings.models.Painting.painting_size.field.name,
                     paintings.models.Painting.painting_photo.field.name,
                     creation_year.field.name,
-                    paintings.models.Painting.painting_slug.field.name,
+                    paintings.models.Painting.slug.field.name,
                 ),
                 not_loaded=(
                     paintings.models.Painting.painting_artist.field.name,

@@ -37,7 +37,7 @@ class GalleriesView(django.views.generic.ListView):
             galleries.models.Galleries.gallery_name.field.name,
             galleries.models.Galleries.gallery_location.field.name,
             galleries.models.Galleries.gallery_image.field.name,
-            galleries.models.Galleries.gallery_slug.field.name,
+            galleries.models.Galleries.slug.field.name,
         ).order_by(galleries.models.Galleries.gallery_name.field.name)
 
 
@@ -59,8 +59,8 @@ class GalleryView(django.views.generic.TemplateView):
         )
         gallery = django.shortcuts.get_object_or_404(
             gallery_queryset,
-            gallery_slug=kwargs[
-                galleries.models.Galleries.gallery_slug.field.name
+            slug=kwargs[
+                galleries.models.Galleries.slug.field.name
             ],
         )
         return {'gallery': gallery}
@@ -84,10 +84,10 @@ class GalleryPaintingsView(django.views.generic.ListView):
         result_search = self.request.GET.get('search')
         gallery = django.shortcuts.get_object_or_404(
             galleries.models.Galleries.objects.only(
-                galleries.models.Galleries.gallery_slug.field.name
+                galleries.models.Galleries.slug.field.name
             ),
-            gallery_slug=self.kwargs[
-                galleries.models.Galleries.gallery_slug.field.name
+            slug=self.kwargs[
+                galleries.models.Galleries.slug.field.name
             ],
         ).pk
         paintings_gallery = (
@@ -97,7 +97,7 @@ class GalleryPaintingsView(django.views.generic.ListView):
                 paintings.models.Painting.painting_size.field.name,
                 paintings.models.Painting.painting_photo.field.name,
                 paintings.models.Painting.painting_creation_year.field.name,
-                paintings.models.Painting.painting_slug.field.name,
+                paintings.models.Painting.slug.field.name,
             )
             .order_by(paintings.models.Painting.painting_name.field.name)
         )

@@ -63,7 +63,7 @@ class Artists(django.db.models.Model):
         help_text='Выберите путь до фотографии художника',
         upload_to='artists/',
     )
-    artist_slug = django.db.models.SlugField(
+    slug = django.db.models.SlugField(
         'слаг художника',
         max_length=55,
         help_text='Введите url адрес для художника',
@@ -83,21 +83,13 @@ class Artists(django.db.models.Model):
     @property
     def years_of_life(self):
         if self.birth_date is None:
+            self.birth_date = '???'
+        if self.death_date is None:
             if self.alived:
-                return '?-до н.в.'
+                self.death_date = 'до н.в.'
             else:
-                if self.death_date is None:
-                    return '?-?'
-                else:
-                    return f'?-{self.death_date}'
-        else:
-            if self.alived:
-                return f'{self.birth_date}-до н.в.'
-            else:
-                if self.death_date is None:
-                    return f'{self.birth_date}-?'
-                else:
-                    return f'{self.birth_date}-{self.death_date}'
+                self.death_date = '???'
+        return f'{self.birth_date}-{self.death_date}'
 
     @property
     def get_image(self):

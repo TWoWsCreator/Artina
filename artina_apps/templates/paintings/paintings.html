@@ -21,7 +21,7 @@
                      alt="картина художника">
       {% endthumbnail %}
       <p>Год создания: {{ painting.painting_creation_year }}</p>
-      <a href="{% url 'paintings:painting' painting.painting_slug %}"
+      <a href="{% url 'paintings:painting' painting.slug %}"
                class="btn btn-primary" role="button">
         Подробнее о картине
       </a>

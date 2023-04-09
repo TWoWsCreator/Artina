@@ -13,7 +13,7 @@ class GalleriesAdmin(django.contrib.admin.ModelAdmin):
     list_display = (
         galleries.models.Galleries.gallery_name.field.name,
         galleries.models.Galleries.gallery_location.field.name,
-        galleries.models.Galleries.gallery_slug.field.name,
+        galleries.models.Galleries.slug.field.name,
         galleries.models.Galleries.get_short_description,
         galleries.models.Galleries.image_tmb,
     )

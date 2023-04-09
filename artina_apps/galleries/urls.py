@@ -8,12 +8,12 @@ urlpatterns = [
         '', galleries.views.GalleriesView.as_view(), name='galleries'
     ),
     django.urls.path(
-        '<slug:gallery_slug>/',
+        '<slug:slug>/',
         galleries.views.GalleryView.as_view(),
         name='gallery',
     ),
     django.urls.path(
-        'paintings/<slug:gallery_slug>/',
+        'paintings/<slug:slug>/',
         galleries.views.GalleryPaintingsView.as_view(),
         name='gallery_paintings',
     ),

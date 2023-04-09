@@ -43,7 +43,7 @@ class FeedbackContextTests(django.test.TestCase):
         ].label
         self.assertEqual(
             name_label,
-            'Введите свое имя',
+            'Имя',
             'У поля name label не соответствует заданному',
         )
 
@@ -63,7 +63,7 @@ class FeedbackContextTests(django.test.TestCase):
         ].label
         self.assertEqual(
             mail_label,
-            'Введите свою почту',
+            'Почта',
             'У поля mail label не соответствует заданному',
         )
 

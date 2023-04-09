@@ -21,10 +21,10 @@ class StaticURLTests(django.test.TestCase):
             ('rye',),
         ]
     )
-    def test_positive_painting_page_endpoint(self, painting_slug):
+    def test_positive_painting_page_endpoint(self, slug):
         response = django.test.Client().get(
             django.urls.reverse(
-                'paintings:painting', kwargs={'painting_slug': painting_slug}
+                'paintings:painting', kwargs={'slug': slug}
             )
         )
         self.assertEqual(
@@ -40,10 +40,10 @@ class StaticURLTests(django.test.TestCase):
             ('authoportret',),
         ]
     )
-    def test_negative_painting_page_endpoint(self, painting_slug):
+    def test_negative_painting_page_endpoint(self, slug):
         response = django.test.Client().get(
             django.urls.reverse(
-                'paintings:painting', kwargs={'painting_slug': painting_slug}
+                'paintings:painting', kwargs={'slug': slug}
             )
         )
         self.assertEqual(
@@ -64,12 +64,12 @@ class ModelsTests(django.test.TestCase):
             death_date=1777,
             short_biography='что то интересное',
             artist_photo='.../...',
-            artist_slug='pushkin',
+            slug='pushkin',
         )
         self.test_gallery = galleries.models.Galleries.objects.create(
             gallery_name='Третьяковка',
             gallery_location='Москва',
-            gallery_slug='tretyakovka',
+            slug='tretyakovka',
             gallery_description='описание',
             gallery_image='../..',
         )
@@ -85,7 +85,7 @@ class ModelsTests(django.test.TestCase):
             painting_materials='холст',
             painting_description='описание картины',
             painting_photo='../..',
-            painting_slug='painting',
+            slug='painting',
         )
 
     @parameterized.parameterized.expand(
@@ -173,12 +173,12 @@ class ModelsTests(django.test.TestCase):
 
 class ContextTests(core.tests.CheckFieldsTestCase):
     fixtures = ['fixtures/data.json']
-    painting_slug = paintings.models.Painting.painting_slug.field.name
+    slug = paintings.models.Painting.slug.field.name
 
     def test_painting_context(self):
         response = django.test.Client().get(
             django.urls.reverse(
-                'paintings:painting', kwargs={self.painting_slug: 'rye'}
+                'paintings:painting', kwargs={self.slug: 'rye'}
             )
         )
         self.assertIn(
@@ -190,7 +190,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
     def test_painting_types(self):
         response = django.test.Client().get(
             django.urls.reverse(
-                'paintings:painting', kwargs={self.painting_slug: 'rye'}
+                'paintings:painting', kwargs={self.slug: 'rye'}
             )
         )
         self.assertIsInstance(
@@ -202,7 +202,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
     def test_painting_loaded_values(self):
         response = django.test.Client().get(
             django.urls.reverse(
-                'paintings:painting', kwargs={self.painting_slug: 'rye'}
+                'paintings:painting', kwargs={self.slug: 'rye'}
             )
         )
         self.check_content_value(
@@ -212,7 +212,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 paintings.models.Painting.painting_creation_year.field.name,
                 paintings.models.Painting.painting_materials.field.name,
                 paintings.models.Painting.painting_size.field.name,
-                paintings.models.Painting.painting_slug.field.name,
+                paintings.models.Painting.slug.field.name,
                 paintings.models.Painting.painting_description.field.name,
                 paintings.models.Painting.painting_photo.field.name,
                 'painting_artist_id',

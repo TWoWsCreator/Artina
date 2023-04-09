@@ -15,7 +15,7 @@ class Galleries(django.db.models.Model):
         max_length=75,
         help_text='Введите локацию галереи',
     )
-    gallery_slug = django.db.models.SlugField(
+    slug = django.db.models.SlugField(
         'слаг галереи',
         max_length=55,
         help_text='Введите url адрес для галереи',

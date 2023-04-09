@@ -24,11 +24,11 @@
                      alt="изображение галереи">
       {% endthumbnail %}
       <div>
-        <a href="{% url 'galleries:gallery' gallery.gallery_slug %}"
+        <a href="{% url 'galleries:gallery' gallery.slug %}"
                    class="btn btn-primary mt-2 mb-3 bi me-2" role="button">
           История галереи
         </a>
-        <a href="{% url 'galleries:gallery_paintings' gallery_slug=gallery.gallery_slug %}"
+        <a href="{% url 'galleries:gallery_paintings' slug=gallery.slug %}"
                    class="btn btn-primary mt-2 mb-3" role="button">
           Картины галереи
         </a>

@@ -7,7 +7,7 @@ import paintings.models
 class PaintingsAdmin(django.contrib.admin.ModelAdmin):
     list_display = (
         paintings.models.Painting.painting_name.field.name,
-        paintings.models.Painting.painting_slug.field.name,
+        paintings.models.Painting.slug.field.name,
         paintings.models.Painting.painting_artist.field.name,
         paintings.models.Painting.get_painting_description,
         paintings.models.Painting.image_tmb,

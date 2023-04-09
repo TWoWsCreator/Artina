@@ -32,7 +32,7 @@ class PaintingsView(django.views.generic.ListView):
                 paintings.models.Painting.painting_creation_year.field.name,
                 paintings.models.Painting.painting_materials.field.name,
                 paintings.models.Painting.painting_size.field.name,
-                paintings.models.Painting.painting_slug.field.name,
+                paintings.models.Painting.slug.field.name,
                 paintings.models.Painting.painting_description.field.name,
                 paintings.models.Painting.painting_photo.field.name,
                 f'{paintings.models.Painting.painting_artist.field.name}__'
@@ -44,8 +44,8 @@ class PaintingsView(django.views.generic.ListView):
                 f'{paintings.models.Painting.painting_gallery.field.name}__'
                 f'{galleries.models.Galleries.gallery_name.field.name}',
             ),
-            painting_slug=self.kwargs[
-                paintings.models.Painting.painting_slug.field.name
+            slug=self.kwargs[
+                paintings.models.Painting.slug.field.name
             ],
         )
         return {'painting': painting}
@@ -55,16 +55,16 @@ class LikePaintingView(django.views.generic.FormView):
     model = paintings.models.Painting
 
     def post(self, request, **kwargs):
-        painting_slug = kwargs[
-            paintings.models.Painting.painting_slug.field.name
+        slug = kwargs[
+            paintings.models.Painting.slug.field.name
         ]
-        slug_field = paintings.models.Painting.painting_slug.field.name
+        slug_field = paintings.models.Painting.slug.field.name
         success_url = django.urls.reverse_lazy(
-            'paintings:painting', kwargs={slug_field: painting_slug}
+            'paintings:painting', kwargs={slug_field: slug}
         )
         response = django.shortcuts.get_object_or_404(
             paintings.models.Painting.objects.filter(
-                painting_slug=painting_slug
+                slug=slug
             )
         )
         if request.user.is_authenticated:

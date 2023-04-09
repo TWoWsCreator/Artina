@@ -25,11 +25,11 @@
                      alt="изображение художника">
       {% endthumbnail %}
       <div>
-        <a href="{% url 'artists:artist' artist.artist_slug %}"
+        <a href="{% url 'artists:artist' artist.slug %}"
                    role="button" class="btn btn-primary mt-3 mb-3 bi me-2">
           Биография художника
         </a>
-        <a href="{% url 'artists:artist_painting' artist_slug=artist.artist_slug %}"
+        <a href="{% url 'artists:artist_painting' slug=artist.slug %}"
                    role="button" class="btn btn-primary mt-3 mb-3">
           Картины художника
         </a>

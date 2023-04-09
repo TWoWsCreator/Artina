@@ -50,7 +50,7 @@ class ArtistsView(django.views.generic.ListView):
             artists.models.Artists.death_date.field.name,
             artists.models.Artists.alived.field.name,
             artists.models.Artists.artist_photo.field.name,
-            artists.models.Artists.artist_slug.field.name,
+            artists.models.Artists.slug.field.name,
         ).order_by(artists.models.Artists.surname.field.name)
 
 
@@ -61,7 +61,7 @@ class ArtistView(django.views.generic.TemplateView):
     def get_context_data(self, **kwargs):
         artist = django.shortcuts.get_object_or_404(
             artists.models.Artists,
-            artist_slug=kwargs[artists.models.Artists.artist_slug.field.name],
+            slug=kwargs[artists.models.Artists.slug.field.name],
         )
         return {'artist': artist}
 
@@ -83,10 +83,10 @@ class ArtistPaintingsView(django.views.generic.ListView):
     def get_queryset(self):
         artist = django.shortcuts.get_object_or_404(
             artists.models.Artists.objects.only(
-                artists.models.Artists.artist_slug.field.name
+                artists.models.Artists.slug.field.name
             ),
-            artist_slug=self.kwargs[
-                artists.models.Artists.artist_slug.field.name
+            slug=self.kwargs[
+                artists.models.Artists.slug.field.name
             ],
         ).pk
         paintings_artist = paintings.models.Painting.objects.filter(
@@ -100,7 +100,7 @@ class ArtistPaintingsView(django.views.generic.ListView):
                 paintings.models.Painting.painting_size.field.name,
                 paintings.models.Painting.painting_photo.field.name,
                 paintings.models.Painting.painting_creation_year.field.name,
-                paintings.models.Painting.painting_slug.field.name,
+                paintings.models.Painting.slug.field.name,
             )
             .order_by(paintings.models.Painting.painting_name.field.name)
         )
