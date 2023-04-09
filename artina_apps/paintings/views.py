@@ -11,8 +11,8 @@ import users.models
 
 class PaintingsView(django.views.generic.ListView):
     model = paintings.models.Painting
-    template_name = 'paintings/painting.html'
-    context_object_name = 'painting'
+    template_name = 'paintings/paintings.html'
+    context_object_name = 'paintings'
 
     def get_context_data(self):
         painting = django.shortcuts.get_object_or_404(
@@ -45,9 +45,7 @@ class PaintingsView(django.views.generic.ListView):
                 f'{paintings.models.Painting.painting_gallery.field.name}__'
                 f'{galleries.models.Galleries.gallery_name.field.name}',
             ),
-            slug=self.kwargs[
-                paintings.models.Painting.slug.field.name
-            ],
+            slug=self.kwargs[paintings.models.Painting.slug.field.name],
         )
         return {'painting': painting}
 
@@ -56,17 +54,13 @@ class LikePaintingView(django.views.generic.FormView):
     model = paintings.models.Painting
 
     def post(self, request, **kwargs):
-        slug = kwargs[
-            paintings.models.Painting.slug.field.name
-        ]
+        slug = kwargs[paintings.models.Painting.slug.field.name]
         slug_field = paintings.models.Painting.slug.field.name
         success_url = django.urls.reverse_lazy(
             'paintings:painting', kwargs={slug_field: slug}
         )
         response = django.shortcuts.get_object_or_404(
-            paintings.models.Painting.objects.filter(
-                slug=slug
-            )
+            paintings.models.Painting.objects.filter(slug=slug)
         )
         if request.user.is_authenticated:
             if request.user in response.likes.all():

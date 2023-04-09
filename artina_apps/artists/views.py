@@ -10,6 +10,7 @@ import paintings.models
 
 class ArtistsView(django.views.generic.ListView):
     model = artists.models.Artists
+    # template_name = 'artists/artists.html'
     context_object_name = 'artists'
 
     def get_template_names(self):
@@ -67,27 +68,12 @@ class ArtistView(django.views.generic.TemplateView):
 
 
 class ArtistPaintingsView(django.views.generic.ListView):
-    model = paintings.models.Painting
-    context_object_name = 'paintings'
-
-    def get_template_names(self):
-        search = self.request.GET.get('search')
-        if search:
-            if search[-1] == '\\':
-                return 'includes/danger.html'
-            else:
-                return 'paintings/paintings.html'
-        else:
-            return 'paintings/paintings.html'
-
     def get_queryset(self):
         artist = django.shortcuts.get_object_or_404(
             artists.models.Artists.objects.only(
                 artists.models.Artists.slug.field.name
             ),
-            slug=self.kwargs[
-                artists.models.Artists.slug.field.name
-            ],
+            slug=self.kwargs[artists.models.Artists.slug.field.name],
         ).pk
         paintings_artist = paintings.models.Painting.objects.filter(
             painting_artist=artist

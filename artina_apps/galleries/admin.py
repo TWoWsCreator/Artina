@@ -4,7 +4,6 @@ import galleries.models
 
 
 class GalleryPhotosAdmin(django.contrib.admin.TabularInline):
-    # fk_name = 'gallery_photos'
     model = galleries.models.GalleryPhotos
 
 

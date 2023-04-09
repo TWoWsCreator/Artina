@@ -9,8 +9,10 @@ class CustomUserCreationForm(
 ):
     class Meta:
         model = users.models.CustomUser
-        fields = (users.models.CustomUser.username.field.name,
-                  users.models.CustomUser.email.field.name,)
+        fields = (
+            users.models.CustomUser.username.field.name,
+            users.models.CustomUser.email.field.name,
+        )
 
 
 class CustomUserChangeForm(
@@ -18,11 +20,13 @@ class CustomUserChangeForm(
 ):
     class Meta:
         model = users.models.CustomUser
-        fields = (users.models.CustomUser.username.field.name,
-                  users.models.CustomUser.email.field.name,
-                  users.models.CustomUser.first_name.field.name,
-                  users.models.CustomUser.last_login.field.name,
-                  users.models.CustomUser.image.field.name,)
+        fields = (
+            users.models.CustomUser.username.field.name,
+            users.models.CustomUser.email.field.name,
+            users.models.CustomUser.first_name.field.name,
+            users.models.CustomUser.last_login.field.name,
+            users.models.CustomUser.image.field.name,
+        )
 
 
 class PasswordResetEmailForm(core.forms.BootstrapControlForm):

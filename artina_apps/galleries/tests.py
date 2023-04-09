@@ -69,9 +69,7 @@ class StaticURLTests(django.test.TestCase):
     )
     def test_positive_galleries_page_endpoint(self, slug):
         response = django.test.Client().get(
-            django.urls.reverse(
-                'galleries:gallery', kwargs={self.slug: slug}
-            )
+            django.urls.reverse('galleries:gallery', kwargs={self.slug: slug})
         )
         self.assertEqual(
             response.status_code,
@@ -88,9 +86,7 @@ class StaticURLTests(django.test.TestCase):
     )
     def test_negative_galleries_page_endpoint(self, slug):
         response = django.test.Client().get(
-            django.urls.reverse(
-                'galleries:gallery', kwargs={self.slug: slug}
-            )
+            django.urls.reverse('galleries:gallery', kwargs={self.slug: slug})
         )
         self.assertEqual(
             response.status_code,

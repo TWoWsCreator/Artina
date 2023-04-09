@@ -4,7 +4,37 @@ import django.utils.safestring
 import sorl.thumbnail
 
 
+class GalleriesManager(django.db.models.Manager):
+    def get_gallery_with_photos(self):
+        gallery_photos = GalleryPhotos.objects.only(
+            GalleryPhotos.photo.field.name,
+            GalleryPhotos.gallery_photos_id.field.name,
+        )
+        gallery_photos_field = GalleryPhotos.gallery_photos
+        return self.get_queryset().prefetch_related(
+            django.db.models.Prefetch(
+                gallery_photos_field.field.related_query_name(),
+                queryset=gallery_photos,
+            ),
+        )
+
+    def get_all_galleries(self):
+        return (
+            self.get_queryset()
+            .all()
+            .only(
+                Galleries.gallery_name.field.name,
+                Galleries.gallery_location.field.name,
+                Galleries.gallery_image.field.name,
+                Galleries.slug.field.name,
+            )
+            .order_by(Galleries.gallery_name.field.name)
+        )
+
+
 class Galleries(django.db.models.Model):
+    objects = GalleriesManager()
+
     gallery_name = django.db.models.CharField(
         'название галереи',
         max_length=50,

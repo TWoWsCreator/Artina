@@ -23,9 +23,7 @@ class StaticURLTests(django.test.TestCase):
     )
     def test_positive_painting_page_endpoint(self, slug):
         response = django.test.Client().get(
-            django.urls.reverse(
-                'paintings:painting', kwargs={'slug': slug}
-            )
+            django.urls.reverse('paintings:painting', kwargs={'slug': slug})
         )
         self.assertEqual(
             response.status_code,
@@ -42,9 +40,7 @@ class StaticURLTests(django.test.TestCase):
     )
     def test_negative_painting_page_endpoint(self, slug):
         response = django.test.Client().get(
-            django.urls.reverse(
-                'paintings:painting', kwargs={'slug': slug}
-            )
+            django.urls.reverse('paintings:painting', kwargs={'slug': slug})
         )
         self.assertEqual(
             response.status_code,
@@ -75,8 +71,7 @@ class ModelsTests(django.test.TestCase):
         )
         return super().setUp()
 
-    def create_painting(self, creation_year='1888', width=1000,
-                        height=1000):
+    def create_painting(self, creation_year='1888', width=1000, height=1000):
         self.test_painting = paintings.models.Painting(
             painting_name='Картина',
             painting_artist=self.test_artist,

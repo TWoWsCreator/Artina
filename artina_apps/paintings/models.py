@@ -11,7 +11,25 @@ import galleries.models
 import users.models
 
 
+class PaintingManager(django.db.models.Manager):
+    def get_filter_paintings(self):
+        return (
+            self.get_queryset()
+            .only(
+                Painting.painting_name.field.name,
+                Painting.painting_height.field.name,
+                Painting.painting_width.field.name,
+                Painting.painting_photo.field.name,
+                Painting.painting_creation_year.field.name,
+                Painting.slug.field.name,
+            )
+            .order_by(Painting.painting_name.field.name)
+        )
+
+
 class Painting(django.db.models.Model):
+    objects = PaintingManager()
+
     painting_name = django.db.models.CharField(
         'название картины', max_length=50, help_text='Максимум 50 символов'
     )
