@@ -5,6 +5,7 @@ import django.contrib.auth
 import django.contrib.auth.mixins
 import django.contrib.auth.tokens
 import django.shortcuts
+import django.template.loader
 import django.urls
 import django.utils.encoding
 import django.utils.http
@@ -86,6 +87,7 @@ class PasswordReset(django.views.generic.FormView):
             user
         )
         msg_data = {
+            'user': user.username,
             'protocol': 'http',
             'domain': '127.0.0.1:8000',
             'uid': django.utils.http.urlsafe_base64_encode(
@@ -93,14 +95,8 @@ class PasswordReset(django.views.generic.FormView):
             ),
             'token': token,
         }
-
-        message = (
-            f'Здравствуйте, {user.username}.\n'
-            f'Ссылка перейдите по ссылке для сброса пароля ниже.\n'
-            f'{msg_data["protocol"]}://{msg_data["domain"]}/users/'
-            f'password_reset/confirm/{msg_data["uid"]}/{msg_data["token"]}'
-            f' Если вы не запрашивали сброс пароля, напишите нам.'
-            f'С уважением от команды Artina'
+        message = django.template.loader.render_to_string(
+            'users/password_reset_mail.html', msg_data
         )
         core.views.send_mail_user(message, user_email, msg_subj='Сброс пароля')
         return django.shortcuts.redirect(

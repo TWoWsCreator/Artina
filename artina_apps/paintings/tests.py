@@ -80,7 +80,6 @@ class ModelsTests(django.test.TestCase):
             painting_width=width,
             painting_height=height,
             painting_materials='холст',
-            painting_description='описание картины',
             painting_photo='../..',
             slug='painting',
         )

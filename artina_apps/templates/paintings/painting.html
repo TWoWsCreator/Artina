@@ -26,8 +26,21 @@
   "mx-auto d-block col-lg-2 col-md-3 col-sm-3 col-xs-6 btn text-blue btn-outline-primary mt-2 mb-3">Скачать изображение</a>
   <h6 class="mt-2 mb-2">год создания: {{ painting.painting_creation_year }}</h6>
   <h6 class="mt-2 mb-2">материалы: {{ painting.painting_materials }}</h6>
-  <h4>Описание</h4>
-  <p class="col-6 mx-auto">{{ painting.painting_description }}</p>
+  <h4>Интересные факты о картине</h4>
+  {% if painting.painting_facts %}
+    {% for fact in painting.painting_facts.all %}
+      <div class="card col-sm-8 mx-auto mt-2 mb-2 rounded">
+        {% if fact.title %}
+          <div class="card-header bg-secondary">
+              <h6 class="card-title">{{ fact.title }}</h6>
+          </div>
+        {% endif %}
+        <div class="card-body">
+          <p class="card-text">{{ fact.fact }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
 
   <h6 class="text-black">
     Количество лайков: {{ painting.likes.count }}

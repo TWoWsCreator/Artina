@@ -39,6 +39,7 @@ class Galleries(django.db.models.Model):
         'название галереи',
         max_length=50,
         help_text='Введите название галереи картин',
+        unique=True,
     )
     gallery_location = django.db.models.CharField(
         'расположение галереи',
@@ -49,6 +50,7 @@ class Galleries(django.db.models.Model):
         'слаг галереи',
         max_length=55,
         help_text='Введите url адрес для галереи',
+        unique=True,
     )
     gallery_description = django.db.models.TextField(
         'описание галереи',

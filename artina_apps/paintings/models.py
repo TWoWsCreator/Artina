@@ -38,6 +38,10 @@ class PaintingManager(django.db.models.Manager):
                     Painting.likes.field.name,
                     queryset=users.models.CustomUser.objects.all(),
                     to_attr='painting_likes',
+                ),
+                django.db.models.Prefetch(
+                    PaintingFacts.painting.field.related_query_name(),
+                    queryset=PaintingFacts.objects.all(),
                 )
             )
             .only(
@@ -47,7 +51,7 @@ class PaintingManager(django.db.models.Manager):
                 Painting.painting_width.field.name,
                 Painting.painting_height.field.name,
                 Painting.slug.field.name,
-                Painting.painting_description.field.name,
+                # Painting.painting_description.field.name,
                 Painting.painting_photo.field.name,
                 f'{Painting.painting_artist.field.name}__'
                 f'{artists.models.Artists.name.field.name}',
@@ -111,11 +115,11 @@ class Painting(django.db.models.Model):
         help_text='Введите материала, которые использовались при создании '
         'картины',
     )
-    painting_description = django.db.models.TextField(
-        'описание картины',
-        max_length=1000,
-        help_text='Напишите описание к картине',
-    )
+    # painting_description = django.db.models.TextField(
+    #     'описание картины',
+    #     max_length=1000,
+    #     help_text='Напишите описание к картине',
+    # )
     painting_photo = django.db.models.ImageField(
         'путь до изображения картины',
         help_text='Введите путь до изображения картины',
@@ -125,17 +129,11 @@ class Painting(django.db.models.Model):
         'слаг картины',
         max_length=55,
         help_text='Введите url адрес для картины',
+        unique=True,
     )
     likes = django.db.models.ManyToManyField(
         users.models.CustomUser, verbose_name='лайк', blank=True
     )
-
-    def get_painting_description(self):
-        return django.template.defaultfilters.truncatechars(
-            self.painting_description, 100
-        )
-
-    get_painting_description.short_description = 'описание картины'
 
     @property
     def get_painting_size(self):
@@ -167,3 +165,31 @@ class Painting(django.db.models.Model):
     class Meta:
         verbose_name = 'картина'
         verbose_name_plural = 'картины'
+
+
+class PaintingFacts(django.db.models.Model):
+    title = django.db.models.CharField(
+        'заголовок',
+        max_length=100,
+        help_text='Напишите заголовок карточки факта',
+        null=True,
+        blank=True
+    )
+    painting = django.db.models.ForeignKey(
+        Painting,
+        verbose_name='факт',
+        related_name='painting_facts',
+        on_delete=django.db.models.CASCADE,
+    )
+    fact = django.db.models.TextField(
+        'факт о картине',
+        max_length=500,
+        help_text='Максимум 500 символов',
+    )
+
+    class Meta:
+        verbose_name = 'факт о картине'
+        verbose_name_plural = 'факты о картине'
+
+    def __str__(self):
+        return self.fact[:20]

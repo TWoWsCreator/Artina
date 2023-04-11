@@ -39,9 +39,8 @@ def send_mail_user(msg, to_mail, msg_subj):
     from_mail = django.conf.settings.APP_MAIL
     server = smtplib.SMTP(django.conf.settings.SMTP_MAIL, port=587)
     server.starttls()
-    print(from_mail, password)
     server.login(from_mail, password)
-    msg = email.mime.text.MIMEText(msg)
+    msg = email.mime.text.MIMEText(msg, 'html')
     msg['Subject'] = msg_subj
 
     try:

@@ -120,9 +120,6 @@ LOGOUT_REDIRECT_URL = 'homepage:home'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = BASE_DIR / 'feedback_mails'
-
 APP_MAIL = os.getenv('APP_MAIL', 'example@gmail.com')
 SMTP_MAIL = os.getenv('SMTP_MAIL', 'smtp.gmail.com')
 SMTP_KEY = os.getenv('SMTP_KEY', '1234567890')

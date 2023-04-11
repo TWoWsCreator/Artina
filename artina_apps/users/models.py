@@ -13,6 +13,7 @@ class CustomUser(django.contrib.auth.models.AbstractUser):
     )
     email = django.db.models.EmailField(
         'ваша почта',
+        unique=True,
     )
     image = django.db.models.ImageField(
         'добавьте картинку профиля', upload_to='avatar/%Y/%m/%d', blank=True

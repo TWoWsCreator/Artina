@@ -5,7 +5,7 @@ import django.views.generic
 
 class DownloadView(django.views.generic.View):
     def get(self, request, **kwargs):
-        download_path = kwargs['download_path']
+        download_path = kwargs['image_id']
         return django.http.FileResponse(
             open(
                 django.conf.settings.MEDIA_ROOT / download_path,

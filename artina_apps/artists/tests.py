@@ -360,7 +360,7 @@ class ContextTests(core.tests.CheckFieldsTestCase):
                 not_loaded=(
                     paintings.models.Painting.painting_artist.field.name,
                     paintings.models.Painting.painting_gallery.field.name,
-                    paintings.models.Painting.painting_description.field.name,
+                    paintings.models.Painting.painting_facts.field.name,
                     paintings.models.Painting.painting_materials.field.name,
                 ),
             )

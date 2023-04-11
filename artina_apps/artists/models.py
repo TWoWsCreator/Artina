@@ -88,6 +88,7 @@ class Artists(django.db.models.Model):
         'слаг художника',
         max_length=55,
         help_text='Введите url адрес для художника',
+        unique=True,
     )
 
     def get_short_biography(self):

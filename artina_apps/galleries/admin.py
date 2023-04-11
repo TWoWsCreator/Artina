@@ -18,4 +18,4 @@ class GalleriesAdmin(django.contrib.admin.ModelAdmin):
     )
     list_display_links = (galleries.models.Galleries.gallery_name.field.name,)
 
-    inlines = [GalleryPhotosAdmin]
+    inlines = (GalleryPhotosAdmin,)

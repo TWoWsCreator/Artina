@@ -1,7 +1,7 @@
 import django.conf
 import django.contrib
 import django.core.files.storage
-import django.core.mail
+import django.template.loader
 import django.urls
 import django.views.generic
 import multi_form_view.base
@@ -42,21 +42,17 @@ class FeedbackView(multi_form_view.base.MultiFormView):
                 file=file,
                 feedback=feedback_item,
             )
-        message = (
-            f'Здравствуйте, {name}.\nСпасибо что оставили свой feedback.\n '
-            f'Ваша отзывчивость помогает нам развиваться\n'
-            f'Ваш отзыв: {feedback_text}\n'
-            f'Спасибо от команды Artina.'
+        message = django.template.loader.render_to_string(
+            'feedback/feedback_mail.html', feedback_form.cleaned_data
         )
         core.views.send_mail_user(message, mail, msg_subj='Спасибо за отзыв')
-        django.core.mail.send_mail(
-            'Спасибо за отзыв',
-            message=message,
-            from_email=django.conf.settings.APP_MAIL,
-            recipient_list=[mail],
-            fail_silently=False,
-        )
         django.contrib.messages.success(
             self.request, 'Ваше сообщение отправлено'
         )
         return super().forms_valid(forms)
+
+    # def form_invalid(self, form):
+    #     django.contrib.messages.success(
+    #         self.request, 'Форма заполнена с ошибками'
+    #     )
+    #     return super().form_invalid(form)
