@@ -16,13 +16,22 @@ class CustomUser(django.contrib.auth.models.AbstractUser):
         unique=True,
     )
     image = django.db.models.ImageField(
-        'добавьте картинку профиля', upload_to='avatar/%Y/%m/%d', blank=True
+        'добавьте картинку профиля',
+        upload_to='avatar/%Y/%m/%d',
+        blank=True,
+    )
+    birthday = django.db.models.DateField(
+        'дата рождения',
+        help_text='Введите свою дату рождения',
+        blank=True,
+        null=True,
     )
     feedback_mails = django.db.models.ForeignKey(
         feedback.models.Feedback,
         on_delete=django.db.models.CASCADE,
         related_name='feedback',
         verbose_name='письма от пользователя',
+        blank=True,
         null=True,
     )
 

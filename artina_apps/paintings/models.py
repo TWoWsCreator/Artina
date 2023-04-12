@@ -42,7 +42,7 @@ class PaintingManager(django.db.models.Manager):
                 django.db.models.Prefetch(
                     PaintingFacts.painting.field.related_query_name(),
                     queryset=PaintingFacts.objects.all(),
-                )
+                ),
             )
             .only(
                 Painting.painting_name.field.name,
@@ -173,7 +173,7 @@ class PaintingFacts(django.db.models.Model):
         max_length=100,
         help_text='Напишите заголовок карточки факта',
         null=True,
-        blank=True
+        blank=True,
     )
     painting = django.db.models.ForeignKey(
         Painting,

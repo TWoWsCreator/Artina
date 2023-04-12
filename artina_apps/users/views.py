@@ -1,9 +1,10 @@
-import os
+# import os
 
 import django.contrib
 import django.contrib.auth
 import django.contrib.auth.mixins
 import django.contrib.auth.tokens
+import django.contrib.messages
 import django.shortcuts
 import django.template.loader
 import django.urls
@@ -35,27 +36,29 @@ class ProfileView(
     django.views.generic.FormView,
 ):
     template_name = 'users/profile.html'
-    model = users.models.CustomUser
     form_class = users.forms.CustomUserChangeForm
     success_url = django.urls.reverse_lazy('users:profile')
 
-    def get_form(self):
-        return self.form_class(
-            self.request.POST or None,
-            self.request.FILES,
-            instance=self.request.user,
-        )
+    def get_object(self):
+        return self.request.user
 
-    def form_valid(self, form):
-        old_image = users.models.CustomUser.objects.get(
-            id=self.request.user.id
-        ).image
-        if old_image:
-            image_path = old_image.path
-            if os.path.exists(image_path):
-                os.remove(image_path)
-        form.save()
-        return super().form_valid(form)
+    # def form_invalid(self, form):
+    #     for error in form.errors:
+    #         form.add_error(users.models.CustomUser.username.field.name,
+    # error)
+    #     return super().form_invalid(form)
+
+    # def form_valid(self, form):
+    #     print('8u12p7   yeyo3u2oip1')
+    #     old_image = users.models.CustomUser.objects.get(
+    #         id=self.request.user.id
+    #     ).image
+    #     if old_image:
+    #         image_path = old_image.path
+    #         if os.path.exists(image_path):
+    #             os.remove(image_path)
+    #     form.save()
+    #     return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

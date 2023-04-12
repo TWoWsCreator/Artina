@@ -1,5 +1,5 @@
 import django.conf
-import django.contrib
+import django.contrib.messages
 import django.core.files.storage
 import django.template.loader
 import django.urls
@@ -21,14 +21,8 @@ class FeedbackView(multi_form_view.base.MultiFormView):
 
     def forms_valid(self, forms):
         feedback_form = forms['feedback']
-        name = feedback_form.cleaned_data[
-            feedback.models.Feedback.name.field.name
-        ]
         mail = feedback_form.cleaned_data[
             feedback.models.Feedback.mail.field.name
-        ]
-        feedback_text = feedback_form.cleaned_data[
-            feedback.models.Feedback.feedback_text.field.name
         ]
         feedback_item = feedback.models.Feedback.objects.create(
             **feedback_form.cleaned_data
@@ -51,8 +45,6 @@ class FeedbackView(multi_form_view.base.MultiFormView):
         )
         return super().forms_valid(forms)
 
-    # def form_invalid(self, form):
-    #     django.contrib.messages.success(
-    #         self.request, 'Форма заполнена с ошибками'
-    #     )
-    #     return super().form_invalid(form)
+    def forms_invalid(self, forms):
+        django.contrib.messages.warning(self.request, 'Данная форма невалидна')
+        return self.render_to_response(self.get_context_data(forms=forms))

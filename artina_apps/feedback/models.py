@@ -1,6 +1,8 @@
 import time
 
+import django.core.exceptions
 import django.db.models
+import django.db.models.base
 
 
 class Feedback(django.db.models.Model):

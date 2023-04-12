@@ -3,6 +3,7 @@ import datetime
 import django.core.exceptions
 import django.core.validators
 import django.db.models
+import django.db.models.base
 import django.template.defaultfilters
 import django.utils.safestring
 import sorl.thumbnail
@@ -136,7 +137,7 @@ class Artists(django.db.models.Model):
                     'Год сметри должен идти позже года рождения'
                 )
 
-    class Meta:
+    class Meta(django.db.models.base.ModelBase):
         verbose_name = 'художник'
         verbose_name_plural = 'художники'
 

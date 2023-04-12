@@ -13,20 +13,14 @@ class PaintingView(django.views.generic.DetailView):
     queryset = model.objects.get_painting()
 
     def get_object(self):
-        return self.queryset.get(slug=self.kwargs[self.model.slug.field.name])
-
-
-class LikePaintingView(django.views.generic.FormView):
-    model = paintings.models.Painting
+        return django.shortcuts.get_object_or_404(
+            self.queryset, slug=self.kwargs[self.slug_field]
+        )
 
     def post(self, request, **kwargs):
-        slug = kwargs[paintings.models.Painting.slug.field.name]
-        slug_field = paintings.models.Painting.slug.field.name
-        success_url = django.urls.reverse_lazy(
-            'paintings:painting', kwargs={slug_field: slug}
-        )
+        painting_slug = kwargs[self.slug_field]
         response = django.shortcuts.get_object_or_404(
-            paintings.models.Painting.objects.filter(slug=slug)
+            self.model.objects.filter(slug=painting_slug)
         )
         if request.user.is_authenticated:
             if request.user in response.likes.all():
@@ -38,4 +32,8 @@ class LikePaintingView(django.views.generic.FormView):
                 django.urls.reverse_lazy('users:login')
             )
         response.save()
-        return django.shortcuts.redirect(success_url)
+        return django.shortcuts.redirect(
+            django.urls.reverse_lazy(
+                'paintings:painting', kwargs={self.slug_field: painting_slug}
+            )
+        )

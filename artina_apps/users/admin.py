@@ -6,24 +6,34 @@ import users.models
 
 
 class CustomUserAdmin(django.contrib.auth.admin.UserAdmin):
-    add_form = users.forms.CustomUserCreationForm
-    form = users.forms.CustomUserChangeForm
-    model = users.models.CustomUser
     list_display = (
         users.models.CustomUser.email.field.name,
         users.models.CustomUser.username.field.name,
         users.models.CustomUser.is_staff.field.name,
     )
+    readonly_fields = (
+        users.models.CustomUser.email.field.name,
+        users.models.CustomUser.username.field.name,
+        users.models.CustomUser.birthday.field.name,
+    )
     fieldsets = (
         (
-            'данные пользователя',
+            'данные идентификации',
             {
                 'fields': (
                     users.models.CustomUser.email.field.name,
                     users.models.CustomUser.username.field.name,
                     users.models.CustomUser.password.field.name,
+                )
+            },
+        ),
+        (
+            'другие данные пользователя',
+            {
+                'fields': (
                     users.models.CustomUser.first_name.field.name,
                     users.models.CustomUser.last_name.field.name,
+                    users.models.CustomUser.birthday.field.name,
                     users.models.CustomUser.image.field.name,
                     users.models.CustomUser.feedback_mails.field.name,
                 )

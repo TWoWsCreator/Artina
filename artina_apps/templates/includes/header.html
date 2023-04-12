@@ -42,8 +42,7 @@
         {% if view_name == 'artists:artists' or view_name == 'artists:artist_painting' or view_name == 'galleries:galleries' or view_name == 'galleries:gallery_paintings' %}
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="get">
             {% csrf_token %}
-            <input name="search" type="search" class="form-control form-control-dark"
-                               placeholder="Поиск по странице..." aria-label="search">
+            <input type="search" class="form-control form-control-dark" placeholder="Поиск по странице...">
           </form>
         {% endif %}
       {% endwith %}

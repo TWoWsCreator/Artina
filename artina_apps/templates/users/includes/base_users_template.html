@@ -14,14 +14,17 @@
               {{ fielf.help_text }}
             {% endif %}
             {% if field.errors %}
-              <div class="alert alert-danger">
-                {{ field.errors }}
-              </div>
+              {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+              {% endfor %}
             {% endif %}
           </div>
         {% endif %}
       {% endwith %}
     {% endfor %}
+    {{ form.errorlist }}
     {% with request.resolver_match.view_name as view_name %}
       {% if view_name == 'users:login' %}
         <div>

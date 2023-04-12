@@ -5,7 +5,7 @@ import feedback.models
 
 
 class FeedbackForm(core.forms.BootstrapControlForm):
-    class Meta:
+    class Meta(core.forms.BootstrapControlForm):
         model = feedback.models.Feedback
         fields = (
             feedback.models.Feedback.name.field.name,
@@ -23,11 +23,6 @@ class FeedbackFilesForm(core.forms.BootstrapControlForm):
         model = feedback.models.FeedbackFiles
 
         fields = (feedback.models.FeedbackFiles.file.field.name,)
-        help_texts = {
-            feedback.models.FeedbackFiles.file.field.name: (
-                'При необходимости прикрепите файлы'
-            ),
-        }
         widgets = {
             feedback.models.FeedbackFiles.file.field.name: (
                 django.forms.FileInput(

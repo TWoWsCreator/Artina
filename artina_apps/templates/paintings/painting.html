@@ -46,7 +46,7 @@
     Количество лайков: {{ painting.likes.count }}
   </h6>
   <div class="d-inline-block">
-    <form method="post" action="{% url 'paintings:likes' slug=painting.slug %}">
+    <form method="post">
       {% csrf_token %}
       <button type="submit" class="button_painting_like border-0">
         {% if request.user in painting.likes.all %}
